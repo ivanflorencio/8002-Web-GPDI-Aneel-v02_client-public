@@ -22,7 +22,7 @@ app-form-edit-template {
 }
 
 :root {
-  --side-bar-width: 256px;
+  --side-bar-width: 320px;
   --header-height: 7rem;
 }
 
@@ -43,7 +43,6 @@ app-form-edit-template {
 ::-webkit-scrollbar-thumb {
   background: $blueLight;
 }
-
 
 .sticky-sidebar {
   position: sticky;
@@ -87,7 +86,7 @@ ckeditor {
 }
 
 .form-editor-field {
-  overflow:hidden;
+  overflow: hidden;
   img {
     max-width: 100% !important;
   }
