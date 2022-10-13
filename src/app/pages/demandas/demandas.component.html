@@ -5,9 +5,11 @@
     </h5>
   </div>
   <div class="col-auto">
-    <div class="d-inline-block" ngbTooltip="A Equipe não foi definida"
-         [disableTooltip]="hasEquipe">
-
+    <div
+      class="d-inline-block"
+      ngbTooltip="A Equipe não foi definida"
+      [disableTooltip]="hasEquipe"
+    >
       <button
         class="btn btn-outline-primary"
         type="button"
@@ -23,7 +25,7 @@
 </div>
 
 <div class="row">
-  <div class="col-12">
+  <div class="col-12 tabs-nav-bar">
     <ul class="nav nav-bar-row nav-justified pt-3">
       <ng-container *ngFor="let route of menu">
         <li class="nav-item">
@@ -31,7 +33,7 @@
             routerLinkActive="active"
             class="nav-link"
             [routerLink]="route.path"
-          >{{ route.text }}</a
+            >{{ route.text }}</a
           >
         </li>
       </ng-container>

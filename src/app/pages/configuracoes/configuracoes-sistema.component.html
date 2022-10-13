@@ -1,6 +1,8 @@
 <div class="row justify-content-between">
   <div class="col">
-    <h5 class="text-uppercase text-blue font-weight-normal my-4">CONFIGURAÇÕES SISTEMA</h5>
+    <h5 class="text-uppercase text-blue font-weight-normal my-4">
+      CONFIGURAÇÕES SISTEMA
+    </h5>
   </div>
 </div>
 
@@ -9,7 +11,12 @@
     <ul class="nav nav-bar-row justify-content-around pt-2">
       <ng-container *ngFor="let route of tabs">
         <li class="nav-item">
-          <a routerLinkActive="active" class="nav-link" [routerLink]="route.path">{{route.text}}</a>
+          <a
+            routerLinkActive="active"
+            class="nav-link"
+            [routerLink]="route.path"
+            >{{ route.text }}</a
+          >
         </li>
       </ng-container>
     </ul>
@@ -17,5 +24,5 @@
 </div>
 
 <div class="wrap-outlet-projeto">
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>

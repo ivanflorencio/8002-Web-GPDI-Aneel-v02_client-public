@@ -56,6 +56,13 @@ export const Finalizacao = {
   icon: "ta-ficha",
   path: `/projetos/em-finalizacao`,
 };
+
+export const GestaoPeD = {
+  text: "Gestão P&D",
+  icon: "ta-chart",
+  path: `/gestao-ped`,
+};
+
 export const Configuracao = {
   text: "Configurações do Sistema",
   icon: "ta-gear",

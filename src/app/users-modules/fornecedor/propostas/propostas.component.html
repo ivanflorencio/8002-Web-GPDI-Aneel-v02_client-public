@@ -7,7 +7,7 @@
 </div>
 
 <div class="row mb-5">
-  <div class="col-12">
+  <div class="col-12 tabs-nav-bar">
     <ul class="nav nav-bar-row nav-justified pt-3">
       <ng-container *ngFor="let route of menu">
         <li class="nav-item">
@@ -15,7 +15,7 @@
             routerLinkActive="active"
             class="nav-link"
             [routerLink]="route.path"
-          >{{ route.text }}</a
+            >{{ route.text }}</a
           >
         </li>
       </ng-container>

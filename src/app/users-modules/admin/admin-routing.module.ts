@@ -1,23 +1,29 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {DashboardComponent} from '@app/dashboard';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { DashboardComponent } from "@app/dashboard";
 import {
   CaptacoesRoute,
-  ConfiguracaoRoute, DemandasRoute,
+  ConfiguracaoRoute,
+  DemandasRoute,
   GerenciarUsuariosRoute,
   MeuCadastroRoute,
+  GestaoPeDRoute,
   NotFoundRoute,
-  ProjetosRoute, PropostaFormalizacaoRoute,
-  PropostaRefinamentoRoute, PropostaRiscosRoute, PropostaSelecaoRoute, RedirectRoute
-} from '@app/routes/routes';
-
+  ProjetosRoute,
+  PropostaFormalizacaoRoute,
+  PropostaRefinamentoRoute,
+  PropostaRiscosRoute,
+  PropostaSelecaoRoute,
+  RedirectRoute,
+} from "@app/routes/routes";
+import { GestaoPeD } from "../shared/menus";
 
 const routes: Routes = [
   {
-    path: '',
+    path: "",
     component: DashboardComponent,
     children: [
-      RedirectRoute('demandas'),
+      RedirectRoute("demandas"),
       MeuCadastroRoute,
       DemandasRoute,
       CaptacoesRoute,
@@ -27,15 +33,15 @@ const routes: Routes = [
       PropostaFormalizacaoRoute,
       ProjetosRoute,
       ConfiguracaoRoute,
+      GestaoPeDRoute,
       GerenciarUsuariosRoute,
-      NotFoundRoute
-    ]
-  }
+      NotFoundRoute,
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AdminRoutingModule {
-}
+export class AdminRoutingModule {}

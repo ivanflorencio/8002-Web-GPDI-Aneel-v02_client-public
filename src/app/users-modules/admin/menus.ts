@@ -1,7 +1,9 @@
-import {HEADER_MENU, SIDEBAR_MENU} from '@app/commons';
+import { HEADER_MENU, SIDEBAR_MENU } from "@app/commons";
 import {
-  MenuItemAlterarProjeto, MenuItemCentralAdministrativa,
-  MenuItemConsultarDados, MenuItemExtrato,
+  MenuItemAlterarProjeto,
+  MenuItemCentralAdministrativa,
+  MenuItemConsultarDados,
+  MenuItemExtrato,
   MenuItemRefpAprovado,
   MenuItemRefpNovo,
   MenuItemRefpPendente,
@@ -10,13 +12,27 @@ import {
   MenuItemRelatorioFinal,
   MenuItemResultadosApoio,
   MenuItemResultadosCapacitacao,
-  MenuItemResultadosCientifico, MenuItemResultadosEconomicos, MenuItemResultadosIntelectual, MenuItemResultadosSocioAmbientais,
+  MenuItemResultadosCientifico,
+  MenuItemResultadosEconomicos,
+  MenuItemResultadosIntelectual,
+  MenuItemResultadosSocioAmbientais,
   PROJETO_EXECUCAO_MENU,
-  PROJETO_FINALIZADO_MENU
-} from '@app/pages/projetos/projeto/projeto';
+  PROJETO_FINALIZADO_MENU,
+} from "@app/pages/projetos/projeto/projeto";
 import {
-  Demandas, Captacoes, Selecao, Refinamento, Riscos, Aprovacao, Execucao, Finalizacao, Configuracao, MeuCadastro, GerenciarUsers
-} from '@app/users-modules/shared/menus';
+  Demandas,
+  Captacoes,
+  Selecao,
+  Refinamento,
+  Riscos,
+  Aprovacao,
+  Execucao,
+  Finalizacao,
+  GestaoPeD,
+  Configuracao,
+  MeuCadastro,
+  GerenciarUsers,
+} from "@app/users-modules/shared/menus";
 
 export const SidebarMenu = {
   provide: SIDEBAR_MENU,
@@ -29,16 +45,14 @@ export const SidebarMenu = {
     Aprovacao,
     Execucao,
     Finalizacao,
-    Configuracao
-  ]
+    GestaoPeD,
+    Configuracao,
+  ],
 };
 
 export const HeaderMenu = {
   provide: HEADER_MENU,
-  useValue: [
-    GerenciarUsers,
-    MeuCadastro
-  ]
+  useValue: [GerenciarUsers, MeuCadastro],
 };
 
 export const ProjetoExecucaoMenu = {
@@ -52,7 +66,7 @@ export const ProjetoExecucaoMenu = {
     MenuItemExtrato,
     MenuItemConsultarDados,
     MenuItemCentralAdministrativa,
-  ]
+  ],
 };
 export const ProjetoFinalizadoMenu = {
   provide: PROJETO_FINALIZADO_MENU,
@@ -65,6 +79,6 @@ export const ProjetoFinalizadoMenu = {
     MenuItemResultadosIntelectual,
     MenuItemResultadosSocioAmbientais,
     MenuItemResultadosEconomicos,
-    MenuItemCentralAdministrativa
-  ]
+    MenuItemCentralAdministrativa,
+  ],
 };

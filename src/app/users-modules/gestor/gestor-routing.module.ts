@@ -1,23 +1,26 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {DashboardComponent} from '@app/dashboard';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { DashboardComponent } from "@app/dashboard";
 import {
-  CaptacoesRoute, DemandasRoute,
-  MeuCadastroRoute, NotFoundRoute,
+  CaptacoesRoute,
+  DemandasRoute,
+  MeuCadastroRoute,
+  NotFoundRoute,
   ProjetosRoute,
   PropostaFormalizacaoRoute,
   PropostaRefinamentoRoute,
   PropostaRiscosRoute,
-  PropostaSelecaoRoute, RedirectRoute
-} from '@app/routes';
-
+  GestaoPeDRoute,
+  PropostaSelecaoRoute,
+  RedirectRoute,
+} from "@app/routes";
 
 const routes: Routes = [
   {
-    path: '',
+    path: "",
     component: DashboardComponent,
     children: [
-      RedirectRoute('demandas'),
+      RedirectRoute("demandas"),
       MeuCadastroRoute,
       DemandasRoute,
       CaptacoesRoute,
@@ -26,14 +29,14 @@ const routes: Routes = [
       PropostaRiscosRoute,
       PropostaFormalizacaoRoute,
       ProjetosRoute,
-      NotFoundRoute
-    ]
-  }
+      GestaoPeDRoute,
+      NotFoundRoute,
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class GestorRoutingModule {
-}
+export class GestorRoutingModule {}
