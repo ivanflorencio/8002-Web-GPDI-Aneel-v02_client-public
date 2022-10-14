@@ -56,10 +56,9 @@ export class NewpassComponent implements OnInit {
         this.loading.show();
         this.resultadoResponse = null;
         try {
-            if (await this.authService.novaSenha(this.form.value)) {
-                await this.app.alert('Senha atualizada com sucesso!');
-                this.router.navigateByUrl('/').then();
-            }
+            await this.authService.novaSenha(this.form.value);
+            await this.app.alert('Senha atualizada com sucesso!');
+            this.router.navigateByUrl('/').then();
         } catch (e) {
             await this.app.alert('Não foi possível atualizar sua senha, verifique se o token expirou e tente novamente');
             console.error(e);

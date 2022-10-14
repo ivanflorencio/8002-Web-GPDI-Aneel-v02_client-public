@@ -1,135 +1,137 @@
 /* You can add global styles to this file, and also import other style files */
-@import "styles/styles-var";
-@import "~bootstrap/scss/bootstrap";
-@import "styles/utilities";
-@import "styles/dropdown";
-@import "styles/tables";
-@import "styles/tabs";
-@import "styles/validation";
-@import "styles/fonts/style";
-@import "styles/layouts";
-@import "styles/screens";
+@import 'styles/styles-var';
+@import '~bootstrap/scss/bootstrap';
+@import 'styles/utilities';
+@import 'styles/dropdown';
+@import 'styles/tables';
+@import 'styles/tabs';
+@import 'styles/validation';
+@import 'styles/fonts/style';
+@import 'styles/layouts';
+@import 'styles/screens';
 
 html,
 body {
-  height: 100%;
-  scroll-behavior: smooth;
+    height: 100%;
+    scroll-behavior: smooth;
 }
 
 app-form-editor,
 app-form-edit-template {
-  display: block;
+    display: block;
 }
 
 :root {
-  --side-bar-width: 320px;
-  --header-height: 7rem;
+    --side-bar-width: 320px;
+    --header-height: 7rem;
 }
 
 ::-webkit-scrollbar {
-  //background: $cinzaClaro;
-  width: 0.5rem;
+    //background: $cinzaClaro;
+    width: 0.5rem;
 }
 
 ::-webkit-scrollbar-track {
-  background: $cinzaClaro;
-  opacity: 0.5;
+    background: $cinzaClaro;
+    opacity: 0.5;
 }
 
 ::-webkit-scrollbar-track-piece {
-  width: 9px;
+    width: 9px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $blueLight;
+    background: $blueLight;
 }
 
 .sticky-sidebar {
-  position: sticky;
-  top: var(--header-height);
+    position: sticky;
+    top: var(--header-height);
 }
 
 .cursor-pointer {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 ckeditor {
-  display: block;
-  max-width: 99%;
+    display: block;
+    max-width: 99%;
 
-  p {
-    img {
-      max-width: 99% !important;
-      height: auto !important;
-      margin: 0;
-      padding: 0;
-      display: inline-block;
+    p {
+        img {
+            max-width: 99% !important;
+            height: auto !important;
+            margin: 0;
+            padding: 0;
+            display: inline-block;
+        }
     }
-  }
 
-  .placeholder {
-    background: #ffff00;
-    padding: 4px 2px;
-    outline-offset: -2px;
-    line-height: 1em;
-    margin: 0 1px;
-  }
+    .placeholder {
+        background: #ffff00;
+        padding: 4px 2px;
+        outline-offset: -2px;
+        line-height: 1em;
+        margin: 0 1px;
+    }
 
-  .placeholder::selection {
-    display: none;
-  }
+    .placeholder::selection {
+        display: none;
+    }
 
-  .ck-editor__editable_inline {
-    min-height: var(--ck-editor-height, 200px);
-    max-height: var(--ck-editor-max-height, 100vh);
-  }
+    .ck-editor__editable_inline {
+        min-height: var(--ck-editor-height, 200px);
+        max-height: var(--ck-editor-max-height, 100vh);
+    }
 }
 
 .form-editor-field {
-  overflow: hidden;
-  img {
-    max-width: 100% !important;
-  }
+    overflow: hidden;
+    img {
+        max-width: 100% !important;
+    }
 }
 
 .btn-action {
-  background-color: white;
-  padding: 8px 10px 5px;
-  border-radius: 5px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-weight: 500;
-  &:hover {
-    text-decoration: none;
-    background-color: #f5f5f5;
-  }
+    background-color: white;
+    padding: 5px 10px 5px;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 500;
+    width: 100%;
+    margin-top: 3px;
+    &:hover {
+        text-decoration: none;
+        background-color: #f5f5f5;
+    }
 }
 
 .tabs-nav-bar {
-  ul {
-    background-image: linear-gradient(#fff, #f5f5f5);
-    align-items: baseline;
-    display: flex;
-    gap: 0.25em;
-    padding: 0.5em 0.5em 0px 0.5em;
-    border-radius: 10px;
-    li {
-      a {
-        background-color: #f0f0f0;
-        border-radius: 10px 10px 0px 0px;
-        display: block;
-        width: 100%;
-        &:hover {
-          background-color: #f5f5f5;
+    ul {
+        background-image: linear-gradient(#fff, #f5f5f5);
+        align-items: baseline;
+        display: flex;
+        gap: 0.25em;
+        padding: 0.5em 0.5em 0px 0.5em;
+        border-radius: 10px;
+        li {
+            a {
+                background-color: #f0f0f0;
+                border-radius: 10px 10px 0px 0px;
+                display: block;
+                width: 100%;
+                &:hover {
+                    background-color: #f5f5f5;
+                }
+                &.active {
+                    background-color: #fff;
+                    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+                }
+            }
         }
-        &.active {
-          background-color: #fff;
-          box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-        }
-      }
     }
-  }
 }
