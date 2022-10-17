@@ -13,9 +13,9 @@
                     ><i class="ta-edit"></i> {{ canEdit ? 'Editar' : 'Visualizar' }}</a
                 >
                 <ng-container *ngSwitchCase="ETAPAS_VALUES.Captacao">
-                    <div *ngIf="demanda.captacaoDate; else enviado">
+                    <div *ngIf="demanda.captacaoDate; else enviado" class="box-detalhe">
                         ENVIADO PARA CAPTAÇÃO <br />
-                        EM {{ demanda.captacaoDate | date: 'short' }}
+                        <small>EM {{ demanda.captacaoDate | date: 'short' }}</small>
                     </div>
                     <ng-template #enviado>Demanda enviada</ng-template>
                 </ng-container>

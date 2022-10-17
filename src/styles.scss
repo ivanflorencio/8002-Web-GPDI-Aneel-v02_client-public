@@ -135,3 +135,30 @@ ckeditor {
         }
     }
 }
+
+.box-detalhe {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    padding: 6px;
+    border-radius: 5px;
+    margin-top: 5px;
+    line-height: 1em;
+}
+
+.modal-content {
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.modal-header {
+    background: linear-gradient(150deg, rgba(0, 0, 0, 0.025), rgba(0, 0, 0, 0));
+}
+input[type='search'] {
+    border-radius: 20px;
+    border: 1px solid #d0d0d0;
+    margin-left: 10px;
+    &:focus {
+        border-color: #aaa;
+        box-shadow: 0 0 0px 5px rgba(0, 0, 0, 0.075);
+        outline: 0;
+    }
+}

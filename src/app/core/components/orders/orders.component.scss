@@ -1,27 +1,27 @@
 @import 'src/styles/components-base';
 
 .order-handler {
-  user-select: none;
+    user-select: none;
 
-  span {
-    line-height: 1;
-    cursor: pointer;
+    span {
+        line-height: 1;
+        cursor: pointer;
 
-    &:hover {
-      color: $blue;
+        &:hover {
+            color: $blue;
+        }
     }
-  }
 
-  &.active {
-    &.asc .order-asc,
-    &.desc .order-desc {
-      color: $blueLight;
+    &.active {
+        &.asc .order-asc,
+        &.desc .order-desc {
+            color: #ddd;
+        }
     }
-  }
-  &.last-active {
-    &.asc .order-asc,
-    &.desc .order-desc {
-      color: $blue;
+    &.last-active {
+        &.asc .order-asc,
+        &.desc .order-desc {
+            color: $blue;
+        }
     }
-  }
 }
