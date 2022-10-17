@@ -1,0 +1,86 @@
+<div>
+    <h5 class="text-uppercase text-blue font-weight-normal my-4">CRONOGRAMA FÍSICO FINANCEIRO</h5>
+
+    <table class="cronograma">
+        <thead>
+            <tr>
+                <th class="etapas" rowspan="3">Etapas</th>
+                <th class="text-right light">Ano</th>
+                <th *ngFor="let ano of cronograma.anos" [attr.colspan]="cronograma.meses[ano].length" class="ano light">
+                    {{ ano }}
+                </th>
+                <th class="produtos" rowspan="3">Produtos</th>
+            </tr>
+            <tr>
+                <th class="text-right light">Mês Calendário</th>
+                <ng-container *ngFor="let ano of cronograma.anos">
+                    <th class="mes light" *ngFor="let mes of cronograma.meses[ano]">{{ mes }}</th>
+                </ng-container>
+            </tr>
+            <tr>
+                <th class="text-right">Mês Corrido</th>
+                <ng-container *ngFor="let ano of cronograma.anos">
+                    <th class="mes" *ngFor="let mes of cronograma.corridos[ano]">{{ mes }}</th>
+                </ng-container>
+            </tr>
+        </thead>
+        <tbody class="gantt">
+            <tr *ngFor="let etapa of cronograma.etapas">
+                <td colspan="2" class="etapa">
+                    <strong>{{ etapa[0] }}</strong> {{ etapa[1] }}
+                </td>
+                <td class="mes" *ngFor="let num of etapa[2]">
+                    <span *ngIf="num > 0">&nbsp;&nbsp;&nbsp;</span>
+                </td>
+                <td colspan="2" class="produto">{{ etapa[1] }}</td>
+            </tr>
+        </tbody>
+        <tbody class="desembolsos">
+            <tr class="header">
+                <td colspan="2">Empresa Executora</td>
+                <td colspan="16">Desembolso por mês (R$)</td>
+                <td>Desembolso Total do Executor (R$)</td>
+            </tr>
+            <tr class="desembolso" *ngFor="let desembolso of cronograma.desembolsos">
+                <td colspan="2" class="empresa">
+                    {{ desembolso[0] }}
+                </td>
+                <td class="mes rotated-value" *ngFor="let num of desembolso[1]">
+                    <div>
+                        <strong>{{ num.toLocaleString('pt-BR') }}</strong>
+                    </div>
+                </td>
+                <td class="total">{{ desembolso[2].toLocaleString('pt-BR') }}</td>
+            </tr>
+        </tbody>
+        <tbody class="resumo">
+            <tr class="totais-grafico">
+                <td colspan="2"></td>
+                <td class="mes barra-grafico" *ngFor="let total of cronograma.totais">
+                    <div class="barra" style="height: {{ (total / cronograma.maiorTotal) * 100 }}px"></div>
+                </td>
+                <td></td>
+            </tr>
+            <tr class="totais-mes">
+                <td colspan="2" class="label">Previsão de Desembolso Mensal (R$)</td>
+                <td class="mes rotated-value" *ngFor="let total of cronograma.totais">
+                    <div>
+                        <strong>{{ total.toLocaleString('pt-BR') }}</strong>
+                    </div>
+                </td>
+                <td class="total">
+                    <strong>{{ cronograma.totalGeral.toLocaleString('pt-BR') }}</strong>
+                </td>
+            </tr>
+            <tr class="totais-ano">
+                <td colspan="2" class="label">Previsão de Desembolso Anual (R$)</td>
+                <td *ngFor="let ano of cronograma.anos" [attr.colspan]="cronograma.meses[ano].length" class="total">
+                    {{ cronograma.totaisAnos[ano].toLocaleString('pt-BR') }}
+                </td>
+                <td colspan="2" class="total">
+                    <strong>{{ cronograma.totalGeral.toLocaleString('pt-BR') }}</strong>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

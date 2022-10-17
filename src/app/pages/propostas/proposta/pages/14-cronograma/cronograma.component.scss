@@ -1,0 +1,146 @@
+table.cronograma {
+    thead {
+        th {
+            background-color: #0099a8;
+            color: #fff;
+            border: 5px solid #fff;
+            padding: 0.25rem 0.5rem;
+            font-size: 12px;
+            &.light {
+                background-color: #00798420;
+                color: #0099a8;
+            }
+        }
+        .etapas,
+        .produtos {
+            width: 400px;
+            font-size: 18px;
+            padding-left: 1em;
+        }
+        .produtos {
+            width: 550px;
+        }
+        .mes {
+            width: 30px;
+            text-align: center;
+            padding: 0;
+            font-size: 12px;
+        }
+        .ano {
+            text-align: center;
+        }
+    }
+    tbody.gantt {
+        td {
+            background-color: #f0f0f0;
+            border: 5px solid #fff;
+            padding: 0.125em 0.25em;
+            font-size: 14px;
+            height: 30px;
+            strong {
+                background-color: #999;
+                color: #fff;
+                width: 30px;
+                height: 30px;
+                display: inline-block;
+                text-align: center;
+                padding-top: 6px;
+                margin-top: -0.125em;
+                margin-left: -1em;
+                margin-right: 10px;
+                border-radius: 4px;
+            }
+            &.mes {
+                padding: 0;
+                span {
+                    background-color: #c29361;
+                    display: flex;
+                    height: 100%;
+                    border-radius: 5px;
+                }
+            }
+        }
+        .produto,
+        .etapa {
+            width: 300px;
+            padding-left: 1em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+    tbody.desembolsos {
+        margin-top: 50px;
+        .header {
+            td {
+                background-color: #0099a8;
+                color: #fff;
+                font-weight: bold;
+                padding: 5px 10px;
+                border-top: 30px solid #fff;
+            }
+        }
+        td {
+            border: solid 5px #fff;
+        }
+        tr.desembolso {
+            background-color: #0099a820;
+            border: 5px solid #fff;
+        }
+
+        .empresa {
+            padding: 1em;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .total {
+            padding: 1em;
+            text-align: right;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    }
+    .rotated-value {
+        height: 110px;
+        white-space: nowrap;
+        div {
+            transform: rotate(-90deg) translateX(-25px);
+            width: 30px;
+        }
+    }
+    tbody.resumo {
+        .label {
+            padding: 1em;
+        }
+        .total {
+            padding: 1em;
+            text-align: right;
+        }
+        td {
+            border: 5px solid #fff;
+            background-color: #0099a8;
+            color: #fff;
+            font-weight: bold;
+        }
+        .totais-ano {
+            td {
+                background-color: #0099a820;
+                color: #0099a8;
+            }
+        }
+        .totais-grafico {
+            td {
+                background-color: #fff;
+                .barra {
+                    background-color: #c29361;
+                    border-radius: 4px;
+                    width: 90%;
+                }
+            }
+            .barra-grafico {
+                vertical-align: baseline;
+            }
+        }
+    }
+    margin-left: -5px;
+}
