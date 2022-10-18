@@ -1,7 +1,7 @@
 <div>
     <h5 class="text-uppercase text-blue font-weight-normal my-4">CRONOGRAMA FÍSICO FINANCEIRO</h5>
 
-    <table class="cronograma">
+    <table [ngClass]="fixedHeader ? 'cronograma fixed' : 'cronograma'">
         <thead>
             <tr>
                 <th class="etapas" rowspan="3">Etapas</th>
@@ -25,15 +25,119 @@
             </tr>
         </thead>
         <tbody class="gantt">
-            <tr *ngFor="let etapa of cronograma.etapas">
-                <td colspan="2" class="etapa">
-                    <strong>{{ etapa[0] }}</strong> {{ etapa[1] }}
-                </td>
-                <td class="mes" *ngFor="let num of etapa[2]">
-                    <span *ngIf="num > 0">&nbsp;&nbsp;&nbsp;</span>
-                </td>
-                <td colspan="2" class="produto">{{ etapa[1] }}</td>
-            </tr>
+            <ng-container *ngFor="let etapa of cronograma.etapas">
+                <tr (click)="toggle(etapa[0])" [ngClass]="etapa[3] ? 'aberto' : ''">
+                    <td colspan="2" class="etapa">
+                        <strong>{{ etapa[0] }}</strong> {{ etapa[1] }}
+                    </td>
+                    <td class="mes" *ngFor="let num of etapa[2]">
+                        <span *ngIf="num > 0">&nbsp;&nbsp;&nbsp;</span>
+                    </td>
+                    <td colspan="2" class="produto">
+                        {{ etapa[1] }}
+                        <i *ngIf="!etapa[3]" class="ta ta-arrow-down float-right"></i>
+                        <i *ngIf="etapa[3]" class="ta ta-arrow-up float-right"></i>
+                    </td>
+                </tr>
+                <tr *ngIf="etapa[3]">
+                    <td [attr.colspan]="4 + etapa[2].length" class="summary">
+                        <table class="table recursos">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2">Empresa Executora</th>
+                                    <th colspan="2">Recursos Humanos</th>
+                                    <th colspan="2">Serviços de Terceiros</th>
+                                    <th colspan="2">Materiais de Consumo</th>
+                                    <th colspan="2">Viagens e Diárias</th>
+                                    <th colspan="2">Auditoria Contábil e Financeira</th>
+                                    <th colspan="2">Outros</th>
+                                    <th rowspan="2">Total</th>
+                                </tr>
+                                <tr>
+                                    <th class="col-qtd">Qtd.</th>
+                                    <th class="col-valor">Valor R$</th>
+                                    <th class="col-qtd">Qtd.</th>
+                                    <th class="col-valor">Valor R$</th>
+                                    <th class="col-qtd">Qtd.</th>
+                                    <th class="col-valor">Valor R$</th>
+                                    <th class="col-qtd">Qtd.</th>
+                                    <th class="col-valor">Valor R$</th>
+                                    <th class="col-qtd">Qtd.</th>
+                                    <th class="col-valor">Valor R$</th>
+                                    <th class="col-qtd">Qtd.</th>
+                                    <th class="col-valor">Valor R$</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Executor A</td>
+                                    <td class="text-center">10</td>
+                                    <td class="text-right">1.200,00</td>
+                                    <td class="text-center">5</td>
+                                    <td class="text-right">1.500,00</td>
+                                    <td class="text-center">1</td>
+                                    <td class="text-right">3.250,00</td>
+                                    <td class="text-center">1</td>
+                                    <td class="text-right">5.600,00</td>
+                                    <td class="text-center">8</td>
+                                    <td class="text-right">8.800,00</td>
+                                    <td class="text-center">6</td>
+                                    <td class="text-right">680,00</td>
+                                    <td class="text-right">18.550,00</td>
+                                </tr>
+                                <tr>
+                                    <td>Executor B</td>
+                                    <td class="text-center">10</td>
+                                    <td class="text-right">1.200,00</td>
+                                    <td class="text-center">5</td>
+                                    <td class="text-right">1.500,00</td>
+                                    <td class="text-center">1</td>
+                                    <td class="text-right">3.250,00</td>
+                                    <td class="text-center">1</td>
+                                    <td class="text-right">5.600,00</td>
+                                    <td class="text-center">8</td>
+                                    <td class="text-right">8.800,00</td>
+                                    <td class="text-center">6</td>
+                                    <td class="text-right">680,00</td>
+                                    <td class="text-right">18.550,00</td>
+                                </tr>
+                                <tr>
+                                    <td>Executor C</td>
+                                    <td class="text-center">10</td>
+                                    <td class="text-right">1.200,00</td>
+                                    <td class="text-center">5</td>
+                                    <td class="text-right">1.500,00</td>
+                                    <td class="text-center">1</td>
+                                    <td class="text-right">3.250,00</td>
+                                    <td class="text-center">1</td>
+                                    <td class="text-right">5.600,00</td>
+                                    <td class="text-center">8</td>
+                                    <td class="text-right">8.800,00</td>
+                                    <td class="text-center">6</td>
+                                    <td class="text-right">680,00</td>
+                                    <td class="text-right">18.550,00</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right"><b>Total:</b></td>
+                                    <td class="text-center"><b>30</b></td>
+                                    <td class="text-right"><b>3.600,00</b></td>
+                                    <td class="text-center"><b>15</b></td>
+                                    <td class="text-right"><b>4.500,00</b></td>
+                                    <td class="text-center"><b>3</b></td>
+                                    <td class="text-right"><b>9.750,00</b></td>
+                                    <td class="text-center"><b>3</b></td>
+                                    <td class="text-right"><b>16.800,00</b></td>
+                                    <td class="text-center"><b>24</b></td>
+                                    <td class="text-right"><b>26.600,00</b></td>
+                                    <td class="text-center"><b>18</b></td>
+                                    <td class="text-right"><b>2.160,00</b></td>
+                                    <td class="text-right"><b>55.650,00</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </ng-container>
         </tbody>
         <tbody class="desembolsos">
             <tr class="header">

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PropostaComponent } from '@app/pages/propostas/proposta/proposta.component';
 import { BehaviorSubject } from 'rxjs';
@@ -13,10 +13,19 @@ export class CronogramaComponent implements OnInit {
 
     canEdit: boolean;
     cronograma: any;
+    fixedHeader: boolean;
+    scrollOffset = 215;
 
     constructor(protected router: Router, protected route: ActivatedRoute, protected parent: PropostaComponent) {}
 
+    @HostListener('window:scroll')
+    onWindowScroll() {
+        console.log('scroll', window.pageYOffset);
+        this.fixedHeader = (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0) > this.scrollOffset;
+    }
+
     async ngOnInit() {
+        this.fixedHeader = false;
         const desembolsos = [
             [
                 'Executor A',
@@ -57,14 +66,22 @@ export class CronogramaComponent implements OnInit {
                 [2023]: [8, 9, 10, 11, 12, 13, 14, 15, 16],
             },
             etapas: [
-                [1, 'Lorem ipsum dolor sit amet, consectetur', [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
-                [2, 'Adipiscing elit, sed do eiusmod tempor incididunt ', [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
-                [3, 'Yt labore et dolore magna aliqua. Ut enim ad minim veniam', [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
-                [4, 'Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea ', [0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
-                [5, 'Commodo consequat. Duis aute irure dolor in reprehender ', [0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
-                [6, 'Velit esse cillum dolore eu fugiat nulla pariatur', [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0]],
-                [7, 'Cupidatat non proident, sunt in culpa qui officia', [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0]],
-                [8, 'Deserunt mollit anim id est laborum', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1]],
+                [1, 'Lorem ipsum dolor sit amet, consectetur', [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], false],
+                [2, 'Adipiscing elit, sed do eiusmod tempor incididunt ', [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], false],
+                [3, 'Yt labore et dolore magna aliqua. Ut enim ad minim veniam', [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], false],
+                [
+                    4,
+                    'Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea ',
+                    [0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    false,
+                ],
+                [5, 'Commodo consequat. Duis aute irure dolor in reprehender ', [0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], false],
+                [6, 'Velit esse cillum dolore eu fugiat nulla pariatur', [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0], false],
+                [7, 'Cupidatat non proident, sunt in culpa qui officia', [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0], false],
+                [8, 'Deserunt mollit anim id est laborum', [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0], false],
+                [9, 'Lorem ipsum dolor sit amet, consectetur', [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0], false],
+                [10, 'Adipiscing elit, sed do eiusmod tempor incididunt ', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0], false],
+                [11, 'Yt labore et dolore magna aliqua. Ut enim ad minim veniam', [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1], false],
             ],
             desembolsos,
             totais,
@@ -74,6 +91,18 @@ export class CronogramaComponent implements OnInit {
                 [2022]: 670000,
                 [2023]: 1080000,
             },
+        };
+    }
+
+    toggle(n) {
+        this.cronograma = {
+            ...this.cronograma,
+            etapas: this.cronograma.etapas.map((etapa) => {
+                if (etapa[0] === n) {
+                    return [etapa[0], etapa[1], etapa[2], !etapa[3]];
+                }
+                return etapa;
+            }),
         };
     }
 }

@@ -1,5 +1,7 @@
 table.cronograma {
     thead {
+        background-color: #fff;
+        z-index: 1;
         th {
             background-color: #0099a8;
             color: #fff;
@@ -11,17 +13,20 @@ table.cronograma {
                 color: #0099a8;
             }
         }
-        .etapas,
-        .produtos {
-            width: 400px;
+        .etapas {
+            width: 325px;
             font-size: 18px;
             padding-left: 1em;
+            border-left: none;
         }
         .produtos {
-            width: 550px;
+            width: 440px;
+            font-size: 18px;
+            padding-left: 1em;
+            border-right: none;
         }
         .mes {
-            width: 30px;
+            width: 32px;
             text-align: center;
             padding: 0;
             font-size: 12px;
@@ -30,9 +35,33 @@ table.cronograma {
             text-align: center;
         }
     }
+    &.fixed {
+        margin-top: 120px;
+        thead {
+            position: fixed;
+            top: -5px;
+        }
+    }
+
     tbody.gantt {
-        td {
+        tr {
+            cursor: pointer;
             background-color: #f0f0f0;
+            transition: all 0.3s ease-in-out;
+            &:hover {
+                background-color: #00798420;
+            }
+            &.aberto {
+                background-color: #00798420;
+                .etapa {
+                    strong {
+                        background-color: #0099a8;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+        td {
             border: 5px solid #fff;
             padding: 0.125em 0.25em;
             font-size: 14px;
@@ -67,6 +96,38 @@ table.cronograma {
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            i {
+                font-size: 20px;
+            }
+        }
+        .produto {
+            width: 440px;
+        }
+        .summary {
+            max-width: 800px;
+            background-color: #fff;
+            table.recursos {
+                tr {
+                    background-color: #fff;
+                }
+                th {
+                    background-color: #00798420;
+                    border: none;
+                    color: #333;
+                }
+                tbody {
+                    td {
+                        background-color: #fff;
+                        border-bottom: solid 1px #f0f0f0;
+                    }
+                }
+            }
+            .col-qtd {
+                width: 50px;
+            }
+            .col-valor {
+                width: 80px;
+            }
         }
     }
     tbody.desembolsos {
@@ -105,7 +166,7 @@ table.cronograma {
         white-space: nowrap;
         div {
             transform: rotate(-90deg) translateX(-25px);
-            width: 30px;
+            width: 25px;
         }
     }
     tbody.resumo {
