@@ -3,11 +3,11 @@
     <div class="view">
         <div class="wrapper">
             <table [ngClass]="fixedHeader ? 'cronograma fixed' : 'cronograma'">
-                <thead style="width: {{ this.tableWidth + 50 }}px;">
+                <thead [attr.style]="'width: ' + this.tableWidth + 'px;'" class="header-table">
                     <tr>
                         <th class="etapas" rowspan="3">Etapas</th>
                         <th class="text-right light">Ano</th>
-                        <th *ngFor="let ano of cronograma.anos" [attr.colspan]="cronograma.meses[ano].length" class="ano light">
+                        <th *ngFor="let ano of cronograma.anos" [attr.colspan]="cronograma.meses[ano].meses.length" class="ano light">
                             {{ ano }}
                         </th>
                         <th class="produtos" rowspan="3">Produtos</th>
@@ -15,7 +15,29 @@
                     <tr>
                         <th class="text-right light" style="width: 120px">Mês Calendário</th>
                         <ng-container *ngFor="let ano of cronograma.anos">
-                            <th class="mes light" *ngFor="let mes of cronograma.meses[ano]">{{ mes }}</th>
+                            <th class="mes light" *ngFor="let mes of cronograma.meses[ano].meses">{{ mes.calendario }}</th>
+                        </ng-container>
+                    </tr>
+                    <tr>
+                        <th class="text-right">Mês Corrido</th>
+                        <ng-container *ngFor="let ano of cronograma.anos">
+                            <th class="mes" *ngFor="let mes of cronograma.corridos[ano]">{{ mes }}</th>
+                        </ng-container>
+                    </tr>
+                </thead>
+                <thead [attr.style]="'width: ' + this.tableWidth + 'px;position:sticky;'">
+                    <tr>
+                        <th class="etapas" rowspan="3">Etapas</th>
+                        <th class="text-right light">Ano</th>
+                        <th *ngFor="let ano of cronograma.anos" [attr.colspan]="cronograma.meses[ano].meses.length" class="ano light">
+                            {{ ano }}
+                        </th>
+                        <th class="produtos" rowspan="3">Produtos</th>
+                    </tr>
+                    <tr>
+                        <th class="text-right light" style="width: 120px">Mês Calendário</th>
+                        <ng-container *ngFor="let ano of cronograma.anos">
+                            <th class="mes light" *ngFor="let mes of cronograma.meses[ano].meses">{{ mes.calendario }}</th>
                         </ng-container>
                     </tr>
                     <tr>
@@ -68,14 +90,16 @@
                                     <table class="table recursos">
                                         <thead>
                                             <tr>
-                                                <th rowspan="2">Empresa Executora</th>
+                                                <th rowspan="2"></th>
+                                                <th rowspan="2" class="col-nome">Empresa Executora</th>
                                                 <th colspan="2">Recursos Humanos</th>
                                                 <th colspan="2">Serviços de Terceiros</th>
                                                 <th colspan="2">Materiais de Consumo</th>
                                                 <th colspan="2">Viagens e Diárias</th>
                                                 <th colspan="2">Auditoria Contábil e Financeira</th>
                                                 <th colspan="2">Outros</th>
-                                                <th rowspan="2">Total</th>
+                                                <th rowspan="2" class="col-total">Total</th>
+                                                <th rowspan="2"></th>
                                             </tr>
                                             <tr>
                                                 <th class="col-qtd">Qtd.</th>
@@ -94,6 +118,7 @@
                                         </thead>
                                         <tbody>
                                             <tr>
+                                                <td></td>
                                                 <td>Executor A</td>
                                                 <td class="text-center">10</td>
                                                 <td class="text-right">1.200,00</td>
@@ -108,8 +133,10 @@
                                                 <td class="text-center">6</td>
                                                 <td class="text-right">680,00</td>
                                                 <td class="text-right">18.550,00</td>
+                                                <td></td>
                                             </tr>
                                             <tr>
+                                                <td></td>
                                                 <td>Executor B</td>
                                                 <td class="text-center">10</td>
                                                 <td class="text-right">1.200,00</td>
@@ -124,8 +151,10 @@
                                                 <td class="text-center">6</td>
                                                 <td class="text-right">680,00</td>
                                                 <td class="text-right">18.550,00</td>
+                                                <td></td>
                                             </tr>
                                             <tr>
+                                                <td></td>
                                                 <td>Executor C</td>
                                                 <td class="text-center">10</td>
                                                 <td class="text-right">1.200,00</td>
@@ -140,8 +169,10 @@
                                                 <td class="text-center">6</td>
                                                 <td class="text-right">680,00</td>
                                                 <td class="text-right">18.550,00</td>
+                                                <td></td>
                                             </tr>
                                             <tr>
+                                                <td></td>
                                                 <td class="text-right"><b>Total:</b></td>
                                                 <td class="text-center"><b>30</b></td>
                                                 <td class="text-right"><b>3.600,00</b></td>
@@ -156,6 +187,7 @@
                                                 <td class="text-center"><b>18</b></td>
                                                 <td class="text-right"><b>2.160,00</b></td>
                                                 <td class="text-right"><b>55.650,00</b></td>
+                                                <td></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -186,7 +218,7 @@
                     <tr class="totais-grafico">
                         <td colspan="2"></td>
                         <td class="mes barra-grafico" *ngFor="let total of cronograma.totais">
-                            <div class="barra" style="height: {{ (total / cronograma.maiorTotal) * 100 }}px"></div>
+                            <div class="barra" [attr.style]="'height: ' + (total / cronograma.maiorTotal) * 100 + 'px'"></div>
                         </td>
                         <td></td>
                     </tr>
@@ -203,8 +235,8 @@
                     </tr>
                     <tr class="totais-ano">
                         <td colspan="2" class="label">Previsão de Desembolso Anual (R$)</td>
-                        <td *ngFor="let ano of cronograma.anos" [attr.colspan]="cronograma.meses[ano].length" class="total">
-                            {{ cronograma.totaisAnos[ano].toLocaleString('pt-BR') }}
+                        <td *ngFor="let ano of cronograma.anos" [attr.colspan]="cronograma.meses[ano].meses.length" class="total">
+                            {{ cronograma.meses[ano].total.toLocaleString('pt-BR') }}
                         </td>
                         <td colspan="2" class="total">
                             <strong>{{ cronograma.totalGeral.toLocaleString('pt-BR') }}</strong>

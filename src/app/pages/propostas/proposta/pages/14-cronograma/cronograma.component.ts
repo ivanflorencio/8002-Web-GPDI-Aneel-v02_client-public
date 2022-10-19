@@ -5,6 +5,11 @@ import { PropostaComponent } from '@app/pages/propostas/proposta/proposta.compon
 import { BehaviorSubject } from 'rxjs';
 import { async } from 'rxjs/internal/scheduler/async';
 
+const MOCK_QTD_MESES = 60;
+const MOCK_QTD_EMPRESAS = 8;
+const MOCK_QTD_ETAPAS = 10;
+const MOCK_INICIO_ANO = 2022;
+const MOCK_INICIO_MES = 8;
 @Component({
     selector: 'app-cronograma',
     templateUrl: './cronograma.component.html',
@@ -17,7 +22,7 @@ export class CronogramaComponent implements OnInit {
     cronograma: any;
     fixedHeader = false;
     scrollOffset = 215;
-    tableWidth: number;
+    tableWidth = 0;
 
     constructor(protected router: Router, protected route: ActivatedRoute, protected parent: PropostaComponent) {}
 
@@ -28,143 +33,99 @@ export class CronogramaComponent implements OnInit {
 
     async ngAfterViewInit() {
         this.tableWidth = document.querySelector('.cronograma').clientWidth;
-        console.log('tableWidth', this.tableWidth);
+    }
+
+    getMesesEtapas(anoInicio: number, mesInicio: number, qtdMeses: number) {
+        const meses = [];
+        let somaAno = 0;
+        let somaMes = mesInicio;
+        for (let index = 0; index < qtdMeses; index++) {
+            meses.push({
+                calendario: somaMes,
+                corrido: index + 1,
+                ano: anoInicio + somaAno,
+            });
+            somaAno = somaMes === 12 ? somaAno + 1 : somaAno;
+            somaMes = somaMes === 12 ? 1 : somaMes + 1;
+        }
+        return meses;
+    }
+
+    getEtapas() {
+        const etapas = [];
+        const tamanho = Math.floor(MOCK_QTD_MESES / MOCK_QTD_ETAPAS);
+        for (let index = 0; index < MOCK_QTD_ETAPAS; index++) {
+            etapas.push({
+                numero: index + 1,
+                etapa: this._getNomeMock(),
+                meses: Array.from(Array(tamanho).keys()).map((i) => i + 1 + tamanho * index),
+                aberto: false,
+                produto: this._getNomeMock(),
+            });
+        }
+        return etapas;
+    }
+
+    _getDesembolsosMock() {
+        const desembolsos = [];
+        for (let index = 0; index < MOCK_QTD_MESES; index++) {
+            desembolsos.push(20000 + Math.floor(Math.random() * 100000));
+        }
+        return desembolsos;
+    }
+
+    _getNomeMock() {
+        const nomes = [
+            'Lorem ipsum dolor sit amet, consectetur',
+            'Adipiscing Elit sed do eiusmod tempor incididunt',
+            'Labore Magna Et dolore magna aliqua',
+            'Enim Ad minim veniam, quis nostrud exercitation',
+            'Ullamco laboris nisi ut aliquip ex ea commodo consequat',
+            'Duis Aute irure dolor in reprehenderit in voluptate ',
+            'Velit Pariatur cillum dolore eu fugiat nulla pariatur',
+            'Excepteur Sint occaecat cupidatat non proident',
+            'Sunt Mollit in culpa qui officia deserunt mollit anim id est laborum',
+        ];
+        return nomes[Math.floor(Math.random() * nomes.length)];
+    }
+
+    getEmpresas() {
+        const desembolso = this._getDesembolsosMock();
+        const empresas = [];
+        for (let index = 0; index < MOCK_QTD_EMPRESAS; index++) {
+            const nome = this._getNomeMock().split(' ');
+            empresas.push({ nome: `${nome[0]} ${nome[1]} Incorporações`, desembolso, total: desembolso.reduce((a, b) => a + b, 0) });
+        }
+        return empresas;
     }
 
     async ngOnInit() {
-        const mesesEtapas = [
-            { calendario: 6, corrido: 1, ano: 2022 },
-            { calendario: 7, corrido: 2, ano: 2022 },
-            { calendario: 8, corrido: 3, ano: 2022 },
-            { calendario: 9, corrido: 4, ano: 2022 },
-            { calendario: 10, corrido: 5, ano: 2022 },
-            { calendario: 11, corrido: 6, ano: 2022 },
-            { calendario: 12, corrido: 7, ano: 2022 },
-            { calendario: 1, corrido: 8, ano: 2023 },
-            { calendario: 2, corrido: 9, ano: 2023 },
-            { calendario: 3, corrido: 10, ano: 2023 },
-            { calendario: 4, corrido: 11, ano: 2023 },
-            { calendario: 5, corrido: 12, ano: 2023 },
-            { calendario: 6, corrido: 13, ano: 2023 },
-            { calendario: 7, corrido: 14, ano: 2023 },
-            { calendario: 8, corrido: 15, ano: 2023 },
-            { calendario: 9, corrido: 16, ano: 2023 },
-            { calendario: 10, corrido: 17, ano: 2023 },
-            { calendario: 11, corrido: 18, ano: 2023 },
-            { calendario: 12, corrido: 19, ano: 2023 },
-            { calendario: 1, corrido: 20, ano: 2024 },
-            { calendario: 2, corrido: 21, ano: 2024 },
-            { calendario: 3, corrido: 22, ano: 2024 },
-            { calendario: 4, corrido: 23, ano: 2024 },
-            { calendario: 5, corrido: 24, ano: 2024 },
-            { calendario: 6, corrido: 25, ano: 2024 },
-            { calendario: 7, corrido: 26, ano: 2024 },
-            { calendario: 8, corrido: 27, ano: 2024 },
-            { calendario: 9, corrido: 28, ano: 2024 },
-            { calendario: 10, corrido: 29, ano: 2024 },
-            { calendario: 11, corrido: 30, ano: 2024 },
-            { calendario: 12, corrido: 31, ano: 2024 },
-            { calendario: 1, corrido: 32, ano: 2025 },
-            { calendario: 2, corrido: 33, ano: 2025 },
-            { calendario: 3, corrido: 34, ano: 2025 },
-        ];
+        const mesesEtapas = this.getMesesEtapas(MOCK_INICIO_ANO, MOCK_INICIO_MES, MOCK_QTD_MESES);
+        const etapas = this.getEtapas();
+        const empresas = this.getEmpresas();
 
-        const etapas = [
-            {
-                numero: 1,
-                etapa: 'Lorem ipsum dolor sit amet, consectetur',
-                meses: [1, 2, 3],
-                aberto: false,
-                produto: 'Commodo consequat. Duis aute irure dolor in reprehender',
-            },
-            {
-                numero: 2,
-                etapa: 'Adipiscing elit, sed do eiusmod tempor incididunt ',
-                meses: [2, 3],
-                aberto: false,
-                produto: 'Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea',
-            },
-            {
-                numero: 3,
-                etapa: 'Yt labore et dolore magna aliqua. enim ad minim venia Ut enim ad minim veniam',
-                meses: [4, 5, 6],
-                aberto: false,
-                produto: 'Commodo consequat. Duis aute irure dolor in reprehender',
-            },
-            {
-                numero: 4,
-                etapa: 'Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea ',
-                meses: [6, 7],
-                aberto: false,
-                produto: 'Lorem ipsum dolor sit amet, consectetur',
-            },
-            {
-                numero: 5,
-                etapa: 'Commodo consequat. Duis aute irure dolor in reprehender ',
-                meses: [8, 9, 10, 11],
-                aberto: false,
-                produto: 'Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea',
-            },
-            {
-                numero: 6,
-                etapa: 'Velit esse cillum dolore eu fugiat nulla pariatur',
-                meses: [10, 11],
-                aberto: false,
-                produto: 'Lorem ipsum dolor sit amet, consectetur',
-            },
-            {
-                numero: 7,
-                etapa: 'Cupidatat non proident,enim ad minim veniaenim ad minim venia sunt in culpa qui officia',
-                meses: [11, 12, 13, 14, 15],
-                aberto: false,
-                produto: 'Commodo consequat. Duis aute irure dolor in reprehender',
-            },
-            {
-                numero: 8,
-                etapa: 'Deserunt mollit anim id est laborum',
-                meses: [13, 14, 15],
-                aberto: false,
-                produto: 'Lorem ipsum dolor sit amet, consectetur',
-            },
-            {
-                numero: 9,
-                etapa: 'Lorem ipsum dolor sit amet, consectetur',
-                meses: [15, 16],
-                aberto: false,
-                produto: 'Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea',
-            },
-            {
-                numero: 10,
-                etapa: 'Adipiscing elit, sed do eiusmod tempor incididunt ',
-                meses: [16],
-                aberto: false,
-                produto: 'Commodo consequat. Duis aute irure dolor in reprehender',
-            },
-            {
-                numero: 11,
-                etapa: 'Yt labore et dolore magna aliqua. Ut enim ad minim veniam',
-                meses: [16, 17],
-                aberto: false,
-                produto: 'Lorem ipsum dolor sit amet, consectetur',
-            },
-        ];
-
-        const desembolsoEmpresa = [
-            25520, 45200, 98500, 23000, 150000, 50000, 250000, 85500, 225000, 75200, 69500, 55000, 47800, 43150, 28600, 155000, 114000,
-            25520, 45200, 98500, 23000, 150000, 50000, 250000, 85500, 225000, 75200, 69500, 55000, 47800, 43150, 28600, 155000, 114000,
-        ];
-
-        const empresas = [
-            { nome: 'Empresa Executora A', desembolso: desembolsoEmpresa, total: desembolsoEmpresa.reduce((a, b) => a + b, 0) },
-            { nome: 'Empresa Executora B', desembolso: desembolsoEmpresa, total: desembolsoEmpresa.reduce((a, b) => a + b, 0) },
-            { nome: 'Empresa Executora C', desembolso: desembolsoEmpresa, total: desembolsoEmpresa.reduce((a, b) => a + b, 0) },
-        ];
+        console.log(etapas);
 
         const anos = Array.from(new Set(mesesEtapas.map((m) => m.ano)));
+
         const meses = anos.reduce((acc, curr) => {
-            acc[curr] = mesesEtapas.filter((m) => m.ano === curr).map((m) => m.calendario);
+            acc[curr] = {};
+            acc[curr].meses = mesesEtapas.filter((m) => m.ano === curr).map((m) => ({ calendario: m.calendario, corrido: m.corrido }));
             return acc;
         }, {});
+
+        anos.forEach((ano) => {
+            let totalAno = 0;
+            meses[ano].meses.forEach((m) => {
+                m.valor = empresas.reduce((acc, curr) => {
+                    acc += curr.desembolso[m.corrido - 1];
+                    return acc;
+                }, 0);
+                totalAno += m.valor;
+            });
+            meses[ano].total = totalAno;
+        });
+
         const corridos = anos.reduce((acc, curr) => {
             acc[curr] = mesesEtapas.filter((m) => m.ano === curr).map((m) => m.corrido);
             return acc;
@@ -184,12 +145,6 @@ export class CronogramaComponent implements OnInit {
             totais,
             maiorTotal,
             totalGeral,
-            totaisAnos: {
-                [2022]: 670000,
-                [2023]: 1080000,
-                [2024]: 1080000,
-                [2025]: 985000,
-            },
         };
     }
 
