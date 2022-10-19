@@ -2,10 +2,11 @@ table.cronograma {
     thead {
         background-color: #fff;
         z-index: 1;
+        position: sticky;
         th {
             background-color: #0099a8;
             color: #fff;
-            border: 5px solid #fff;
+            border: 4px solid #fff;
             padding: 0.25rem 0.5rem;
             font-size: 12px;
             &.light {
@@ -37,7 +38,7 @@ table.cronograma {
     }
     &.fixed {
         margin-top: 120px;
-        thead {
+        & > thead {
             position: fixed;
             top: -5px;
         }
@@ -62,22 +63,29 @@ table.cronograma {
             }
         }
         td {
-            border: 5px solid #fff;
+            border: 2px solid #fff;
+            border-left: 4px solid #fff;
+            border-right: 4px solid #fff;
             padding: 0.125em 0.25em;
             font-size: 14px;
             height: 30px;
-            strong {
-                background-color: #999;
-                color: #fff;
-                width: 30px;
-                height: 30px;
-                display: inline-block;
-                text-align: center;
-                padding-top: 6px;
+            .wrapper {
                 margin-top: -0.125em;
                 margin-left: -1em;
-                margin-right: 10px;
-                border-radius: 4px;
+                width: 435px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                strong {
+                    background-color: #999;
+                    color: #fff;
+                    width: 30px;
+                    height: 30px;
+                    display: inline-block;
+                    text-align: center;
+                    padding-top: 6px;
+                    margin-right: 10px;
+                    border-radius: 4px;
+                }
             }
             &.mes {
                 padding: 0;
@@ -98,35 +106,92 @@ table.cronograma {
             white-space: nowrap;
             i {
                 font-size: 20px;
+                position: absolute;
+                transform: translateX(-20px);
             }
         }
         .produto {
             width: 440px;
+            .wrapper {
+                padding-left: 1em;
+                margin-left: -1em;
+                width: 420px;
+                float: left;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-right: 20px;
+            }
         }
-        .summary {
-            max-width: 800px;
+        .summary-container {
+            padding: 0;
+            height: 0px;
+            border: none;
+            vertical-align: top;
+            overflow: hidden;
             background-color: #fff;
-            table.recursos {
-                tr {
-                    background-color: #fff;
+            .summary {
+                overflow: hidden;
+                height: 0;
+                max-width: 100%;
+                background-color: #fff;
+                padding: 0em;
+                border: none;
+                align-items: stretch;
+                justify-content: space-between;
+                &.aberto {
+                    animation: slideDown 500ms ease-in-out;
+                    animation-fill-mode: forwards;
                 }
-                th {
-                    background-color: #00798420;
-                    border: none;
-                    color: #333;
-                }
-                tbody {
-                    td {
-                        background-color: #fff;
-                        border-bottom: solid 1px #f0f0f0;
+                .detalhes {
+                    display: flex;
+                    width: 100%;
+                    gap: 10px;
+                    padding: 2px;
+                    margin-bottom: 8px;
+                    margin-top: 5px;
+                    .summary-detalhe {
+                        width: 100%;
+                        background-color: #00798420;
+                        border-radius: 3px;
+                        padding: 15px;
+                        label {
+                            font-size: 14px;
+                            color: #007984;
+                            font-weight: 600;
+                            display: block;
+                        }
+                        span {
+                            font-size: 16px;
+                            line-height: 16px;
+                        }
                     }
                 }
-            }
-            .col-qtd {
-                width: 50px;
-            }
-            .col-valor {
-                width: 80px;
+                table.recursos {
+                    box-shadow: none;
+                    tr {
+                        background-color: #fff;
+                    }
+                    th {
+                        background-color: #00798420;
+                        border: none;
+                        color: #007984;
+                        line-height: 12px;
+                        padding: 10px 8px;
+                        vertical-align: bottom;
+                    }
+                    tbody {
+                        td {
+                            background-color: #fff;
+                            border-bottom: solid 1px #f0f0f0;
+                        }
+                    }
+                }
+                .col-qtd {
+                    width: 50px;
+                }
+                .col-valor {
+                    width: 80px;
+                }
             }
         }
     }
@@ -204,4 +269,16 @@ table.cronograma {
         }
     }
     margin-left: -5px;
+}
+@keyframes slideDown {
+    0% {
+        height: 0;
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+    100% {
+        height: 100%;
+        opacity: 1;
+        transform: translateY(0px);
+    }
 }

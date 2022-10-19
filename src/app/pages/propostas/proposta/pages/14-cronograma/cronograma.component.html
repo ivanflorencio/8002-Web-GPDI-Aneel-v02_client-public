@@ -1,190 +1,217 @@
 <div>
     <h5 class="text-uppercase text-blue font-weight-normal my-4">CRONOGRAMA FÍSICO FINANCEIRO</h5>
-
-    <table [ngClass]="fixedHeader ? 'cronograma fixed' : 'cronograma'">
-        <thead>
-            <tr>
-                <th class="etapas" rowspan="3">Etapas</th>
-                <th class="text-right light">Ano</th>
-                <th *ngFor="let ano of cronograma.anos" [attr.colspan]="cronograma.meses[ano].length" class="ano light">
-                    {{ ano }}
-                </th>
-                <th class="produtos" rowspan="3">Produtos</th>
-            </tr>
-            <tr>
-                <th class="text-right light">Mês Calendário</th>
-                <ng-container *ngFor="let ano of cronograma.anos">
-                    <th class="mes light" *ngFor="let mes of cronograma.meses[ano]">{{ mes }}</th>
-                </ng-container>
-            </tr>
-            <tr>
-                <th class="text-right">Mês Corrido</th>
-                <ng-container *ngFor="let ano of cronograma.anos">
-                    <th class="mes" *ngFor="let mes of cronograma.corridos[ano]">{{ mes }}</th>
-                </ng-container>
-            </tr>
-        </thead>
-        <tbody class="gantt">
-            <ng-container *ngFor="let etapa of cronograma.etapas">
-                <tr (click)="toggle(etapa[0])" [ngClass]="etapa[3] ? 'aberto' : ''">
-                    <td colspan="2" class="etapa">
-                        <strong>{{ etapa[0] }}</strong> {{ etapa[1] }}
-                    </td>
-                    <td class="mes" *ngFor="let num of etapa[2]">
-                        <span *ngIf="num > 0">&nbsp;&nbsp;&nbsp;</span>
-                    </td>
-                    <td colspan="2" class="produto">
-                        {{ etapa[1] }}
-                        <i *ngIf="!etapa[3]" class="ta ta-arrow-down float-right"></i>
-                        <i *ngIf="etapa[3]" class="ta ta-arrow-up float-right"></i>
-                    </td>
-                </tr>
-                <tr *ngIf="etapa[3]">
-                    <td [attr.colspan]="4 + etapa[2].length" class="summary">
-                        <table class="table recursos">
-                            <thead>
-                                <tr>
-                                    <th rowspan="2">Empresa Executora</th>
-                                    <th colspan="2">Recursos Humanos</th>
-                                    <th colspan="2">Serviços de Terceiros</th>
-                                    <th colspan="2">Materiais de Consumo</th>
-                                    <th colspan="2">Viagens e Diárias</th>
-                                    <th colspan="2">Auditoria Contábil e Financeira</th>
-                                    <th colspan="2">Outros</th>
-                                    <th rowspan="2">Total</th>
-                                </tr>
-                                <tr>
-                                    <th class="col-qtd">Qtd.</th>
-                                    <th class="col-valor">Valor R$</th>
-                                    <th class="col-qtd">Qtd.</th>
-                                    <th class="col-valor">Valor R$</th>
-                                    <th class="col-qtd">Qtd.</th>
-                                    <th class="col-valor">Valor R$</th>
-                                    <th class="col-qtd">Qtd.</th>
-                                    <th class="col-valor">Valor R$</th>
-                                    <th class="col-qtd">Qtd.</th>
-                                    <th class="col-valor">Valor R$</th>
-                                    <th class="col-qtd">Qtd.</th>
-                                    <th class="col-valor">Valor R$</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Executor A</td>
-                                    <td class="text-center">10</td>
-                                    <td class="text-right">1.200,00</td>
-                                    <td class="text-center">5</td>
-                                    <td class="text-right">1.500,00</td>
-                                    <td class="text-center">1</td>
-                                    <td class="text-right">3.250,00</td>
-                                    <td class="text-center">1</td>
-                                    <td class="text-right">5.600,00</td>
-                                    <td class="text-center">8</td>
-                                    <td class="text-right">8.800,00</td>
-                                    <td class="text-center">6</td>
-                                    <td class="text-right">680,00</td>
-                                    <td class="text-right">18.550,00</td>
-                                </tr>
-                                <tr>
-                                    <td>Executor B</td>
-                                    <td class="text-center">10</td>
-                                    <td class="text-right">1.200,00</td>
-                                    <td class="text-center">5</td>
-                                    <td class="text-right">1.500,00</td>
-                                    <td class="text-center">1</td>
-                                    <td class="text-right">3.250,00</td>
-                                    <td class="text-center">1</td>
-                                    <td class="text-right">5.600,00</td>
-                                    <td class="text-center">8</td>
-                                    <td class="text-right">8.800,00</td>
-                                    <td class="text-center">6</td>
-                                    <td class="text-right">680,00</td>
-                                    <td class="text-right">18.550,00</td>
-                                </tr>
-                                <tr>
-                                    <td>Executor C</td>
-                                    <td class="text-center">10</td>
-                                    <td class="text-right">1.200,00</td>
-                                    <td class="text-center">5</td>
-                                    <td class="text-right">1.500,00</td>
-                                    <td class="text-center">1</td>
-                                    <td class="text-right">3.250,00</td>
-                                    <td class="text-center">1</td>
-                                    <td class="text-right">5.600,00</td>
-                                    <td class="text-center">8</td>
-                                    <td class="text-right">8.800,00</td>
-                                    <td class="text-center">6</td>
-                                    <td class="text-right">680,00</td>
-                                    <td class="text-right">18.550,00</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-right"><b>Total:</b></td>
-                                    <td class="text-center"><b>30</b></td>
-                                    <td class="text-right"><b>3.600,00</b></td>
-                                    <td class="text-center"><b>15</b></td>
-                                    <td class="text-right"><b>4.500,00</b></td>
-                                    <td class="text-center"><b>3</b></td>
-                                    <td class="text-right"><b>9.750,00</b></td>
-                                    <td class="text-center"><b>3</b></td>
-                                    <td class="text-right"><b>16.800,00</b></td>
-                                    <td class="text-center"><b>24</b></td>
-                                    <td class="text-right"><b>26.600,00</b></td>
-                                    <td class="text-center"><b>18</b></td>
-                                    <td class="text-right"><b>2.160,00</b></td>
-                                    <td class="text-right"><b>55.650,00</b></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-            </ng-container>
-        </tbody>
-        <tbody class="desembolsos">
-            <tr class="header">
-                <td colspan="2">Empresa Executora</td>
-                <td colspan="16">Desembolso por mês (R$)</td>
-                <td>Desembolso Total do Executor (R$)</td>
-            </tr>
-            <tr class="desembolso" *ngFor="let desembolso of cronograma.desembolsos">
-                <td colspan="2" class="empresa">
-                    {{ desembolso[0] }}
-                </td>
-                <td class="mes rotated-value" *ngFor="let num of desembolso[1]">
-                    <div>
-                        <strong>{{ num.toLocaleString('pt-BR') }}</strong>
-                    </div>
-                </td>
-                <td class="total">{{ desembolso[2].toLocaleString('pt-BR') }}</td>
-            </tr>
-        </tbody>
-        <tbody class="resumo">
-            <tr class="totais-grafico">
-                <td colspan="2"></td>
-                <td class="mes barra-grafico" *ngFor="let total of cronograma.totais">
-                    <div class="barra" style="height: {{ (total / cronograma.maiorTotal) * 100 }}px"></div>
-                </td>
-                <td></td>
-            </tr>
-            <tr class="totais-mes">
-                <td colspan="2" class="label">Previsão de Desembolso Mensal (R$)</td>
-                <td class="mes rotated-value" *ngFor="let total of cronograma.totais">
-                    <div>
-                        <strong>{{ total.toLocaleString('pt-BR') }}</strong>
-                    </div>
-                </td>
-                <td class="total">
-                    <strong>{{ cronograma.totalGeral.toLocaleString('pt-BR') }}</strong>
-                </td>
-            </tr>
-            <tr class="totais-ano">
-                <td colspan="2" class="label">Previsão de Desembolso Anual (R$)</td>
-                <td *ngFor="let ano of cronograma.anos" [attr.colspan]="cronograma.meses[ano].length" class="total">
-                    {{ cronograma.totaisAnos[ano].toLocaleString('pt-BR') }}
-                </td>
-                <td colspan="2" class="total">
-                    <strong>{{ cronograma.totalGeral.toLocaleString('pt-BR') }}</strong>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="view">
+        <div class="wrapper">
+            <table [ngClass]="fixedHeader ? 'cronograma fixed' : 'cronograma'">
+                <thead style="width: {{ this.tableWidth + 50 }}px;">
+                    <tr>
+                        <th class="etapas" rowspan="3">Etapas</th>
+                        <th class="text-right light">Ano</th>
+                        <th *ngFor="let ano of cronograma.anos" [attr.colspan]="cronograma.meses[ano].length" class="ano light">
+                            {{ ano }}
+                        </th>
+                        <th class="produtos" rowspan="3">Produtos</th>
+                    </tr>
+                    <tr>
+                        <th class="text-right light" style="width: 120px">Mês Calendário</th>
+                        <ng-container *ngFor="let ano of cronograma.anos">
+                            <th class="mes light" *ngFor="let mes of cronograma.meses[ano]">{{ mes }}</th>
+                        </ng-container>
+                    </tr>
+                    <tr>
+                        <th class="text-right">Mês Corrido</th>
+                        <ng-container *ngFor="let ano of cronograma.anos">
+                            <th class="mes" *ngFor="let mes of cronograma.corridos[ano]">{{ mes }}</th>
+                        </ng-container>
+                    </tr>
+                </thead>
+                <tbody class="gantt">
+                    <ng-container *ngFor="let etapa of cronograma.etapas">
+                        <tr (click)="toggle(etapa.numero)" [ngClass]="etapa.aberto ? 'aberto' : ''">
+                            <td colspan="2" class="etapa">
+                                <div class="wrapper">
+                                    <strong>{{ etapa.numero }}</strong> {{ etapa.etapa }}
+                                </div>
+                            </td>
+                            <td class="mes" *ngFor="let mes of cronograma.mesesEtapas">
+                                <span *ngIf="etapa.meses.includes(mes.corrido)">&nbsp;</span>
+                            </td>
+                            <td colspan="2" class="produto">
+                                <div class="wrapper">
+                                    {{ etapa.produto }}
+                                </div>
+                                <i *ngIf="!etapa.aberto" class="ta ta-arrow-down float-right"></i>
+                                <i *ngIf="etapa.aberto" class="ta ta-arrow-up float-right"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td [attr.colspan]="cronograma.mesesEtapas.length + 4" class="summary-container">
+                                <div [ngClass]="etapa.aberto ? 'summary aberto' : 'summary'">
+                                    <div class="detalhes">
+                                        <div class="summary-detalhe">
+                                            <label> Etapa </label>
+                                            <span>
+                                                {{ etapa.etapa }}
+                                            </span>
+                                        </div>
+                                        <div class="summary-detalhe">
+                                            <label> Produto </label>
+                                            <span>
+                                                {{ etapa.produto }}
+                                            </span>
+                                        </div>
+                                        <div class="summary-detalhe">
+                                            <label> Período </label>
+                                            <span> De Julho/2022 a Setembro/2022 </span>
+                                        </div>
+                                    </div>
+                                    <table class="table recursos">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2">Empresa Executora</th>
+                                                <th colspan="2">Recursos Humanos</th>
+                                                <th colspan="2">Serviços de Terceiros</th>
+                                                <th colspan="2">Materiais de Consumo</th>
+                                                <th colspan="2">Viagens e Diárias</th>
+                                                <th colspan="2">Auditoria Contábil e Financeira</th>
+                                                <th colspan="2">Outros</th>
+                                                <th rowspan="2">Total</th>
+                                            </tr>
+                                            <tr>
+                                                <th class="col-qtd">Qtd.</th>
+                                                <th class="col-valor">Valor R$</th>
+                                                <th class="col-qtd">Qtd.</th>
+                                                <th class="col-valor">Valor R$</th>
+                                                <th class="col-qtd">Qtd.</th>
+                                                <th class="col-valor">Valor R$</th>
+                                                <th class="col-qtd">Qtd.</th>
+                                                <th class="col-valor">Valor R$</th>
+                                                <th class="col-qtd">Qtd.</th>
+                                                <th class="col-valor">Valor R$</th>
+                                                <th class="col-qtd">Qtd.</th>
+                                                <th class="col-valor">Valor R$</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Executor A</td>
+                                                <td class="text-center">10</td>
+                                                <td class="text-right">1.200,00</td>
+                                                <td class="text-center">5</td>
+                                                <td class="text-right">1.500,00</td>
+                                                <td class="text-center">1</td>
+                                                <td class="text-right">3.250,00</td>
+                                                <td class="text-center">1</td>
+                                                <td class="text-right">5.600,00</td>
+                                                <td class="text-center">8</td>
+                                                <td class="text-right">8.800,00</td>
+                                                <td class="text-center">6</td>
+                                                <td class="text-right">680,00</td>
+                                                <td class="text-right">18.550,00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Executor B</td>
+                                                <td class="text-center">10</td>
+                                                <td class="text-right">1.200,00</td>
+                                                <td class="text-center">5</td>
+                                                <td class="text-right">1.500,00</td>
+                                                <td class="text-center">1</td>
+                                                <td class="text-right">3.250,00</td>
+                                                <td class="text-center">1</td>
+                                                <td class="text-right">5.600,00</td>
+                                                <td class="text-center">8</td>
+                                                <td class="text-right">8.800,00</td>
+                                                <td class="text-center">6</td>
+                                                <td class="text-right">680,00</td>
+                                                <td class="text-right">18.550,00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Executor C</td>
+                                                <td class="text-center">10</td>
+                                                <td class="text-right">1.200,00</td>
+                                                <td class="text-center">5</td>
+                                                <td class="text-right">1.500,00</td>
+                                                <td class="text-center">1</td>
+                                                <td class="text-right">3.250,00</td>
+                                                <td class="text-center">1</td>
+                                                <td class="text-right">5.600,00</td>
+                                                <td class="text-center">8</td>
+                                                <td class="text-right">8.800,00</td>
+                                                <td class="text-center">6</td>
+                                                <td class="text-right">680,00</td>
+                                                <td class="text-right">18.550,00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right"><b>Total:</b></td>
+                                                <td class="text-center"><b>30</b></td>
+                                                <td class="text-right"><b>3.600,00</b></td>
+                                                <td class="text-center"><b>15</b></td>
+                                                <td class="text-right"><b>4.500,00</b></td>
+                                                <td class="text-center"><b>3</b></td>
+                                                <td class="text-right"><b>9.750,00</b></td>
+                                                <td class="text-center"><b>3</b></td>
+                                                <td class="text-right"><b>16.800,00</b></td>
+                                                <td class="text-center"><b>24</b></td>
+                                                <td class="text-right"><b>26.600,00</b></td>
+                                                <td class="text-center"><b>18</b></td>
+                                                <td class="text-right"><b>2.160,00</b></td>
+                                                <td class="text-right"><b>55.650,00</b></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+                <tbody class="desembolsos">
+                    <tr class="header">
+                        <td colspan="2">Empresa Executora</td>
+                        <td [attr.colspan]="cronograma.mesesEtapas.length">Desembolso por mês (R$)</td>
+                        <td>Desembolso Total do Executor (R$)</td>
+                    </tr>
+                    <tr class="desembolso" *ngFor="let empresa of cronograma.empresas">
+                        <td colspan="2" class="empresa">
+                            {{ empresa.nome }}
+                        </td>
+                        <td class="mes rotated-value" *ngFor="let valor of empresa.desembolso">
+                            <div>
+                                <strong>{{ valor.toLocaleString('pt-BR') }}</strong>
+                            </div>
+                        </td>
+                        <td class="total">{{ empresa.total.toLocaleString('pt-BR') }}</td>
+                    </tr>
+                </tbody>
+                <tbody class="resumo">
+                    <tr class="totais-grafico">
+                        <td colspan="2"></td>
+                        <td class="mes barra-grafico" *ngFor="let total of cronograma.totais">
+                            <div class="barra" style="height: {{ (total / cronograma.maiorTotal) * 100 }}px"></div>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr class="totais-mes">
+                        <td colspan="2" class="label">Previsão de Desembolso Mensal (R$)</td>
+                        <td class="mes rotated-value" *ngFor="let total of cronograma.totais">
+                            <div>
+                                <strong>{{ total.toLocaleString('pt-BR') }}</strong>
+                            </div>
+                        </td>
+                        <td class="total">
+                            <strong>{{ cronograma.totalGeral.toLocaleString('pt-BR') }}</strong>
+                        </td>
+                    </tr>
+                    <tr class="totais-ano">
+                        <td colspan="2" class="label">Previsão de Desembolso Anual (R$)</td>
+                        <td *ngFor="let ano of cronograma.anos" [attr.colspan]="cronograma.meses[ano].length" class="total">
+                            {{ cronograma.totaisAnos[ano].toLocaleString('pt-BR') }}
+                        </td>
+                        <td colspan="2" class="total">
+                            <strong>{{ cronograma.totalGeral.toLocaleString('pt-BR') }}</strong>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
