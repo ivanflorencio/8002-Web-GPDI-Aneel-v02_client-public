@@ -2,46 +2,24 @@
     <h5 class="text-uppercase text-blue font-weight-normal my-4">CRONOGRAMA FÍSICO FINANCEIRO</h5>
     <div class="view">
         <div class="wrapper">
-            <table [ngClass]="fixedHeader ? 'cronograma fixed' : 'cronograma'">
-                <thead [attr.style]="'width: ' + this.tableWidth + 'px;'" class="header-table">
+            <table class="cronograma">
+                <thead>
                     <tr>
-                        <th class="etapas" rowspan="3">Etapas</th>
-                        <th class="text-right light">Ano</th>
+                        <th class="etapas fixo" rowspan="3">Etapas</th>
+                        <th class="text-right light fixo pos">Ano</th>
                         <th *ngFor="let ano of cronograma.anos" [attr.colspan]="cronograma.meses[ano].meses.length" class="ano light">
                             {{ ano }}
                         </th>
                         <th class="produtos" rowspan="3">Produtos</th>
                     </tr>
                     <tr>
-                        <th class="text-right light" style="width: 120px">Mês Calendário</th>
+                        <th class="text-right light fixo pos" style="width: 120px">Mês Calendário</th>
                         <ng-container *ngFor="let ano of cronograma.anos">
                             <th class="mes light" *ngFor="let mes of cronograma.meses[ano].meses">{{ mes.calendario }}</th>
                         </ng-container>
                     </tr>
                     <tr>
-                        <th class="text-right">Mês Corrido</th>
-                        <ng-container *ngFor="let ano of cronograma.anos">
-                            <th class="mes" *ngFor="let mes of cronograma.corridos[ano]">{{ mes }}</th>
-                        </ng-container>
-                    </tr>
-                </thead>
-                <thead [attr.style]="'width: ' + this.tableWidth + 'px;position:sticky;'">
-                    <tr>
-                        <th class="etapas" rowspan="3">Etapas</th>
-                        <th class="text-right light">Ano</th>
-                        <th *ngFor="let ano of cronograma.anos" [attr.colspan]="cronograma.meses[ano].meses.length" class="ano light">
-                            {{ ano }}
-                        </th>
-                        <th class="produtos" rowspan="3">Produtos</th>
-                    </tr>
-                    <tr>
-                        <th class="text-right light" style="width: 120px">Mês Calendário</th>
-                        <ng-container *ngFor="let ano of cronograma.anos">
-                            <th class="mes light" *ngFor="let mes of cronograma.meses[ano].meses">{{ mes.calendario }}</th>
-                        </ng-container>
-                    </tr>
-                    <tr>
-                        <th class="text-right">Mês Corrido</th>
+                        <th class="text-right fixo pos">Mês Corrido</th>
                         <ng-container *ngFor="let ano of cronograma.anos">
                             <th class="mes" *ngFor="let mes of cronograma.corridos[ano]">{{ mes }}</th>
                         </ng-container>
@@ -49,6 +27,9 @@
                 </thead>
                 <tbody class="gantt">
                     <ng-container *ngFor="let etapa of cronograma.etapas">
+                        <tr>
+                            <td [attr.colspan]="cronograma.mesesEtapas.length + 4" class="summary-container"></td>
+                        </tr>
                         <tr (click)="toggle(etapa.numero)" [ngClass]="etapa.aberto ? 'aberto' : ''">
                             <td colspan="2" class="etapa">
                                 <div class="wrapper">
@@ -69,128 +50,79 @@
                         <tr>
                             <td [attr.colspan]="cronograma.mesesEtapas.length + 4" class="summary-container">
                                 <div [ngClass]="etapa.aberto ? 'summary aberto' : 'summary'">
-                                    <div class="detalhes">
-                                        <div class="summary-detalhe">
-                                            <label> Etapa </label>
-                                            <span>
-                                                {{ etapa.etapa }}
-                                            </span>
+                                    <div *ngIf="etapa.detalhe" class="wrapper-summary">
+                                        <div class="detalhes">
+                                            <div class="summary-detalhe">
+                                                <label> Etapa </label>
+                                                <span>
+                                                    {{ etapa.detalhe.etapa }}
+                                                </span>
+                                            </div>
+                                            <div class="summary-detalhe">
+                                                <label> Produto </label>
+                                                <span>
+                                                    {{ etapa.detalhe.produto }}
+                                                </span>
+                                            </div>
+                                            <div class="summary-detalhe">
+                                                <label> Período </label>
+                                                <span>
+                                                    de <b>{{ etapa.detalhe.inicioPeriodo | date: 'MMMM/yyyy' }}</b> a
+                                                    <b>{{ etapa.detalhe.fimPeriodo | date: 'MMMM/yyyy' }}</b>
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div class="summary-detalhe">
-                                            <label> Produto </label>
-                                            <span>
-                                                {{ etapa.produto }}
-                                            </span>
-                                        </div>
-                                        <div class="summary-detalhe">
-                                            <label> Período </label>
-                                            <span> De Julho/2022 a Setembro/2022 </span>
-                                        </div>
+                                        <table class="table recursos">
+                                            <thead>
+                                                <tr>
+                                                    <th rowspan="2"></th>
+                                                    <th rowspan="2" class="col-nome">Empresa Executora</th>
+                                                    <th colspan="2">Recursos Humanos</th>
+                                                    <th colspan="2">Serviços de Terceiros</th>
+                                                    <th colspan="2">Materiais de Consumo</th>
+                                                    <th colspan="2">Viagens e Diárias</th>
+                                                    <th colspan="2">Auditoria Contábil e Financeira</th>
+                                                    <th colspan="2">Outros</th>
+                                                    <th rowspan="2" class="col-total">Total R$</th>
+                                                    <th rowspan="2"></th>
+                                                </tr>
+                                                <tr>
+                                                    <th class="col-qtd">Qtd.</th>
+                                                    <th class="col-valor">Valor R$</th>
+                                                    <th class="col-qtd">Qtd.</th>
+                                                    <th class="col-valor">Valor R$</th>
+                                                    <th class="col-qtd">Qtd.</th>
+                                                    <th class="col-valor">Valor R$</th>
+                                                    <th class="col-qtd">Qtd.</th>
+                                                    <th class="col-valor">Valor R$</th>
+                                                    <th class="col-qtd">Qtd.</th>
+                                                    <th class="col-valor">Valor R$</th>
+                                                    <th class="col-qtd">Qtd.</th>
+                                                    <th class="col-valor">Valor R$</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let recurso of etapa.detalhe.recursos">
+                                                    <td></td>
+                                                    <td>{{ recurso.empresa }}</td>
+                                                    <td class="text-center">{{ recurso.qtdRH }}</td>
+                                                    <td class="text-right">{{ recurso.valorRH.toLocaleString('pt-BR') }}</td>
+                                                    <td class="text-center">{{ recurso.qtdServTerc }}</td>
+                                                    <td class="text-right">{{ recurso.valorServTerc.toLocaleString('pt-BR') }}</td>
+                                                    <td class="text-center">{{ recurso.qtdMatConsu }}</td>
+                                                    <td class="text-right">{{ recurso.valorMatConsu.toLocaleString('pt-BR') }}</td>
+                                                    <td class="text-center">{{ recurso.qtdViaDia }}</td>
+                                                    <td class="text-right">{{ recurso.valorViaDia.toLocaleString('pt-BR') }}</td>
+                                                    <td class="text-center">{{ recurso.qtdAudConFin }}</td>
+                                                    <td class="text-right">{{ recurso.valorAudConFin.toLocaleString('pt-BR') }}</td>
+                                                    <td class="text-center">{{ recurso.qtdOutros }}</td>
+                                                    <td class="text-right">{{ recurso.valorOutros.toLocaleString('pt-BR') }}</td>
+                                                    <td class="text-right">{{ recurso.total.toLocaleString('pt-BR') }}</td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <table class="table recursos">
-                                        <thead>
-                                            <tr>
-                                                <th rowspan="2"></th>
-                                                <th rowspan="2" class="col-nome">Empresa Executora</th>
-                                                <th colspan="2">Recursos Humanos</th>
-                                                <th colspan="2">Serviços de Terceiros</th>
-                                                <th colspan="2">Materiais de Consumo</th>
-                                                <th colspan="2">Viagens e Diárias</th>
-                                                <th colspan="2">Auditoria Contábil e Financeira</th>
-                                                <th colspan="2">Outros</th>
-                                                <th rowspan="2" class="col-total">Total</th>
-                                                <th rowspan="2"></th>
-                                            </tr>
-                                            <tr>
-                                                <th class="col-qtd">Qtd.</th>
-                                                <th class="col-valor">Valor R$</th>
-                                                <th class="col-qtd">Qtd.</th>
-                                                <th class="col-valor">Valor R$</th>
-                                                <th class="col-qtd">Qtd.</th>
-                                                <th class="col-valor">Valor R$</th>
-                                                <th class="col-qtd">Qtd.</th>
-                                                <th class="col-valor">Valor R$</th>
-                                                <th class="col-qtd">Qtd.</th>
-                                                <th class="col-valor">Valor R$</th>
-                                                <th class="col-qtd">Qtd.</th>
-                                                <th class="col-valor">Valor R$</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td>Executor A</td>
-                                                <td class="text-center">10</td>
-                                                <td class="text-right">1.200,00</td>
-                                                <td class="text-center">5</td>
-                                                <td class="text-right">1.500,00</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-right">3.250,00</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-right">5.600,00</td>
-                                                <td class="text-center">8</td>
-                                                <td class="text-right">8.800,00</td>
-                                                <td class="text-center">6</td>
-                                                <td class="text-right">680,00</td>
-                                                <td class="text-right">18.550,00</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td>Executor B</td>
-                                                <td class="text-center">10</td>
-                                                <td class="text-right">1.200,00</td>
-                                                <td class="text-center">5</td>
-                                                <td class="text-right">1.500,00</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-right">3.250,00</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-right">5.600,00</td>
-                                                <td class="text-center">8</td>
-                                                <td class="text-right">8.800,00</td>
-                                                <td class="text-center">6</td>
-                                                <td class="text-right">680,00</td>
-                                                <td class="text-right">18.550,00</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td>Executor C</td>
-                                                <td class="text-center">10</td>
-                                                <td class="text-right">1.200,00</td>
-                                                <td class="text-center">5</td>
-                                                <td class="text-right">1.500,00</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-right">3.250,00</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-right">5.600,00</td>
-                                                <td class="text-center">8</td>
-                                                <td class="text-right">8.800,00</td>
-                                                <td class="text-center">6</td>
-                                                <td class="text-right">680,00</td>
-                                                <td class="text-right">18.550,00</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td class="text-right"><b>Total:</b></td>
-                                                <td class="text-center"><b>30</b></td>
-                                                <td class="text-right"><b>3.600,00</b></td>
-                                                <td class="text-center"><b>15</b></td>
-                                                <td class="text-right"><b>4.500,00</b></td>
-                                                <td class="text-center"><b>3</b></td>
-                                                <td class="text-right"><b>9.750,00</b></td>
-                                                <td class="text-center"><b>3</b></td>
-                                                <td class="text-right"><b>16.800,00</b></td>
-                                                <td class="text-center"><b>24</b></td>
-                                                <td class="text-right"><b>26.600,00</b></td>
-                                                <td class="text-center"><b>18</b></td>
-                                                <td class="text-right"><b>2.160,00</b></td>
-                                                <td class="text-right"><b>55.650,00</b></td>
-                                                <td></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
                                 </div>
                             </td>
                         </tr>
@@ -236,7 +168,7 @@
                     <tr class="totais-ano">
                         <td colspan="2" class="label">Previsão de Desembolso Anual (R$)</td>
                         <td *ngFor="let ano of cronograma.anos" [attr.colspan]="cronograma.meses[ano].meses.length" class="total">
-                            {{ cronograma.meses[ano].total.toLocaleString('pt-BR') }}
+                            {{ cronograma.meses[ano].meses.length > 2 ? cronograma.meses[ano].total.toLocaleString('pt-BR') : '' }}
                         </td>
                         <td colspan="2" class="total">
                             <strong>{{ cronograma.totalGeral.toLocaleString('pt-BR') }}</strong>
