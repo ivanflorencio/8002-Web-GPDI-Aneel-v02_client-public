@@ -34,11 +34,13 @@ table.cronograma {
             }
             &.fixo {
                 position: sticky;
-                left: -2px;
+                left: 0px;
+                transform: translateX(-4px);
             }
             &.fixo.pos {
                 position: sticky;
-                left: 321px;
+                transform: translateX(-2px);
+                left: 322px;
             }
         }
         .etapas {
@@ -106,6 +108,7 @@ table.cronograma {
             &:first-child {
                 position: sticky;
                 left: 0;
+                transform: translateX(-3px);
                 outline: 4px solid #fff;
                 outline-offset: -2px;
             }
@@ -264,6 +267,7 @@ table.cronograma {
             &:first-child {
                 position: sticky;
                 left: 0;
+                transform: translateX(-3px);
                 z-index: 1;
                 outline: 4px solid #fff;
                 outline-offset: -2px;
@@ -300,6 +304,13 @@ table.cronograma {
         .total {
             padding: 1em;
             text-align: right;
+            &.geral {
+                font-size: 1.5em;
+            }
+            &.ano {
+                padding: 0px;
+                text-align: center;
+            }
         }
         td {
             border: 4px solid #fff;
