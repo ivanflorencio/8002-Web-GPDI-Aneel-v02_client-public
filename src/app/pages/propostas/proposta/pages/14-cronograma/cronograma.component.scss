@@ -4,6 +4,7 @@
     width: calc(100vw - 380px);
     height: calc(100vh - 220px);
     overflow: auto;
+    margin-top: 20px;
     & > .wrapper {
         position: absolute;
     }

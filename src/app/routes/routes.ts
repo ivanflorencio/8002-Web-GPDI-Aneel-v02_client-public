@@ -104,7 +104,7 @@ const ColaboradorRoutes: Routes = [
         loadChildren: () => import('@app/users-modules/colaborador/colaborador.module').then((m) => m.ColaboradorModule),
     },
 ];
-const SuprimentoRoutes: Routes = [
+export const SuprimentoRoutes: Routes = [
     {
         path: '',
         canActivate: ['logged', 'isSuprimento'],
