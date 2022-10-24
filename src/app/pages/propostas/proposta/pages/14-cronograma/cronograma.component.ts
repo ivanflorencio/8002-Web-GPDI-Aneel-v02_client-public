@@ -112,6 +112,8 @@ export class CronogramaComponent implements OnInit {
     }
 
     toggle(n) {
+        const summaryHeight = document.querySelector(`.etapa-${n} .wrapper-summary`)?.clientHeight;
+        document.documentElement.style.setProperty('--height-summary-etapa', `${summaryHeight + 30}px`);
         this.cronograma = {
             ...this.cronograma,
             etapas: this.cronograma.etapas.map((etapa) => {

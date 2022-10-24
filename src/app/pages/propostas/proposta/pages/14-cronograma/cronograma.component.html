@@ -48,8 +48,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td [attr.colspan]="cronograma.mesesEtapas.length + 4" class="summary-container">
-                                <div [ngClass]="etapa.aberto ? 'summary aberto' : 'summary'">
+                            <td [attr.colspan]="cronograma.mesesEtapas.length + 4" class="summary-container etapa-{{ etapa.numero }}">
+                                <div [ngClass]="etapa.aberto ? 'summary aberto' : 'summary fechado'">
                                     <div *ngIf="etapa.detalhe" class="wrapper-summary">
                                         <div class="detalhes">
                                             <div class="summary-detalhe">
