@@ -57,6 +57,12 @@
                                                 <span>
                                                     <h5>{{ etapa.detalhe.etapa }}</h5>
                                                 </span>
+                                                <span>
+                                                    <h6 class="text-muted">
+                                                        de <b>{{ etapa.detalhe.inicioPeriodo | date: 'MMMM/yyyy' }}</b> a
+                                                        <b>{{ etapa.detalhe.fimPeriodo | date: 'MMMM/yyyy' }}</b>
+                                                    </h6>
+                                                </span>
                                             </div>
                                             <div class="summary-detalhe">
                                                 <label> Produto </label>
@@ -64,14 +70,9 @@
                                                     <h5>{{ etapa.detalhe.produtoTitulo }}</h5>
                                                     <p>{{ etapa.detalhe.produtoDescricao }}</p>
                                                 </span>
-                                            </div>
-                                            <div class="summary-detalhe">
-                                                <label> Período </label>
+                                                <label> Tipo: {{ etapa.detalhe.produtoTipo }} </label>
                                                 <span>
-                                                    <h5>
-                                                        de <b>{{ etapa.detalhe.inicioPeriodo | date: 'MMMM/yyyy' }}</b> a
-                                                        <b>{{ etapa.detalhe.fimPeriodo | date: 'MMMM/yyyy' }}</b>
-                                                    </h5>
+                                                    <p>{{ etapa.detalhe.produtoTipoDetalhado }}</p>
                                                 </span>
                                             </div>
                                         </div>

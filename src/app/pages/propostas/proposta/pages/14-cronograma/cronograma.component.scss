@@ -197,6 +197,12 @@ table.cronograma {
                         background-color: #e3eef0;
                         border-radius: 3px;
                         padding: 15px;
+                        .field {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            margin-bottom: 8px;
+                        }
                         label {
                             font-size: 14px;
                             color: #007984;
