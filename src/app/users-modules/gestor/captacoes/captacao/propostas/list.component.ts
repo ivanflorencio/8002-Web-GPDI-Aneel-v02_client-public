@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { TableComponentActions, TableComponentCols } from '@app/core/components';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
-import { CaptacaoComponent } from '@app/users-modules/suprimento/captacoes/captacao/captacao.component';
+import { CaptacaoComponent } from '@app/users-modules/gestor/captacoes/captacao/captacao.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { PropostaDetalhesComponent } from '@app/users-modules/suprimento/captacoes/captacao/propostas/proposta-detalhes/proposta-detalhes.component';
+import { PropostaDetalhesComponent } from '@app/users-modules/gestor/captacoes/captacao/propostas/proposta-detalhes/proposta-detalhes.component';
 
 const getPropostaStatus = (b) => (b ? ['Submetido', 'text-success'] : ['Pendente', 'text-danger']);
 

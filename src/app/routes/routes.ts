@@ -109,7 +109,7 @@ export const SuprimentoRoutes: Routes = [
         path: '',
         canActivate: ['logged', 'isSuprimento'],
         canActivateChild: ['logged', 'isSuprimento'],
-        loadChildren: () => import('@app/users-modules/suprimento/suprimento.module').then((m) => m.SuprimentoModule),
+        loadChildren: () => import('@app/users-modules/gestor/gestor.module').then((m) => m.GestorModule),
     },
 ];
 const FornecedorRoutes: Routes = [

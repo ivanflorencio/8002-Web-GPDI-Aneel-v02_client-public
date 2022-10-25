@@ -35,6 +35,19 @@ const routes: Routes = [
             SuprimentoRoutes[0],
         ],
     },
+    {
+        path: '',
+        component: DashboardComponent,
+        children: [
+            RedirectRoute('captacoes'),
+            MeuCadastroRoute,
+            {
+                path: 'captacoes-suprimentos',
+                loadChildren: () => import('./captacoes/captacoes.module').then((m) => m.CaptacoesModule),
+            },
+            NotFoundRoute,
+        ],
+    },
 ];
 
 @NgModule({
