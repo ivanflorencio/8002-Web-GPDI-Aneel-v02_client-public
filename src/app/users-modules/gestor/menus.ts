@@ -22,7 +22,6 @@ import {
 } from '@app/pages/projetos/projeto/projeto';
 import {
     Aprovacao,
-    CaptacoesSuprimentos,
     Captacoes,
     Demandas,
     Execucao,
@@ -36,7 +35,7 @@ import {
 
 export const SidebarMenu = {
     provide: SIDEBAR_MENU,
-    useValue: [Demandas, CaptacoesSuprimentos, Captacoes, Selecao, Refinamento, Riscos, Aprovacao, Execucao, Finalizacao, GestaoPeD],
+    useValue: [Demandas, Captacoes, Selecao, Refinamento, Riscos, Aprovacao, Execucao, Finalizacao, GestaoPeD],
 };
 
 export const HeaderMenu = {

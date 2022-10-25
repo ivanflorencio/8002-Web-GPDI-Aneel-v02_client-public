@@ -4,9 +4,9 @@ import { UserRole, ProjetoAccess } from './enums';
 import { TextValue } from './common';
 
 export const Roles: Array<TextValue> = [
-    { text: 'Colaborador', value: UserRole.Colaborador },
+    //{ text: 'Colaborador', value: UserRole.Colaborador },
     { text: 'Equipe PDI', value: UserRole.User },
-    { text: 'Suprimentos', value: UserRole.Suprimento },
+    //{ text: 'Suprimentos', value: UserRole.Suprimento },
     { text: 'Fornecedor', value: UserRole.Fornecedor },
     { text: 'Administrador', value: UserRole.Administrador },
 ];

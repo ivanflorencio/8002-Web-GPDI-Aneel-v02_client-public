@@ -57,6 +57,7 @@ export class ListComponent implements OnInit, OnDestroy {
     async ngOnInit() {
         this.subscriptions.push(
             this.route.data.subscribe(({ captacaoTable, captacoes }: { captacaoTable: CaptacaoTableConfig; captacoes: Array<any> }) => {
+                console.log({ captacoes });
                 this.captacoes = captacoes;
                 this.captacaoEtapa = captacaoTable.captacaoEtapaStatus;
                 this.cols = captacaoTable.cols;

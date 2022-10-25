@@ -25,6 +25,10 @@ const routes: Routes = [
             MeuCadastroRoute,
             DemandasRoute,
             CaptacoesRoute,
+            {
+                path: 'suprimentos/captacoes',
+                loadChildren: () => import('../suprimento/captacoes/captacoes.module').then((m) => m.CaptacoesModule),
+            },
             PropostaSelecaoRoute,
             PropostaRefinamentoRoute,
             PropostaRiscosRoute,

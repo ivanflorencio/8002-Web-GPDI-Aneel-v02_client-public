@@ -20,6 +20,12 @@ import { BehaviorSubject } from 'rxjs';
                     const t = (n) => `<span class="mx-1">(${n})</span>`;
                     behavior.next([
                         {
+                            text: `Elaboração Pendente`,
+                            afterText: '',
+                            path: 'elaborar',
+                            role: [UserRole.Administrador, UserRole.User, UserRole.Suprimento],
+                        },
+                        {
                             text: `Captação Pendente`,
                             afterText: t(Pendente),
                             path: 'pendente',

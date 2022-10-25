@@ -23,7 +23,6 @@ import {
 import {
     Demandas,
     Captacoes,
-    CaptacoesSuprimentos,
     Selecao,
     Refinamento,
     Riscos,
@@ -38,19 +37,7 @@ import {
 
 export const SidebarMenu = {
     provide: SIDEBAR_MENU,
-    useValue: [
-        Demandas,
-        CaptacoesSuprimentos,
-        Captacoes,
-        Selecao,
-        Refinamento,
-        Riscos,
-        Aprovacao,
-        Execucao,
-        Finalizacao,
-        GestaoPeD,
-        Configuracao,
-    ],
+    useValue: [Demandas, Captacoes, Selecao, Refinamento, Riscos, Aprovacao, Execucao, Finalizacao, GestaoPeD, Configuracao],
 };
 
 export const HeaderMenu = {

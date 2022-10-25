@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { TableComponentActions, TableComponentCols } from '@app/core/components/table/table';
 import { DatePipe } from '@angular/common';
@@ -172,7 +173,15 @@ export const CaptacaoCols: { [prop: string]: TableComponentCols } = {
 
 export const CaptacaoButtons: { [prop: string]: TableComponentActions } = {
     Pendente: [{ action: 'criar', text: 'CRIAR CAPTAÇÃO', icon: 'ta-edit', className: 'btn btn-primary' }],
-    EmElaboracao: [{ action: '${id}', text: 'Configurar', isLink: true, icon: 'ta-edit', className: 'btn btn-primary' }],
+    EmElaboracao: [
+        {
+            action: '/suprimentos/captacoes/${id}',
+            text: 'Configurar 11',
+            isLink: true,
+            icon: 'ta-edit',
+            className: 'btn btn-primary',
+        },
+    ],
     Aberta: [],
     Encerrada: [],
     Cancelada: [],
