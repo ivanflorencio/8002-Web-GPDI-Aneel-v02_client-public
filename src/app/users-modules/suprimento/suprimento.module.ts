@@ -17,7 +17,7 @@ import { CaptacoesResolver } from '@app/users-modules/suprimento/resolvers/capta
         CaptacoesResolver,
         {
             provide: SIDEBAR_MENU,
-            useValue: [{ subtitle: 'Suprimentos', text: 'Captação de Propostas', icon: 'ta-extrato', path: '/captacoes' }],
+            useValue: [{ subtitle: 'Suprimentos', text: 'Captação de Propostas', icon: 'ta-extrato', path: '/suprimentos/captacoes' }],
         },
         {
             provide: HEADER_MENU,

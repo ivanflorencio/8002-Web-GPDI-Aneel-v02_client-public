@@ -21,6 +21,12 @@ export const Captacoes = {
     icon: 'ta-extrato',
     path: `/captacoes`,
 };
+export const CaptacoesSuprimentos = {
+    subtitle: 'Suprimentos',
+    text: 'Propostas em Captação',
+    icon: 'ta-extrato',
+    path: `/suprimentos/captacoes`,
+};
 export const Selecao = {
     subtitle: 'Projetos',
     text: 'Priorização e Seleção',
