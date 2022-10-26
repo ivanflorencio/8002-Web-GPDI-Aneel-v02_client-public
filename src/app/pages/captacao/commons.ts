@@ -176,7 +176,7 @@ export const CaptacaoButtons: { [prop: string]: TableComponentActions } = {
     EmElaboracao: [
         {
             action: '/suprimentos/captacoes/${id}',
-            text: 'Configurar 11',
+            text: 'Configurar',
             isLink: true,
             icon: 'ta-edit',
             className: 'btn btn-primary',

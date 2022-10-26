@@ -83,13 +83,19 @@
                                                     <th colspan="2">Recursos Humanos</th>
                                                     <th colspan="2">Serviços de Terceiros</th>
                                                     <th colspan="2">Materiais de Consumo</th>
+                                                    <th colspan="2">Materiais Permanentes e Equipamentos</th>
                                                     <th colspan="2">Viagens e Diárias</th>
                                                     <th colspan="2">Auditoria Contábil e Financeira</th>
+                                                    <th colspan="2">Startups</th>
                                                     <th colspan="2">Outros</th>
                                                     <th rowspan="2" class="col-total">Total R$</th>
                                                     <th rowspan="2"></th>
                                                 </tr>
                                                 <tr>
+                                                    <th class="col-qtd">Qtd.</th>
+                                                    <th class="col-valor">Valor R$</th>
+                                                    <th class="col-qtd">Qtd.</th>
+                                                    <th class="col-valor">Valor R$</th>
                                                     <th class="col-qtd">Qtd.</th>
                                                     <th class="col-valor">Valor R$</th>
                                                     <th class="col-qtd">Qtd.</th>
@@ -120,6 +126,10 @@
                                                     <td class="text-right">
                                                         {{ recurso.valorMatConsu ? (recurso.valorMatConsu | number: '1.0-0') : '' }}
                                                     </td>
+                                                    <td class="text-center">{{ recurso.qtdMatPerm ? recurso.qtdMatPerm : '' }}</td>
+                                                    <td class="text-right">
+                                                        {{ recurso.valorMatPerm ? (recurso.valorMatPerm | number: '1.0-0') : '' }}
+                                                    </td>
                                                     <td class="text-center">{{ recurso.qtdViaDia ? recurso.qtdViaDia : '' }}</td>
                                                     <td class="text-right">
                                                         {{ recurso.valorViaDia ? (recurso.valorViaDia | number: '1.0-0') : '' }}
@@ -127,6 +137,10 @@
                                                     <td class="text-center">{{ recurso.qtdAudConFin ? recurso.qtdAudConFin : '' }}</td>
                                                     <td class="text-right">
                                                         {{ recurso.valorAudConFin ? (recurso.valorAudConFin | number: '1.0-0') : '' }}
+                                                    </td>
+                                                    <td class="text-center">{{ recurso.qtdStartups ? recurso.qtdStartups : '' }}</td>
+                                                    <td class="text-right">
+                                                        {{ recurso.valorStartups ? (recurso.valorStartups | number: '1.0-0') : '' }}
                                                     </td>
                                                     <td class="text-center">{{ recurso.qtdOutros ? recurso.qtdOutros : '' }}</td>
                                                     <td class="text-right">
