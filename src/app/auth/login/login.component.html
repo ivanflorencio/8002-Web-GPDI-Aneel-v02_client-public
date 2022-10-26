@@ -1,27 +1,31 @@
 <form class="position-relative" [formGroup]="form" (ngSubmit)="doLogin()">
-  <div class="form-group">
-    <input type="email" class="form-control form-control-lg" name="email" #email placeholder="Email"
-           formControlName="email">
-  </div>
-  <div class="form-group">
-    <input type="password" class="form-control form-control-lg" #password name="password"
-           placeholder="Senha"
-           formControlName="password">
-  </div>
-  <div class="alert border-red text-red font-weight-bold" *ngIf="errorMessage">
-    <i class="ta-cancel-circle"></i> {{errorMessage}}
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" name="rememberme" [(ngModel)]="remember"
-           [ngModelOptions]="{standalone:true}"
-           id="defaultCheck1">
-    <label class="form-check-label" for="defaultCheck1" i18n>
-      Manter-me logado
-    </label>
-  </div>
-  <div class="py-3 d-flex justify-content-between">
-    <button type="submit" class="btn btn-blue btn-lg" [disabled]="form.invalid">Login</button>
-    <a routerLink="/forget" class="btn btn-link" i18n>Esqueci minha senha</a>
-  </div>
-  <app-loading type="fullparent" background="transparent" color="#03286a"></app-loading>
+    <div class="form-group">
+        <input type="email" class="form-control form-control-lg" name="email" #email placeholder="Email" formControlName="email" />
+    </div>
+    <div class="form-group">
+        <input
+            type="password"
+            class="form-control form-control-lg"
+            #password
+            name="password"
+            placeholder="Senha"
+            formControlName="password" />
+    </div>
+    <div class="alert border-red text-red font-weight-bold" *ngIf="errorMessage"><i class="ta-cancel-circle"></i> {{ errorMessage }}</div>
+    <div class="form-check">
+        <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            name="rememberme"
+            [(ngModel)]="remember"
+            [ngModelOptions]="{ standalone: true }"
+            id="defaultCheck1" />
+        <label class="form-check-label" for="defaultCheck1" i18n> Manter-me logado </label>
+    </div>
+    <div class="py-3 d-flex justify-content-between">
+        <button type="submit" class="btn btn-blue btn-lg btn-block" [disabled]="form.invalid">Login</button>
+    </div>
+    <a routerLink="/forget" class="btn btn-link btn-block" i18n>Esqueci minha senha</a>
+    <app-loading type="fullparent" background="transparent" color="#007984"></app-loading>
 </form>
