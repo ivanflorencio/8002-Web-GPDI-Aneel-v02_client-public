@@ -1,25 +1,27 @@
-@import "../../../styles/components-base";
+@import '../../../styles/components-base';
 
 :host {
-  background: $body-bg url("/assets/fundo.png") no-repeat center;
-  background-size: cover;
-  grid-area: header;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.125);
+    background: $body-bg url('/assets/fundo.png') no-repeat center;
+    background-size: cover;
+    grid-area: header;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.125);
+    border-bottom: solid 1.5px #007984;
+    height: 112px;
 }
 
 .wrap-menu-dropdown {
-  .dropdown-toggle::after {
-    display: none;
-  }
+    .dropdown-toggle::after {
+        display: none;
+    }
 }
 .logo {
-  margin-left: -1em;
-  padding-right: 2em;
-  margin-right: 2em;
-  img {
-    width: 220px;
-  }
+    margin-left: -1em;
+    padding-right: 2em;
+    margin-right: 2em;
+    img {
+        width: 220px;
+    }
 }

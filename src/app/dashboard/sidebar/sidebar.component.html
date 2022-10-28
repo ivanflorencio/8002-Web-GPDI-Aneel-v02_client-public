@@ -8,7 +8,7 @@
                     <a [routerLink]="route.path" class="side-nav-item" routerLinkActive="active">
                         <span class="fs-24 mr-3"><i [class]="route.icon"></i></span>
                         <ng-container *ngIf="route.beforeText"><span [innerHTML]="route.beforeText"></span></ng-container>
-                        <div>
+                        <div class="menu-item-wrapper">
                             <ng-container *ngIf="route.subtitle">
                                 <small class="menu-item-subtitle" [innerHTML]="route.subtitle"></small><br
                             /></ng-container>
