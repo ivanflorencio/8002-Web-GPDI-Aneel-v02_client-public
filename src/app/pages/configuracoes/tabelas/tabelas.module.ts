@@ -14,7 +14,7 @@ import { TabelasFormComponent } from '@app/pages/configuracoes/tabelas/tabela-fo
     declarations: [TabelasComponent, TabelasFormComponent],
     imports: [CommonModule, SharedModule, TabelasRoutingModule],
     providers: [
-        { provide: ServiceBase, deps: [HttpClient], useFactory: (httpClient) => new ServiceBase(httpClient, 'Sistema/Fornecedores') },
+        { provide: ServiceBase, deps: [HttpClient], useFactory: (httpClient) => new ServiceBase(httpClient, 'Sistema/TabelasValorHora') },
         ListResolver,
         ItemResolver,
     ],

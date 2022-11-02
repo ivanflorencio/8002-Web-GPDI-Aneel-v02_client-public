@@ -4,6 +4,7 @@ import { Injectable, Provider } from '@angular/core';
 import { ServiceBase } from '@app/services';
 import { HttpClient } from '@angular/common/http';
 import { PropostasService } from '@app/pages/propostas/proposta/services/propostas.service';
+import { Validations } from '@app/commons';
 
 @Injectable()
 export class PropostaServiceBase extends ServiceBase<any> {
@@ -20,6 +21,10 @@ export class PropostaServiceBase extends ServiceBase<any> {
             deps: [HttpClient, PropostasService],
             useFactory: (http: HttpClient, service: PropostasService) => new PropostaServiceBase(http, service, append),
         };
+    }
+
+    async getTabelaValorHora(guid: string) {
+        return await this.http.get<any>(`Propostas/${guid}/TabelaValorHora`, {}).toPromise();
     }
 
     set captacaoId(value) {

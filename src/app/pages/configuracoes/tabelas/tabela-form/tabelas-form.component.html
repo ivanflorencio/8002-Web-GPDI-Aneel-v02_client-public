@@ -1,6 +1,6 @@
 <div class="modal-header">
     <div class="text-uppercase modal-title text-blue-light fs-24">
-        {{ fornecedor ? 'EDITAR TABELA' : 'NOVA TABELA' }}
+        {{ tabelaValorHora ? 'EDITAR TABELA' : 'NOVA TABELA' }}
     </div>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.close(false)">
         <i class="ta-cancel-circle"></i>
@@ -44,6 +44,7 @@
                             currencyMask />
                         <input
                             placeholder="h"
+                            type="number"
                             class="form-control"
                             style="width: 100%; text-align: right"
                             [formControlName]="'Horas_' + funcao.value + '_' + graduacao.value" />

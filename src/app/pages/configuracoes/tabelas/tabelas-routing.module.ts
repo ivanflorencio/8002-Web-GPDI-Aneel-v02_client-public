@@ -7,7 +7,7 @@ const routes: Routes = [
     {
         path: '',
         resolve: {
-            fornecedores: ListResolver,
+            tabelasValorHora: ListResolver,
         },
         component: TabelasComponent,
     },

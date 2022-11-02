@@ -14,24 +14,19 @@ import { ServiceBase } from '@app/services/service-base.service';
     styleUrls: ['./tabelas-form.component.scss'],
 })
 export class TabelasFormComponent implements OnInit {
-    private _fornecedor: any;
+    private _tabelaValorHora: any;
     graduacoes: any;
     funcoes: any;
 
-    get fornecedor(): any {
-        return this._fornecedor;
+    get tabelaValorHora(): any {
+        return this._tabelaValorHora;
     }
 
-    set fornecedor(value: any) {
+    set tabelaValorHora(value: any) {
         if (value) {
-            this._fornecedor = value;
-            this.form.patchValue(value);
-            const nomeCtrl = this.form.get('responsavelNome');
-            const emailCtrl = this.form.get('responsavelEmail');
-            nomeCtrl.clearValidators();
-            emailCtrl.clearValidators();
-            nomeCtrl.disable();
-            emailCtrl.disable();
+            const dadosForm = JSON.parse(value.registros);
+            this._tabelaValorHora = dadosForm;
+            this.form.patchValue(dadosForm);
         }
     }
 
@@ -52,6 +47,8 @@ export class TabelasFormComponent implements OnInit {
     form = this.fb.group({
         id: [0, Validators.required],
         nome: ['', Validators.required],
+        registros: [''],
+
         ...this.getCampos(),
     });
 
@@ -70,9 +67,10 @@ export class TabelasFormComponent implements OnInit {
     async onSubmit() {
         if (this.form.valid) {
             this.app.loading.show().then();
+            this.form.controls['registros'].setValue(JSON.stringify(this.form.value));
             console.log('FORM', this.form.value);
             try {
-                //await this.service.salvar(this.form.value);
+                await this.service.salvar(this.form.value);
                 this.activeModal.close(true);
                 this.app.alert('Tabela salva com sucesso').then();
             } catch (e) {

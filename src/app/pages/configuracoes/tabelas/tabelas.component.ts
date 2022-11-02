@@ -14,7 +14,7 @@ import { ServiceBase } from '@app/services/service-base.service';
     styleUrls: ['./tabelas.component.scss'],
 })
 export class TabelasComponent implements OnInit {
-    fornecedor: any;
+    tabelaValorHora: any;
     loading = false;
     hidePagination = false;
 
@@ -26,23 +26,7 @@ export class TabelasComponent implements OnInit {
         },
         {
             field: 'nome',
-            title: 'Nome Fornecedor',
-            order: true,
-        },
-        {
-            field: 'uf',
-            title: 'Uf',
-            order: true,
-        },
-        {
-            field: 'responsavelNome',
-            title: 'Responsável',
-            order: true,
-        },
-        {
-            field: 'ativo',
-            title: 'Status',
-            value: (i) => (i.ativo ? 'Ativo' : 'Inativo'),
+            title: 'Nome Tabela',
             order: true,
         },
     ];
@@ -59,7 +43,7 @@ export class TabelasComponent implements OnInit {
 
     filters: Array<TableComponentFilter> = [];
 
-    fornecedores: Pagination<any> = {
+    tabelasValorHora: Pagination<any> = {
         perPage: 0,
         page: 0,
         totalItems: 0,
@@ -78,33 +62,33 @@ export class TabelasComponent implements OnInit {
 
     ngOnInit() {
         this.route.data.subscribe((data) => {
-            if (data.fornecedores) {
-                this.data = data.fornecedores;
+            if (data.tabelasValorHora) {
+                this.data = data.tabelasValorHora;
             }
         });
 
         this.route.fragment.subscribe((fragment) => {
             const id = parseFloat(fragment);
             if (Number.isSafeInteger(id)) {
-                this.service.obter(id).then((fornecedor) => {
-                    this.setFornecedor(fornecedor);
+                this.service.obter(id).then((tabelaValorHora) => {
+                    this.setTabelaValorHora(tabelaValorHora);
                 });
             }
         });
     }
 
-    setFornecedor(fornecedor) {
-        this.fornecedor = fornecedor;
-        if (this.fornecedor) {
-            this.openForm(this.fornecedor).then();
+    setTabelaValorHora(tabelaValorHora) {
+        this.tabelaValorHora = tabelaValorHora;
+        if (this.tabelaValorHora) {
+            this.openForm(this.tabelaValorHora).then();
         }
     }
 
-    async openForm(fornecedor?: any) {
+    async openForm(tabelaValorHora?: any) {
         const ref = this.modal.open(TabelasFormComponent, { backdrop: false, size: 'lg' });
         const form = ref.componentInstance as TabelasFormComponent;
-        if (fornecedor) {
-            form.fornecedor = fornecedor;
+        if (tabelaValorHora) {
+            form.tabelaValorHora = tabelaValorHora;
         }
         try {
             if (await ref.result) {
