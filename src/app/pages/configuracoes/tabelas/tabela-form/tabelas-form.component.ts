@@ -68,7 +68,6 @@ export class TabelasFormComponent implements OnInit {
         if (this.form.valid) {
             this.app.loading.show().then();
             this.form.controls['registros'].setValue(JSON.stringify(this.form.value));
-            console.log('FORM', this.form.value);
             try {
                 await this.service.salvar(this.form.value);
                 this.activeModal.close(true);

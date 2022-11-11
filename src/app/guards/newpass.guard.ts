@@ -9,7 +9,6 @@ export class NewpassGuard implements CanActivate {
     constructor(protected router: Router) {}
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): UrlTree | boolean {
         const query = state.root.queryParams;
-        console.log('state.next', state.root);
         const canContinue = query.email && query.email.length > 0 && query.token && query.token.length > 0;
 
         return canContinue ? true : this.router.parseUrl('/login');

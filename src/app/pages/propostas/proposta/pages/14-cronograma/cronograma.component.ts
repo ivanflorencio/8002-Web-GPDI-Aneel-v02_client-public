@@ -24,7 +24,6 @@ export class CronogramaComponent implements OnInit {
     ) {}
 
     getMesesEtapas(anoInicio: number, mesInicio: number, numeroMeses: number) {
-        console.log({ anoInicio, mesInicio, numeroMeses });
         const meses = [];
         let somaAno = 0;
         let somaMes = mesInicio;

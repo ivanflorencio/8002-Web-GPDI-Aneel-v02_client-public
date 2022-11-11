@@ -1,16 +1,16 @@
 {
-  "short_name": "PDI",
-  "name": "Sistema Norte Energia PDI",
-  "icons": [
-    {
-      "src": "/assets/logo-app.png",
-      "type": "image/png",
-      "sizes": "900x900"
-    }
-  ],
-  "start_url": "/?source=pwa",
-  "background_color": "#03286a",
-  "display": "standalone",
-  "scope": "/",
-  "theme_color": "#03286a"
+    "short_name": "PDI",
+    "name": "Sistema Norte Energia PDI",
+    "icons": [
+        {
+            "src": "/assets/logo-app.png",
+            "type": "image/png",
+            "sizes": "32x32"
+        }
+    ],
+    "start_url": "/?source=pwa",
+    "background_color": "#03286a",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#03286a"
 }

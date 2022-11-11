@@ -41,8 +41,6 @@ export class NewpassComponent implements OnInit {
 
     ngOnInit() {
         this.route.data.subscribe((data) => {
-            console.log('query', data);
-
             const token = data.token;
             this.passconfirm = new FormControl('', [Validators.required]);
             this.form.patchValue({

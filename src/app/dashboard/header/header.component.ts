@@ -39,7 +39,6 @@ export class HeaderComponent implements OnInit {
 
     logout() {
         this.auth.logout();
-        console.log('logout');
         document.location.href = '/';
     }
 

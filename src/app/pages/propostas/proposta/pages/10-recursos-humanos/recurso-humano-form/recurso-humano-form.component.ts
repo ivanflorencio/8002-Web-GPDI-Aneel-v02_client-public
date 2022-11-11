@@ -44,11 +44,8 @@ export class RecursoHumanoFormComponent extends PropostaNodeFormDirective implem
     }
 
     atualizarValorMaximo() {
-        console.log('atualizarValorMaximo');
         const funcao = this.form.get('funcao').value;
         const graduacao = this.form.get('titulacao').value;
-        console.log(`Valor_${funcao}_${graduacao}`);
-        console.log(this.tabelaValorHora);
         const valorMax = this.tabelaValorHora[`Valor_${funcao}_${graduacao}`];
 
         if (valorMax) {
