@@ -1,19 +1,16 @@
 /* eslint-disable @angular-eslint/use-lifecycle-interface */
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { PropostasService } from '../../services/propostas.service';
-@Component({
-    selector: 'app-cronograma',
-    templateUrl: './cronograma.component.html',
-    styleUrls: ['./cronograma.component.scss'],
-})
-export class CronogramaComponent implements OnInit {
-    loading = false;
-    canEdit: boolean;
-    proposta: any;
-    cronograma: any;
+import { Component, Input, OnInit } from '@angular/core';
 
-    constructor(protected router: Router, protected route: ActivatedRoute, protected service: PropostasService) {}
+@Component({
+    selector: 'app-cronograma-financeiro',
+    templateUrl: './cronograma-financeiro.component.html',
+    styleUrls: ['./cronograma-financeiro.component.scss'],
+})
+export class CronogramaFinanceiroComponent implements OnInit {
+    @Input() infoCronograma: any;
+
+    loading = false;
+    cronograma: any;
 
     getMesesEtapas(anoInicio: number, mesInicio: number, numeroMeses: number) {
         const meses = [];
@@ -32,6 +29,7 @@ export class CronogramaComponent implements OnInit {
     }
 
     carregarCronograma(infoCronograma) {
+        console.log('infoCronograma', infoCronograma);
         const mesesEtapas = this.getMesesEtapas(infoCronograma.inicio.ano, infoCronograma.inicio.mes, infoCronograma.inicio.numeroMeses);
         const etapas = infoCronograma.etapas;
         const empresas = infoCronograma.empresas;
@@ -77,29 +75,8 @@ export class CronogramaComponent implements OnInit {
         };
     }
 
-    carregarDetalheEtapa(numero) {
-        this.service.getDetalheEtapaCronograma(this.proposta.guid, numero).then((result) => {
-            this.cronograma = {
-                ...this.cronograma,
-                etapas: this.cronograma.etapas.map((etapa) => {
-                    if (etapa.numero === numero) {
-                        return { ...etapa, detalhe: result };
-                    }
-                    return etapa;
-                }),
-            };
-        });
-    }
-
     async ngOnInit() {
-        this.service.proposta.subscribe((proposta) => {
-            this.proposta = proposta;
-        });
-        this.route.data.subscribe((data) => {
-            if (data && data.data) {
-                this.carregarCronograma(data.data);
-            }
-        });
+        this.carregarCronograma(this.infoCronograma);
     }
 
     toggle(n) {
@@ -109,9 +86,6 @@ export class CronogramaComponent implements OnInit {
             ...this.cronograma,
             etapas: this.cronograma.etapas.map((etapa) => {
                 if (etapa.numero === n) {
-                    if (!etapa.aberto && !etapa.detalhe) {
-                        this.carregarDetalheEtapa(etapa.numero);
-                    }
                     return { ...etapa, aberto: !etapa.aberto };
                 }
                 return etapa;

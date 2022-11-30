@@ -1,17 +1,11 @@
-import {NgModule} from '@angular/core';
-import {ViewContratoComponent} from '@app/components/view-contrato/view-contrato.component';
-import {CoreModule} from '@app/core';
-
-const components = [
-  ViewContratoComponent
-];
+import { NgModule } from '@angular/core';
+import { ViewContratoComponent } from '@app/components/view-contrato/view-contrato.component';
+import { CoreModule } from '@app/core';
+import { CronogramaFinanceiroComponent } from '@app/components/cronograma-financeiro/cronograma-financeiro.component';
 
 @NgModule({
-  declarations: [...components],
-  imports: [
-    CoreModule
-  ],
-  exports: [...components]
+    declarations: [ViewContratoComponent, CronogramaFinanceiroComponent],
+    imports: [CoreModule],
+    exports: [ViewContratoComponent, CronogramaFinanceiroComponent],
 })
-export class ComponentsModule {
-}
+export class ComponentsModule {}
