@@ -11,6 +11,7 @@ export class CronogramaFinanceiroComponent implements OnInit {
 
     loading = false;
     cronograma: any;
+    isCronogramaProjeto: boolean;
 
     getMesesEtapas(anoInicio: number, mesInicio: number, numeroMeses: number) {
         const meses = [];
@@ -29,7 +30,6 @@ export class CronogramaFinanceiroComponent implements OnInit {
     }
 
     carregarCronograma(infoCronograma) {
-        console.log('infoCronograma', infoCronograma);
         const mesesEtapas = this.getMesesEtapas(infoCronograma.inicio.ano, infoCronograma.inicio.mes, infoCronograma.inicio.numeroMeses);
         const etapas = infoCronograma.etapas;
         const empresas = infoCronograma.empresas;
@@ -58,9 +58,18 @@ export class CronogramaFinanceiroComponent implements OnInit {
             return acc;
         }, {});
 
+        empresas.forEach((empresa) => {
+            empresa.ultimoMes = 'Abr/2022';
+            empresa.porcentagemExecutado = '0,5';
+            empresa.porcentagemPlanejado = '77,2';
+            empresa.totalPlanejado = 715500;
+            empresa.totalProjetado = 211000;
+        });
+
         const totais = mesesEtapas.map((m, i) => empresas.reduce((acc, curr) => acc + curr.desembolso[i], 0));
         const maiorTotal = Math.max(...totais);
         const totalGeral = totais.reduce((a, b) => a + b, 0);
+        this.isCronogramaProjeto = empresas?.some((i) => !!i.executado);
 
         this.cronograma = {
             mesesEtapas,

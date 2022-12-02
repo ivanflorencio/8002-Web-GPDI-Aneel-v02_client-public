@@ -22,7 +22,7 @@ table.cronograma {
             background-color: #fff;
         }
         th {
-            background-color: #0099a8;
+            background-color: #007984;
             color: #fff;
             border: 4px solid #fff;
             outline: 2px solid #fff;
@@ -31,7 +31,7 @@ table.cronograma {
             font-size: 12px;
             &.light {
                 background-color: #e3eef0;
-                color: #0099a8;
+                color: #007984;
             }
             &.fixo {
                 position: sticky;
@@ -92,7 +92,7 @@ table.cronograma {
                 background-color: #e3eef0;
                 &.etapa {
                     strong {
-                        background-color: #0099a8;
+                        background-color: #007984;
                         color: #fff;
                     }
                 }
@@ -228,7 +228,7 @@ table.cronograma {
                         }
                     }
                     th {
-                        background-color: #e3eef0;
+                        background-color: #c7dee0;
                         border: none;
                         color: #007984;
                         line-height: 12px;
@@ -260,11 +260,14 @@ table.cronograma {
             }
         }
     }
+    .divisor {
+        background-color: #fff !important;
+    }
     tbody.desembolsos {
         margin-top: 50px;
         .header {
             td {
-                background-color: #0099a8;
+                background-color: #007984;
                 color: #fff;
                 font-weight: bold;
                 padding: 5px 10px;
@@ -273,14 +276,34 @@ table.cronograma {
         }
         td {
             border: solid 5px #fff;
-            background-color: #e3eef0;
-            &:first-child {
+            background-color: #c7dee0;
+            &.empresa {
+                border-top-left-radius: 10px;
+                border-bottom-left-radius: 10px;
                 position: sticky;
                 left: 0;
                 transform: translateX(-3px);
                 z-index: 1;
                 outline: 4px solid #fff;
                 outline-offset: -2px;
+                caption {
+                    background-color: #007984;
+                    color: #fff;
+                    font-weight: bold;
+                    padding: 5px 10px;
+                    float: right;
+                    transform: rotate(270deg);
+                    position: absolute;
+                    top: 38px;
+                    right: -32px;
+                    width: 100px;
+                    text-align: center;
+                    border-top-right-radius: 10px;
+                    border-top-left-radius: 10px;
+                    &.executado {
+                        top: 152px;
+                    }
+                }
             }
         }
         tr.desembolso {
@@ -297,6 +320,58 @@ table.cronograma {
             text-align: right;
             font-size: 16px;
             font-weight: bold;
+            &.projeto {
+                background-color: #fff;
+                padding: 0;
+                border-width: 0;
+                table {
+                    &.total-planejado tr:first-child td.value {
+                        border-top-right-radius: 10px;
+                    }
+                    &.total-executado tr:last-child td.value {
+                        border-bottom-right-radius: 10px;
+                    }
+                    tr:first-child {
+                        td {
+                            background-color: #e3eff0;
+                            color: #a1774c;
+                        }
+                    }
+                    td {
+                        border: none;
+                        &.header {
+                            width: 140px;
+                            color: #007984 !important;
+                        }
+                        &.value {
+                            padding: 0.5em 1em;
+                            .percent {
+                                float: left;
+                                margin-left: 2em;
+                                width: 4em;
+                                text-align: center;
+                                background-color: rgba(255, 255, 255, 0.6);
+                                border-radius: 5px;
+                                font-size: 0.85em;
+                            }
+                        }
+                    }
+                    width: 100%;
+                    height: 110px;
+                    .label {
+                        width: 32px;
+                        position: relative;
+                        background-color: #007984 !important;
+                        caption {
+                            transform: rotate(270deg);
+                            position: absolute;
+                            text-align: center;
+                            width: 32px;
+                            color: #fff;
+                        }
+                    }
+                }
+            }
         }
     }
     .rotated-value {
@@ -324,7 +399,7 @@ table.cronograma {
         }
         td {
             border: 4px solid #fff;
-            background-color: #0099a8;
+            background-color: #007984;
             color: #fff;
             font-weight: bold;
             &:first-child {
@@ -337,8 +412,8 @@ table.cronograma {
         }
         .totais-ano {
             td {
-                background-color: #e3eef0;
-                color: #0099a8;
+                background-color: #c7dee0;
+                color: #007984;
             }
         }
         .totais-grafico {

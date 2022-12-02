@@ -165,10 +165,84 @@
                         <td [attr.colspan]="cronograma.mesesEtapas.length">Desembolso por mês (R$)</td>
                         <td>Desembolso Total do Executor (R$)</td>
                     </tr>
-                    <tr class="desembolso" *ngFor="let empresa of cronograma.empresas">
-                        <td colspan="2" class="empresa">
-                            {{ empresa.nome }}
-                        </td>
+                    <ng-container *ngIf="isCronogramaProjeto">
+                        <ng-container *ngFor="let empresa of cronograma.empresas">
+                            <tr>
+                                <td class="divisor"></td>
+                            </tr>
+                            <tr class="desembolso">
+                                <td colspan="2" rowspan="2" class="empresa">
+                                    {{ empresa.nome }}
+                                    <caption class="planejado">
+                                        Planejado
+                                    </caption>
+                                    <caption class="executado">
+                                        Executado
+                                    </caption>
+                                </td>
+                                <td class="mes rotated-value" *ngFor="let valor of empresa.desembolso">
+                                    <div>
+                                        <strong>{{ valor | number: '1.0-0' }}</strong>
+                                    </div>
+                                </td>
+                                <td class="total projeto">
+                                    <table class="total-planejado">
+                                        <tr>
+                                            <td rowspan="2" class="label">
+                                                <caption>
+                                                    Planejado
+                                                </caption>
+                                            </td>
+                                            <td class="header">Até {{ empresa.ultimoMes }}</td>
+                                            <td class="value">
+                                                <span class="percent"> {{ empresa.porcentagemPlanejado }}%</span>
+                                                {{ empresa.totalPlanejado | number: '1.0-0' }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="header">Planejado Final</td>
+                                            <td class="value">
+                                                <span class="percent">100%</span>
+                                                {{ empresa.total | number: '1.0-0' }}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr class="executado" *ngIf="!!empresa.executado">
+                                <td class="mes rotated-value" *ngFor="let valor of empresa.executado">
+                                    <div>
+                                        <strong>{{ valor | number: '1.0-0' }}</strong>
+                                    </div>
+                                </td>
+                                <td class="total projeto">
+                                    <table class="total-executado">
+                                        <tr>
+                                            <td rowspan="2" class="label">
+                                                <caption>
+                                                    Executado
+                                                </caption>
+                                            </td>
+                                            <td class="header">Até {{ empresa.ultimoMes }}</td>
+                                            <td class="value">
+                                                <span class="percent"> {{ empresa.porcentagemExecutado }}%</span>
+                                                {{ empresa.totalExecutado | number: '1.0-0' }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="header">Projetado Final</td>
+                                            <td class="value">
+                                                <span class="percent">100%</span>
+                                                {{ empresa.totalProjetado | number: '1.0-0' }}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </ng-container>
+                    <tr class="desembolso" *ngIf="!isCronogramaProjeto">
+                        <td colspan="2" rowspan="2" class="empresa">{{ empresa.nome }}</td>
                         <td class="mes rotated-value" *ngFor="let valor of empresa.desembolso">
                             <div>
                                 <strong>{{ valor | number: '1.0-0' }}</strong>
