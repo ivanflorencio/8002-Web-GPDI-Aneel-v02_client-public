@@ -71,8 +71,9 @@ export class CronogramaFinanceiroComponent implements OnInit {
             empresa.nomeUltimoMes = nomeUltimoMes;
             empresa.totalPlanejado = empresa.desembolso.slice(0, ultimoMes).reduce((acc, curr) => acc + curr, 0);
             empresa.totalProjetado = empresa.executado.slice(0, ultimoMes).reduce((acc, curr) => acc + curr, 0);
-            empresa.porcentagemExecutado = ((empresa.totalProjetado / empresa.totalPlanejado) * 100).toFixed(2);
-            empresa.porcentagemPlanejado = ((empresa.totalPlanejado / empresa.total) * 100).toFixed(2);
+            empresa.porcentagemExecutado =
+                empresa.totalPlanejado > 0 ? ((empresa.totalProjetado / empresa.totalPlanejado) * 100).toFixed(2) : '0';
+            empresa.porcentagemPlanejado = empresa.totalPlanejado > 0 ? ((empresa.totalPlanejado / empresa.total) * 100).toFixed(2) : '0';
         });
 
         this.isCronogramaProjeto = empresas?.some((i) => !!i.executado);
