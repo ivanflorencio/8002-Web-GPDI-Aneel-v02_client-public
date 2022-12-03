@@ -1,5 +1,6 @@
 /* eslint-disable @angular-eslint/use-lifecycle-interface */
 import { Component, Input, OnInit } from '@angular/core';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-cronograma-financeiro',
@@ -58,17 +59,22 @@ export class CronogramaFinanceiroComponent implements OnInit {
             return acc;
         }, {});
 
-        empresas.forEach((empresa) => {
-            empresa.ultimoMes = 'Abr/2022';
-            empresa.porcentagemExecutado = '0,5';
-            empresa.porcentagemPlanejado = '77,2';
-            empresa.totalPlanejado = 715500;
-            empresa.totalProjetado = 211000;
-        });
-
         const totais = mesesEtapas.map((m, i) => empresas.reduce((acc, curr) => acc + curr.desembolso[i], 0));
+        const totaisExecutado = mesesEtapas.map((m, i) => empresas.reduce((acc, curr) => acc + curr.executado[i], 0));
         const maiorTotal = Math.max(...totais);
         const totalGeral = totais.reduce((a, b) => a + b, 0);
+        const totalGeralExecutado = totaisExecutado.reduce((a, b) => a + b, 0);
+
+        empresas.forEach((empresa) => {
+            const { nomeUltimoMes, ultimoMes } = this.getUltimoMesExecutado(infoCronograma.inicio.ano, infoCronograma.inicio.mes, empresa);
+            empresa.ultimoMes = ultimoMes;
+            empresa.nomeUltimoMes = nomeUltimoMes;
+            empresa.totalPlanejado = empresa.desembolso.slice(0, ultimoMes).reduce((acc, curr) => acc + curr, 0);
+            empresa.totalProjetado = empresa.executado.slice(0, ultimoMes).reduce((acc, curr) => acc + curr, 0);
+            empresa.porcentagemExecutado = ((empresa.totalProjetado / empresa.totalPlanejado) * 100).toFixed(2);
+            empresa.porcentagemPlanejado = ((empresa.totalPlanejado / empresa.total) * 100).toFixed(2);
+        });
+
         this.isCronogramaProjeto = empresas?.some((i) => !!i.executado);
 
         this.cronograma = {
@@ -79,8 +85,19 @@ export class CronogramaFinanceiroComponent implements OnInit {
             etapas,
             empresas,
             totais,
+            totaisExecutado,
             maiorTotal,
             totalGeral,
+            totalGeralExecutado,
+        };
+    }
+
+    getUltimoMesExecutado(anoInicio: number, mesInicio: number, empresa: any) {
+        let ultimoMes = 0;
+        empresa.executado.forEach((desembolso, index) => (ultimoMes = desembolso > 0 ? index : ultimoMes));
+        return {
+            nomeUltimoMes: moment(`${anoInicio}-${mesInicio}-01`).add(ultimoMes, 'months').format('MMM/YY'),
+            ultimoMes: ultimoMes + 1,
         };
     }
 

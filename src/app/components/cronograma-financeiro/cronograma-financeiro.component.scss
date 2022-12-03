@@ -340,7 +340,8 @@ table.cronograma {
                     td {
                         border: none;
                         &.header {
-                            width: 140px;
+                            font-size: 0.85em;
+                            width: 120px;
                             color: #007984 !important;
                         }
                         &.value {
@@ -411,6 +412,12 @@ table.cronograma {
             }
         }
         .totais-ano {
+            td {
+                background-color: #c7dee0;
+                color: #007984;
+            }
+        }
+        .totais-mes.executado {
             td {
                 background-color: #c7dee0;
                 color: #007984;
