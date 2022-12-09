@@ -4,12 +4,12 @@
             <table class="cronograma">
                 <thead>
                     <tr>
-                        <th class="etapas fixo" rowspan="3">Etapas</th>
+                        <th class="etapas fixo" [attr.rowspan]="isConsolidado ? 2 : 3">{{ isConsolidado ? 'Projetos' : 'Etapas' }}</th>
                         <th class="text-right light fixo pos">Ano</th>
                         <th *ngFor="let ano of cronograma.anos" [attr.colspan]="cronograma.meses[ano].meses.length" class="ano light">
                             {{ ano }}
                         </th>
-                        <th class="produtos" rowspan="3">Produtos</th>
+                        <th class="produtos" [attr.rowspan]="isConsolidado ? 2 : 3">{{ isConsolidado ? '' : 'Produtos' }}</th>
                     </tr>
                     <tr>
                         <th class="text-right light fixo pos" style="width: 120px">Mês Calendário</th>
@@ -17,7 +17,7 @@
                             <th class="mes light" *ngFor="let mes of cronograma.meses[ano].meses">{{ mes.calendario }}</th>
                         </ng-container>
                     </tr>
-                    <tr>
+                    <tr *ngIf="!isConsolidado">
                         <th class="text-right fixo pos">Mês Corrido</th>
                         <ng-container *ngFor="let ano of cronograma.anos">
                             <th class="mes" *ngFor="let mes of cronograma.corridos[ano]">{{ mes }}</th>
@@ -32,7 +32,7 @@
                         <tr (click)="toggle(etapa.numero)" [ngClass]="etapa.aberto ? 'aberto' : ''">
                             <td colspan="2" class="etapa">
                                 <div class="wrapper">
-                                    <strong>{{ etapa.numero }}</strong> {{ etapa.etapa }}
+                                    <strong *ngIf="!isConsolidado">{{ etapa.numero }}</strong> <span>{{ etapa.etapa }}</span>
                                 </div>
                             </td>
                             <td class="mes" *ngFor="let mes of cronograma.mesesEtapas">
@@ -42,8 +42,8 @@
                                 <div class="wrapper">
                                     {{ etapa.produto }}
                                 </div>
-                                <i *ngIf="!etapa.aberto" class="ta ta-arrow-down float-right"></i>
-                                <i *ngIf="etapa.aberto" class="ta ta-arrow-up float-right"></i>
+                                <i *ngIf="!etapa.aberto && !isConsolidado" class="ta ta-arrow-down float-right"></i>
+                                <i *ngIf="etapa.aberto && !isConsolidado" class="ta ta-arrow-up float-right"></i>
                             </td>
                         </tr>
                         <tr>
@@ -58,8 +58,8 @@
                                                 </span>
                                                 <span>
                                                     <h6 class="text-muted">
-                                                        de <b>{{ etapa.detalhe.inicioPeriodo | date: 'MMMM/yyyy' }}</b> a
-                                                        <b>{{ etapa.detalhe.fimPeriodo | date: 'MMMM/yyyy' }}</b>
+                                                        de <b>{{ etapa.detalhe.inicioPeriodo | date : 'MMMM/yyyy' }}</b> a
+                                                        <b>{{ etapa.detalhe.fimPeriodo | date : 'MMMM/yyyy' }}</b>
                                                     </h6>
                                                 </span>
                                             </div>
@@ -116,38 +116,38 @@
                                                     <td>{{ recurso.empresa }}</td>
                                                     <td class="text-center">{{ recurso.qtdRH ? recurso.qtdRH : '' }}</td>
                                                     <td class="text-right">
-                                                        {{ recurso.valorRH ? (recurso.valorRH | number: '1.0-0') : '' }}
+                                                        {{ recurso.valorRH ? (recurso.valorRH | number : '1.0-0') : '' }}
                                                     </td>
                                                     <td class="text-center">{{ recurso.qtdServTerc ? recurso.qtdServTerc : '' }}</td>
                                                     <td class="text-right">
-                                                        {{ recurso.valorServTerc ? (recurso.valorServTerc | number: '1.0-0') : '' }}
+                                                        {{ recurso.valorServTerc ? (recurso.valorServTerc | number : '1.0-0') : '' }}
                                                     </td>
                                                     <td class="text-center">{{ recurso.qtdMatConsu ? recurso.qtdMatConsu : '' }}</td>
                                                     <td class="text-right">
-                                                        {{ recurso.valorMatConsu ? (recurso.valorMatConsu | number: '1.0-0') : '' }}
+                                                        {{ recurso.valorMatConsu ? (recurso.valorMatConsu | number : '1.0-0') : '' }}
                                                     </td>
                                                     <td class="text-center">{{ recurso.qtdMatPerm ? recurso.qtdMatPerm : '' }}</td>
                                                     <td class="text-right">
-                                                        {{ recurso.valorMatPerm ? (recurso.valorMatPerm | number: '1.0-0') : '' }}
+                                                        {{ recurso.valorMatPerm ? (recurso.valorMatPerm | number : '1.0-0') : '' }}
                                                     </td>
                                                     <td class="text-center">{{ recurso.qtdViaDia ? recurso.qtdViaDia : '' }}</td>
                                                     <td class="text-right">
-                                                        {{ recurso.valorViaDia ? (recurso.valorViaDia | number: '1.0-0') : '' }}
+                                                        {{ recurso.valorViaDia ? (recurso.valorViaDia | number : '1.0-0') : '' }}
                                                     </td>
                                                     <td class="text-center">{{ recurso.qtdAudConFin ? recurso.qtdAudConFin : '' }}</td>
                                                     <td class="text-right">
-                                                        {{ recurso.valorAudConFin ? (recurso.valorAudConFin | number: '1.0-0') : '' }}
+                                                        {{ recurso.valorAudConFin ? (recurso.valorAudConFin | number : '1.0-0') : '' }}
                                                     </td>
                                                     <td class="text-center">{{ recurso.qtdStartups ? recurso.qtdStartups : '' }}</td>
                                                     <td class="text-right">
-                                                        {{ recurso.valorStartups ? (recurso.valorStartups | number: '1.0-0') : '' }}
+                                                        {{ recurso.valorStartups ? (recurso.valorStartups | number : '1.0-0') : '' }}
                                                     </td>
                                                     <td class="text-center">{{ recurso.qtdOutros ? recurso.qtdOutros : '' }}</td>
                                                     <td class="text-right">
-                                                        {{ recurso.valorOutros ? (recurso.valorOutros | number: '1.0-0') : '' }}
+                                                        {{ recurso.valorOutros ? (recurso.valorOutros | number : '1.0-0') : '' }}
                                                     </td>
                                                     <td class="text-right">
-                                                        {{ recurso.total | number: '1.0-0' }}
+                                                        {{ recurso.total | number : '1.0-0' }}
                                                     </td>
                                                     <td></td>
                                                 </tr>
@@ -182,7 +182,7 @@
                                 </td>
                                 <td class="mes rotated-value" *ngFor="let valor of empresa.desembolso">
                                     <div>
-                                        <strong>{{ valor | number: '1.0-0' }}</strong>
+                                        <strong>{{ valor | number : '1.0-0' }}</strong>
                                     </div>
                                 </td>
                                 <td class="total projeto">
@@ -196,14 +196,14 @@
                                             <td class="header">Até {{ empresa.nomeUltimoMes }}</td>
                                             <td class="value">
                                                 <span class="percent"> {{ empresa.porcentagemPlanejado }}%</span>
-                                                {{ empresa.totalPlanejado | number: '1.0-0' }}
+                                                {{ empresa.totalPlanejado | number : '1.0-0' }}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="header">Planejado Final</td>
                                             <td class="value">
                                                 <span class="percent">100%</span>
-                                                {{ empresa.total | number: '1.0-0' }}
+                                                {{ empresa.total | number : '1.0-0' }}
                                             </td>
                                         </tr>
                                     </table>
@@ -212,7 +212,7 @@
                             <tr class="executado" *ngIf="!!empresa.executado">
                                 <td class="mes rotated-value" *ngFor="let valor of empresa.executado">
                                     <div>
-                                        <strong>{{ valor | number: '1.0-0' }}</strong>
+                                        <strong>{{ valor | number : '1.0-0' }}</strong>
                                     </div>
                                 </td>
                                 <td class="total projeto">
@@ -226,14 +226,14 @@
                                             <td class="header">Até {{ empresa.nomeUltimoMes }}</td>
                                             <td class="value">
                                                 <span class="percent"> {{ empresa.porcentagemExecutado }}%</span>
-                                                {{ empresa.totalExecutado | number: '1.0-0' }}
+                                                {{ empresa.totalExecutado | number : '1.0-0' }}
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr class="projetado">
                                             <td class="header">Projetado Final</td>
                                             <td class="value">
                                                 <span class="percent">100%</span>
-                                                {{ empresa.totalProjetado | number: '1.0-0' }}
+                                                {{ empresa.totalProjetado | number : '1.0-0' }}
                                             </td>
                                         </tr>
                                     </table>
@@ -245,10 +245,10 @@
                         <td colspan="2" rowspan="2" class="empresa">{{ empresa.nome }}</td>
                         <td class="mes rotated-value" *ngFor="let valor of empresa.desembolso">
                             <div>
-                                <strong>{{ valor | number: '1.0-0' }}</strong>
+                                <strong>{{ valor | number : '1.0-0' }}</strong>
                             </div>
                         </td>
-                        <td class="total">{{ empresa.total | number: '1.0-0' }}</td>
+                        <td class="total">{{ empresa.total | number : '1.0-0' }}</td>
                     </tr>
                 </tbody>
                 <tbody class="resumo">
@@ -265,22 +265,22 @@
                             <td colspan="2" class="label">Previsão de Desembolso Mensal (R$)</td>
                             <td class="mes rotated-value" *ngFor="let total of cronograma.totais">
                                 <div>
-                                    <strong>{{ total | number: '1.0-0' }}</strong>
+                                    <strong>{{ total | number : '1.0-0' }}</strong>
                                 </div>
                             </td>
                             <td class="total geral">
-                                <strong>{{ cronograma.totalGeral | number: '1.0-0' }}</strong>
+                                <strong>{{ cronograma.totalGeral | number : '1.0-0' }}</strong>
                             </td>
                         </tr>
                         <tr class="totais-mes executado">
                             <td colspan="2" class="label">Desembolso Mensal Executado (R$)</td>
                             <td class="mes rotated-value" *ngFor="let total of cronograma.totaisExecutado">
                                 <div>
-                                    <strong>{{ total | number: '1.0-0' }}</strong>
+                                    <strong>{{ total | number : '1.0-0' }}</strong>
                                 </div>
                             </td>
                             <td class="total geral">
-                                <strong>{{ cronograma.totalGeralExecutado | number: '1.0-0' }}</strong>
+                                <strong>{{ cronograma.totalGeralExecutado | number : '1.0-0' }}</strong>
                             </td>
                         </tr>
                     </ng-container>
@@ -289,20 +289,20 @@
                             <td colspan="2" class="label">Previsão de Desembolso Mensal (R$)</td>
                             <td class="mes rotated-value" *ngFor="let total of cronograma.totais">
                                 <div>
-                                    <strong>{{ total | number: '1.0-0' }}</strong>
+                                    <strong>{{ total | number : '1.0-0' }}</strong>
                                 </div>
                             </td>
                             <td class="total geral">
-                                <strong>{{ cronograma.totalGeral | number: '1.0-0' }}</strong>
+                                <strong>{{ cronograma.totalGeral | number : '1.0-0' }}</strong>
                             </td>
                         </tr>
                         <tr class="totais-ano">
                             <td colspan="2" rowspan="2" class="label">Previsão de Desembolso Anual (R$)</td>
                             <td *ngFor="let ano of cronograma.anos" [attr.colspan]="cronograma.meses[ano].meses.length" class="total ano">
-                                {{ cronograma.meses[ano].meses.length > 2 ? (cronograma.meses[ano].total | number: '1.0-0') : '' }}
+                                {{ cronograma.meses[ano].meses.length > 2 ? (cronograma.meses[ano].total | number : '1.0-0') : '' }}
                             </td>
                             <td colspan="2" class="total">
-                                <strong>{{ cronograma.totalGeral | number: '1.0-0' }}</strong>
+                                <strong>{{ cronograma.totalGeral | number : '1.0-0' }}</strong>
                             </td>
                         </tr>
                     </ng-container>

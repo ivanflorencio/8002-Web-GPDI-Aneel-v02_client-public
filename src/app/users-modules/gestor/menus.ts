@@ -32,11 +32,12 @@ import {
     Riscos,
     Selecao,
     GestaoPeD,
+    CronogramaConsolidado,
 } from '@app/users-modules/shared/menus';
 
 export const SidebarMenu = {
     provide: SIDEBAR_MENU,
-    useValue: [Demandas, Captacoes, Selecao, Refinamento, Riscos, Aprovacao, Execucao, Finalizacao, GestaoPeD],
+    useValue: [Demandas, Captacoes, Selecao, Refinamento, Riscos, Aprovacao, Execucao, Finalizacao, GestaoPeD, CronogramaConsolidado],
 };
 
 export const HeaderMenu = {

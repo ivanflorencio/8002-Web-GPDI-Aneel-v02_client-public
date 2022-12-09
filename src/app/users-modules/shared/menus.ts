@@ -60,8 +60,14 @@ export const Finalizacao = {
 
 export const GestaoPeD = {
     text: 'Gestão P&D',
-    icon: 'ta-chart',
+    icon: 'ta-alocacao-rm',
     path: `/gestao-ped`,
+};
+
+export const CronogramaConsolidado = {
+    text: 'Cronograma Consolidado',
+    icon: 'ta-chart',
+    path: `/cronograma-consolidado`,
 };
 
 export const Configuracao = {

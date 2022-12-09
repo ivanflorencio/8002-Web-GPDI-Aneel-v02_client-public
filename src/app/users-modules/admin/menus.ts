@@ -31,6 +31,7 @@ import {
     Execucao,
     Finalizacao,
     GestaoPeD,
+    CronogramaConsolidado,
     Configuracao,
     MeuCadastro,
     GerenciarUsers,
@@ -38,7 +39,19 @@ import {
 
 export const SidebarMenu = {
     provide: SIDEBAR_MENU,
-    useValue: [Demandas, Captacoes, Selecao, Refinamento, Riscos, Aprovacao, Execucao, Finalizacao, GestaoPeD, Configuracao],
+    useValue: [
+        Demandas,
+        Captacoes,
+        Selecao,
+        Refinamento,
+        Riscos,
+        Aprovacao,
+        Execucao,
+        Finalizacao,
+        GestaoPeD,
+        CronogramaConsolidado,
+        Configuracao,
+    ],
 };
 
 export const HeaderMenu = {

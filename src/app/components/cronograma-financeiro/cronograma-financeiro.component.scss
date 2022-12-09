@@ -1,3 +1,12 @@
+$cronograma-azul-escuro: #007984;
+$cronograma-azul-claro: #e3eef0;
+$cronograma-azul-mais-claro: #f3f6f7;
+$cronograma-cinza-escuro: #999;
+$cronograma-cinza-claro: #f0f0f0;
+$cronograma-marrom: #c29361;
+$cronograma-marrom-escuro: #8c6b4a;
+$cronograma-branco: #fff;
+
 .view {
     position: relative;
     overflow: hidden;
@@ -19,19 +28,19 @@ table.cronograma {
         top: 2px;
         transform: translateY(-2px);
         tr {
-            background-color: #fff;
+            background-color: $cronograma-branco;
         }
         th {
-            background-color: #007984;
-            color: #fff;
-            border: 4px solid #fff;
-            outline: 2px solid #fff;
+            background-color: $cronograma-azul-escuro;
+            color: $cronograma-branco;
+            border: 4px solid $cronograma-branco;
+            outline: 2px solid $cronograma-branco;
             outline-offset: -2px;
             padding: 0.25rem 0.5rem;
             font-size: 12px;
             &.light {
-                background-color: #e3eef0;
-                color: #007984;
+                background-color: $cronograma-azul-claro;
+                color: $cronograma-azul-escuro;
             }
             &.fixo {
                 position: sticky;
@@ -86,31 +95,31 @@ table.cronograma {
             cursor: pointer;
             transition: all 0.3s ease-in-out;
             &:hover td {
-                background-color: #e3eef0;
+                background-color: $cronograma-azul-claro;
             }
             &.aberto td {
-                background-color: #e3eef0;
+                background-color: $cronograma-azul-claro;
                 &.etapa {
                     strong {
-                        background-color: #007984;
-                        color: #fff;
+                        background-color: $cronograma-azul-escuro;
+                        color: $cronograma-branco;
                     }
                 }
             }
         }
         td {
-            border: 2px solid #fff;
-            border-left: 4px solid #fff;
-            border-right: 4px solid #fff;
+            border: 2px solid $cronograma-branco;
+            border-left: 4px solid $cronograma-branco;
+            border-right: 4px solid $cronograma-branco;
             padding: 0.125em 0.25em;
             font-size: 14px;
             height: 30px;
-            background-color: #f0f0f0;
+            background-color: $cronograma-cinza-claro;
             &:first-child {
                 position: sticky;
                 left: 0;
                 transform: translateX(-3px);
-                outline: 4px solid #fff;
+                outline: 4px solid $cronograma-branco;
                 outline-offset: -2px;
             }
             .wrapper {
@@ -120,21 +129,23 @@ table.cronograma {
                 overflow: hidden;
                 text-overflow: ellipsis;
                 strong {
-                    background-color: #999;
-                    color: #fff;
+                    background-color: $cronograma-cinza-escuro;
+                    color: $cronograma-branco;
                     width: 30px;
                     height: 30px;
                     display: inline-block;
                     text-align: center;
                     padding-top: 6px;
-                    margin-right: 10px;
                     border-radius: 4px;
+                }
+                span {
+                    margin-left: 10px;
                 }
             }
             &.mes {
                 padding: 0;
                 span {
-                    background-color: #c29361;
+                    background-color: $cronograma-marrom;
                     display: flex;
                     height: 100%;
                     border-radius: 5px;
@@ -172,11 +183,11 @@ table.cronograma {
             border: none;
             vertical-align: top;
             overflow: hidden;
-            background-color: #fff;
+            background-color: $cronograma-branco;
             .summary {
                 overflow: hidden;
                 max-width: 100%;
-                background-color: #fff;
+                background-color: $cronograma-branco;
                 padding: 0em;
                 border: none;
                 align-items: stretch;
@@ -198,7 +209,7 @@ table.cronograma {
                     margin-top: 5px;
                     .summary-detalhe {
                         width: 100%;
-                        background-color: #e3eef0;
+                        background-color: $cronograma-azul-claro;
                         border-radius: 3px;
                         padding: 15px;
                         .field {
@@ -209,7 +220,7 @@ table.cronograma {
                         }
                         label {
                             font-size: 14px;
-                            color: #007984;
+                            color: $cronograma-azul-escuro;
                             font-weight: 600;
                             display: block;
                         }
@@ -222,7 +233,7 @@ table.cronograma {
                 table.recursos {
                     box-shadow: none;
                     tr {
-                        background-color: #fff;
+                        background-color: $cronograma-branco;
                         &:last-child {
                             font-weight: bold;
                         }
@@ -230,15 +241,15 @@ table.cronograma {
                     th {
                         background-color: #c7dee0;
                         border: none;
-                        color: #007984;
+                        color: $cronograma-azul-escuro;
                         line-height: 12px;
                         padding: 5px 10px;
                         vertical-align: bottom;
                     }
                     tbody {
                         td {
-                            background-color: #fff;
-                            border-bottom: solid 1px #f0f0f0;
+                            background-color: $cronograma-branco;
+                            border-bottom: solid 1px $cronograma-cinza-claro;
                             height: 20px;
                         }
                     }
@@ -261,21 +272,21 @@ table.cronograma {
         }
     }
     .divisor {
-        background-color: #fff !important;
+        background-color: $cronograma-branco !important;
     }
     tbody.desembolsos {
         margin-top: 50px;
         .header {
             td {
-                background-color: #007984;
-                color: #fff;
+                background-color: $cronograma-azul-escuro;
+                color: $cronograma-branco;
                 font-weight: bold;
                 padding: 5px 10px;
-                border-top: 30px solid #fff;
+                border-top: 30px solid $cronograma-branco;
             }
         }
         td {
-            border: solid 5px #fff;
+            border: solid 5px $cronograma-branco;
             background-color: #c7dee0;
             &.empresa {
                 border-top-left-radius: 10px;
@@ -284,11 +295,11 @@ table.cronograma {
                 left: 0;
                 transform: translateX(-3px);
                 z-index: 1;
-                outline: 4px solid #fff;
+                outline: 4px solid $cronograma-branco;
                 outline-offset: -2px;
                 caption {
-                    background-color: #007984;
-                    color: #fff;
+                    background-color: $cronograma-azul-escuro;
+                    color: $cronograma-branco;
                     font-weight: bold;
                     padding: 5px 10px;
                     float: right;
@@ -307,7 +318,10 @@ table.cronograma {
             }
         }
         tr.desembolso {
-            border: 5px solid #fff;
+            border: 5px solid $cronograma-branco;
+        }
+        tr.executado td.mes {
+            background-color: $cronograma-azul-claro;
         }
 
         .empresa {
@@ -321,7 +335,7 @@ table.cronograma {
             font-size: 16px;
             font-weight: bold;
             &.projeto {
-                background-color: #fff;
+                background-color: $cronograma-branco;
                 padding: 0;
                 border-width: 0;
                 table {
@@ -333,8 +347,8 @@ table.cronograma {
                     }
                     tr:first-child {
                         td {
-                            background-color: #e3eff0;
-                            color: #a1774c;
+                            background-color: $cronograma-azul-claro;
+                            color: $cronograma-marrom-escuro;
                         }
                     }
                     td {
@@ -342,7 +356,7 @@ table.cronograma {
                         &.header {
                             font-size: 0.85em;
                             width: 120px;
-                            color: #007984 !important;
+                            color: $cronograma-azul-escuro !important;
                         }
                         &.value {
                             padding: 0.5em 1em;
@@ -351,7 +365,7 @@ table.cronograma {
                                 margin-left: 2em;
                                 width: 4em;
                                 text-align: center;
-                                background-color: rgba(255, 255, 255, 0.6);
+                                background-color: $cronograma-cinza-claro;
                                 border-radius: 5px;
                                 font-size: 0.85em;
                             }
@@ -362,13 +376,13 @@ table.cronograma {
                     .label {
                         width: 32px;
                         position: relative;
-                        background-color: #007984 !important;
+                        background-color: $cronograma-azul-escuro !important;
                         caption {
                             transform: rotate(270deg);
                             position: absolute;
                             text-align: center;
                             width: 32px;
-                            color: #fff;
+                            color: $cronograma-branco;
                         }
                     }
                 }
@@ -399,35 +413,35 @@ table.cronograma {
             }
         }
         td {
-            border: 4px solid #fff;
-            background-color: #007984;
-            color: #fff;
+            border: 4px solid $cronograma-branco;
+            background-color: $cronograma-azul-escuro;
+            color: $cronograma-branco;
             font-weight: bold;
             &:first-child {
                 position: sticky;
                 left: 0;
                 z-index: 1;
-                outline: 4px solid #fff;
+                outline: 4px solid $cronograma-branco;
                 outline-offset: -2px;
             }
         }
         .totais-ano {
             td {
                 background-color: #c7dee0;
-                color: #007984;
+                color: $cronograma-azul-escuro;
             }
         }
         .totais-mes.executado {
             td {
                 background-color: #c7dee0;
-                color: #007984;
+                color: $cronograma-azul-escuro;
             }
         }
         .totais-grafico {
             td {
-                background-color: #fff;
+                background-color: $cronograma-branco;
                 .barra {
-                    background-color: #c29361;
+                    background-color: $cronograma-marrom;
                     border-radius: 4px;
                     width: 22px;
                     margin: 0 auto;
@@ -435,6 +449,22 @@ table.cronograma {
             }
             .barra-grafico {
                 vertical-align: baseline;
+            }
+        }
+        tr.planejado {
+            td:first-child {
+                border-top-left-radius: 10px;
+            }
+            td:last-child {
+                border-top-right-radius: 15px;
+            }
+        }
+        tr.executado {
+            td:first-child {
+                border-bottom-left-radius: 10px;
+            }
+            td:last-child {
+                border-bottom-right-radius: 15px;
             }
         }
     }

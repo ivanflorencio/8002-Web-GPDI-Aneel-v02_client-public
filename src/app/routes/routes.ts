@@ -35,6 +35,13 @@ export const GestaoPeDRoute: Route = {
     loadChildren: () => import('@app/pages/gestao-ped/gestao-ped.module').then((m) => m.GestaoPeDModule),
 };
 
+export const CronogramaConsolidadoRoute: Route = {
+    path: 'cronograma-consolidado',
+    component: SidebarComponent,
+    loadChildren: () =>
+        import('@app/pages/cronograma-consolidado/cronograma-consolidado.module').then((m) => m.CronogramaConsolidadoModule),
+};
+
 export const GerenciarUsuariosRoute: Route = {
     path: 'gerenciar-usuarios',
     loadChildren: () => import('@app/pages/gerenciar-usuarios/gerenciar-usuarios.module').then((m) => m.GerenciarUsuariosModule),

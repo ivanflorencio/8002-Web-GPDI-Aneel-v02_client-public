@@ -13,6 +13,7 @@ export class CronogramaFinanceiroComponent implements OnInit {
     loading = false;
     cronograma: any;
     isCronogramaProjeto: boolean;
+    isConsolidado: boolean;
 
     getMesesEtapas(anoInicio: number, mesInicio: number, numeroMeses: number) {
         const meses = [];
@@ -72,11 +73,15 @@ export class CronogramaFinanceiroComponent implements OnInit {
             empresa.totalPlanejado = empresa.desembolso.slice(0, ultimoMes).reduce((acc, curr) => acc + curr, 0);
             empresa.totalProjetado = empresa.executado.slice(0, ultimoMes).reduce((acc, curr) => acc + curr, 0);
             empresa.porcentagemExecutado =
-                empresa.totalPlanejado > 0 ? ((empresa.totalProjetado / empresa.totalPlanejado) * 100).toFixed(2) : '0';
-            empresa.porcentagemPlanejado = empresa.totalPlanejado > 0 ? ((empresa.totalPlanejado / empresa.total) * 100).toFixed(2) : '0';
+                empresa.totalProjetado > 0 && empresa.totalPlanejado > 0
+                    ? ((empresa.totalProjetado / empresa.totalPlanejado) * 100).toFixed(2)
+                    : '0';
+            empresa.porcentagemPlanejado =
+                empresa.totalPlanejado > 0 && empresa.total > 0 ? ((empresa.totalPlanejado / empresa.total) * 100).toFixed(2) : '0';
         });
 
         this.isCronogramaProjeto = empresas?.some((i) => !!i.executado);
+        this.isConsolidado = !!infoCronograma.etapas[0].projetoId;
 
         this.cronograma = {
             mesesEtapas,

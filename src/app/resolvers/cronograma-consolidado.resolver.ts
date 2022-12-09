@@ -5,14 +5,11 @@ import { ProjetoService } from '@app/pages/projetos/projeto/services/projeto.ser
 import { ROOT_URL } from '@app/commons';
 
 @Injectable()
-export class CronogramaProjetoResolver implements Resolve<any> {
+export class CronogramaConsolidadoResolver implements Resolve<any> {
     constructor(@Inject(ROOT_URL) protected root_url, protected router: Router, protected service: ProjetoService) {}
 
     async resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        const projeto = this.service.getCurrentProjeto();
-        if (projeto) {
-            return this.service.getCronogramaProjeto(projeto.id);
-        }
+        return this.service.getCronogramaConsolidado();
         await this.router.navigate([this.root_url, 'projetos']);
     }
 }
