@@ -9,6 +9,7 @@ import * as moment from 'moment';
 })
 export class CronogramaFinanceiroComponent implements OnInit {
     @Input() infoCronograma: any;
+    @Input() onRemoveSimulacao: any;
 
     loading = false;
     cronograma: any;
@@ -105,6 +106,10 @@ export class CronogramaFinanceiroComponent implements OnInit {
             nomeUltimoMes: moment(`${anoInicio}-${mesInicio}-01`).add(ultimoMes, 'months').format('MMM/YY'),
             ultimoMes: ultimoMes + 1,
         };
+    }
+
+    removerSimulacao(proposta) {
+        this.onRemoveSimulacao(proposta);
     }
 
     async ngOnInit() {}

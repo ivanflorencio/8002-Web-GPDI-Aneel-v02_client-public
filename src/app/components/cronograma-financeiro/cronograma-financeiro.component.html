@@ -32,7 +32,8 @@
                         <tr (click)="toggle(etapa.numero)" [ngClass]="etapa.aberto ? 'aberto' : ''">
                             <td colspan="2" class="etapa">
                                 <div class="wrapper">
-                                    <strong *ngIf="!isConsolidado">{{ etapa.numero }}</strong> <span>{{ etapa.etapa }}</span>
+                                    <strong *ngIf="!isConsolidado">{{ etapa.numero }}</strong>
+                                    <span>{{ etapa.etapa }}</span>
                                 </div>
                             </td>
                             <td class="mes" *ngFor="let mes of cronograma.mesesEtapas">

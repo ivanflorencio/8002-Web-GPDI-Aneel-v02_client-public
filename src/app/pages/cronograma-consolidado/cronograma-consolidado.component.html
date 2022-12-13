@@ -17,12 +17,19 @@
                 formControlName="mesInicioProposta"
                 class="form-control" />
         </div>
-        <div class="form-group pr-5">
+        <div class="form-group pr-2">
             <button
-                class="btn btn-outline-primary"
+                class="btn btn-outline-primary mr-1"
                 [disabled]="!this.simulador.controls.mesInicioProposta.value || !this.simulador.controls.propostaSelecionada.value"
                 (click)="adicionarProposta()">
-                Adicionar
+                <span *ngIf="!loading">Adicionar</span>
+                <span *ngIf="loading">
+                    <fa-icon [icon]="['fas', 'spinner']" [spin]="true" [size]="size" [style.color]="color"></fa-icon>
+                    Carregando
+                </span>
+            </button>
+            <button *ngIf="!!this.propostasSimuladas.length" class="btn btn-outline-danger" (click)="limparSimulacao()">
+                <span>Limpar</span>
             </button>
         </div>
     </aside>

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TextValue } from '@app/commons';
-import { AppService, LoadingController, DemandasService } from '@app/services';
+import { AppService, DemandasService } from '@app/services';
 import * as moment from 'moment';
 import { ProjetoService } from '../projetos/projeto/services/projeto.service';
 
@@ -18,6 +18,7 @@ export class CronogramaConsolidadoComponent implements OnInit {
     propostasSimuladas: Array<any> = [];
     dataMinSimulacao: string = moment().format('YYYY-MM');
     dataMaxSimulacao: string = moment().add(2, 'years').format('YYYY-MM');
+    loading = false;
 
     simulador = new FormGroup({
         propostaSelecionada: new FormControl(),
@@ -28,8 +29,7 @@ export class CronogramaConsolidadoComponent implements OnInit {
         protected route: ActivatedRoute,
         protected app: AppService,
         protected service: DemandasService,
-        protected projetoService: ProjetoService,
-        protected loading: LoadingController
+        protected projetoService: ProjetoService
     ) {}
 
     ngOnInit(): void {
@@ -51,7 +51,14 @@ export class CronogramaConsolidadoComponent implements OnInit {
 
     selecionarProposta(e) {}
 
+    limparSimulacao() {
+        this.loading = true;
+        this.propostasSimuladas = [];
+        this.carregarSimulacoes();
+    }
+
     adicionarProposta() {
+        this.loading = true;
         const propostaSelecionada = this.propostasFull.find((x) => x.guid === this.simulador.controls.propostaSelecionada.value);
         this.propostasSimuladas.push({
             proposta: propostaSelecionada.guid,
@@ -60,10 +67,15 @@ export class CronogramaConsolidadoComponent implements OnInit {
             duracao: propostaSelecionada.duracao,
             id: propostaSelecionada.id,
         });
+        this.carregarSimulacoes();
+    }
+
+    carregarSimulacoes() {
         this.projetoService.getCronogramaConsolidadoSimulado(this.propostasSimuladas).then((data) => {
             this.cronograma = data;
             this.simulador.controls.propostaSelecionada.setValue(null);
             this.simulador.controls.mesInicioProposta.setValue(null);
+            this.loading = false;
         });
     }
 }
