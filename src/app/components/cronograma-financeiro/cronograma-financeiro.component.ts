@@ -1,5 +1,5 @@
 /* eslint-disable @angular-eslint/use-lifecycle-interface */
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit } from '@angular/core';
 import * as moment from 'moment';
 
 @Component({
@@ -107,7 +107,9 @@ export class CronogramaFinanceiroComponent implements OnInit {
         };
     }
 
-    async ngOnInit() {
+    async ngOnInit() {}
+
+    async ngOnChanges() {
         this.carregarCronograma(this.infoCronograma);
     }
 

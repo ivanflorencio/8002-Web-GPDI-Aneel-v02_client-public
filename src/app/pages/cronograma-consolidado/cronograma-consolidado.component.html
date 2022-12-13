@@ -1,1 +1,30 @@
+<div>
+    <h5 class="text-blue float-left">CRONOGRAMA FÍSICO FINANCEIRO DOS <strong>PROJETOS EM ANDAMENTO</strong></h5>
+    <aside class="form-inline float-right pb-2">
+        <div class="form-group pr-4" [formGroup]="simulador">
+            <label class="pr-2"><small>Simular Projeto:</small></label>
+            <select class="form-control" (change)="selecionarProposta($event)" formControlName="propostaSelecionada">
+                <option>Selecione</option>
+                <option *ngFor="let proposta of propostas" [value]="proposta.value">{{ proposta.text }}</option>
+            </select>
+        </div>
+        <div class="form-group pr-4" [formGroup]="simulador">
+            <label class="pr-2"><small>Iniciar em:</small></label>
+            <input
+                type="month"
+                min="{{ dataMinSimulacao }}"
+                max="{{ dataMaxSimulacao }}"
+                formControlName="mesInicioProposta"
+                class="form-control" />
+        </div>
+        <div class="form-group pr-5">
+            <button
+                class="btn btn-outline-primary"
+                [disabled]="!this.simulador.controls.mesInicioProposta.value || !this.simulador.controls.propostaSelecionada.value"
+                (click)="adicionarProposta()">
+                Adicionar
+            </button>
+        </div>
+    </aside>
+</div>
 <app-cronograma-financeiro [infoCronograma]="cronograma"></app-cronograma-financeiro>

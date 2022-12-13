@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/member-ordering */
 import { Injectable } from '@angular/core';
 import { ServiceBase } from '@app/services';
 import { HttpClient } from '@angular/common/http';
@@ -43,8 +42,10 @@ export class ProjetoService extends ServiceBase<any> {
     async getCronogramaProjeto(projetoId: number) {
         return await this.get(`${projetoId}/Cronograma`);
     }
-
     async getCronogramaConsolidado() {
         return await this.get(`CronogramaConsolidado`);
+    }
+    async getCronogramaConsolidadoSimulado(propostas = []) {
+        return await this.post(`CronogramaConsolidadoSimulado`, propostas);
     }
 }

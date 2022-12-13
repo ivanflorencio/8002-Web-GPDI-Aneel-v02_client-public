@@ -115,6 +115,10 @@ export class DemandasService {
         return this.http.put<any>(`Demandas/${id}/ReprovarPermanente`, { motivo }).toPromise();
     }
 
+    getPropostasSimulacao() {
+        return this.http.get<any>('Propostas/PropostasSimulacao');
+    }
+
     getForms() {
         return this.http.get<any>('Demandas/Forms');
     }

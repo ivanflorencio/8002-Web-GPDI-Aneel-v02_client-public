@@ -5,10 +5,12 @@ import { CronogramaConsolidadoComponent } from './cronograma-consolidado.compone
 import { ProjetoService } from '../projetos/projeto/services/projeto.service';
 import { CronogramaConsolidadoResolver } from '@app/resolvers/cronograma-consolidado.resolver';
 import { ComponentsModule } from '@app/components';
+import { CommonModule } from '@angular/common';
+import { CoreModule } from '@app/core';
 
 @NgModule({
     declarations: [CronogramaConsolidadoComponent],
-    imports: [CronogramaConsolidadoRoutingModule, ComponentsModule],
+    imports: [CommonModule, CoreModule, CronogramaConsolidadoRoutingModule, ComponentsModule],
     providers: [ProjetoService, CronogramaConsolidadoResolver],
 })
 export class CronogramaConsolidadoModule {}
