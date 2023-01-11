@@ -170,6 +170,11 @@ table.cronograma {
                     height: 100%;
                     border-radius: 5px;
                 }
+                &.simulado {
+                    span {
+                        background-color: $cronograma-cinza-escuro;
+                    }
+                }
             }
         }
         .produto,

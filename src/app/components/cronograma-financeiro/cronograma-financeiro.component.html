@@ -29,14 +29,21 @@
                         <tr>
                             <td [attr.colspan]="cronograma.mesesEtapas.length + 4" class="summary-container"></td>
                         </tr>
-                        <tr (click)="toggle(etapa.numero)" [ngClass]="etapa.aberto ? 'aberto' : ''">
+                        <tr (click)="toggle(etapa.numero)" [ngClass]="etapa.aberto || etapa.produto === 'Simulação' ? 'aberto' : ''">
                             <td colspan="2" class="etapa">
                                 <div class="wrapper">
                                     <strong *ngIf="!isConsolidado">{{ etapa.numero }}</strong>
-                                    <span>{{ etapa.etapa }}</span>
+                                    <span>
+                                        <small *ngIf="etapa.produto === 'Simulação'" class="float-right">
+                                            <i class="ta-lamp"></i>
+                                        </small>
+                                        {{ etapa.etapa }}
+                                    </span>
                                 </div>
                             </td>
-                            <td class="mes" *ngFor="let mes of cronograma.mesesEtapas">
+                            <td
+                                class="{{ etapa.produto === 'Simulação' ? 'mes simulado' : 'mes' }}"
+                                *ngFor="let mes of cronograma.mesesEtapas">
                                 <span *ngIf="etapa.meses.includes(mes.corrido)">&nbsp;</span>
                             </td>
                             <td colspan="2" class="produto">

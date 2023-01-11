@@ -60,6 +60,7 @@ export class RecursoHumanoFormComponent extends PropostaNodeFormDirective implem
 
         this.service.getTabelaValorHora(this.proposta.guid).then((tabela) => {
             this.tabelaValorHora = JSON.parse(tabela.registros);
+            this.atualizarValorMaximo();
         });
 
         this.form.get('nacionalidade').valueChanges.subscribe((v) => {

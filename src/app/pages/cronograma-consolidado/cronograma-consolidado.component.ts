@@ -21,7 +21,7 @@ export class CronogramaConsolidadoComponent implements OnInit {
     loading = false;
 
     simulador = new FormGroup({
-        propostaSelecionada: new FormControl(),
+        propostaSelecionada: new FormControl(''),
         mesInicioProposta: new FormControl(),
     });
 
@@ -73,7 +73,7 @@ export class CronogramaConsolidadoComponent implements OnInit {
     carregarSimulacoes() {
         this.projetoService.getCronogramaConsolidadoSimulado(this.propostasSimuladas).then((data) => {
             this.cronograma = data;
-            this.simulador.controls.propostaSelecionada.setValue(null);
+            this.simulador.controls.propostaSelecionada.setValue('');
             this.simulador.controls.mesInicioProposta.setValue(null);
             this.loading = false;
         });

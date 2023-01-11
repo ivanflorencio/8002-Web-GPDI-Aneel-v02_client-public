@@ -1,10 +1,15 @@
 <div>
-    <h5 class="text-blue float-left">CRONOGRAMA FÍSICO FINANCEIRO DOS <strong>PROJETOS EM ANDAMENTO</strong></h5>
+    <h5 class="text-blue float-left">
+        CRONOGRAMA FÍSICO FINANCEIRO DOS <strong>PROJETOS EM ANDAMENTO</strong>
+        <small *ngIf="!cronograma?.etapas?.length">
+            <p class="mt-5">Nenhum Projeto em Execução</p>
+        </small>
+    </h5>
     <aside class="form-inline float-right pb-2">
         <div class="form-group pr-4" [formGroup]="simulador">
             <label class="pr-2"><small>Simular Projeto:</small></label>
             <select class="form-control" (change)="selecionarProposta($event)" formControlName="propostaSelecionada">
-                <option>Selecione</option>
+                <option value="">Selecione</option>
                 <option *ngFor="let proposta of propostas" [value]="proposta.value">{{ proposta.text }}</option>
             </select>
         </div>
@@ -34,4 +39,6 @@
         </div>
     </aside>
 </div>
-<app-cronograma-financeiro [infoCronograma]="cronograma"></app-cronograma-financeiro>
+<div class="{{ loading ? 'loading' : '' }}" *ngIf="!!cronograma?.etapas?.length">
+    <app-cronograma-financeiro [infoCronograma]="cronograma"></app-cronograma-financeiro>
+</div>
