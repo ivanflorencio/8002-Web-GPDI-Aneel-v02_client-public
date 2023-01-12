@@ -51,7 +51,6 @@ const routes: Routes = [
             },
             {
                 path: 'cronograma',
-                canActivate: ['isGestor'],
                 component: CronogramaProjetoComponent,
                 resolve: {
                     status: 'projetoExecucao',

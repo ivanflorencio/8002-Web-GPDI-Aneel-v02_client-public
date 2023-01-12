@@ -2,6 +2,7 @@
 import { HEADER_MENU, SIDEBAR_MENU } from '@app/commons';
 import {
     MenuItemConsultarDados,
+    MenuItemCronogramaProjeto,
     MenuItemRefpAprovado,
     MenuItemRefpNovo,
     MenuItemRefpPendente,
@@ -31,7 +32,14 @@ export const HeaderMenu = {
 
 export const ProjetoExecucaoMenu = {
     provide: PROJETO_EXECUCAO_MENU,
-    useValue: [MenuItemRefpNovo, MenuItemRefpPendente, MenuItemRefpReprovado, MenuItemRefpAprovado, MenuItemConsultarDados],
+    useValue: [
+        MenuItemRefpNovo,
+        MenuItemRefpPendente,
+        MenuItemRefpReprovado,
+        MenuItemRefpAprovado,
+        MenuItemCronogramaProjeto,
+        MenuItemConsultarDados,
+    ],
 };
 export const ProjetoFinalizadoMenu = {
     provide: PROJETO_FINALIZADO_MENU,
