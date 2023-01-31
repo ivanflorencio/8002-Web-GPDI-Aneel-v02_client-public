@@ -22,7 +22,6 @@ export class ConfiguracoesSistemaComponent implements OnInit {
             { text: 'Fornecedores', path: 'fornecedores' },
             { text: 'Configuração Captações', path: 'config-captacoes' },
             { text: 'Tabelas Hora/Valor', path: 'tabelas' },
-            { text: 'Fornecedores', path: 'fornecedores' },
             { text: 'Banco de Ajuda', path: 'ajuda' },
         ];
     }
