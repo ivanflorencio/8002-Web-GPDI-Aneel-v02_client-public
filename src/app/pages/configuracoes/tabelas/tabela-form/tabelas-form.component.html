@@ -54,12 +54,17 @@
         </table>
 
         <div class="form-group">
-            <div class="text-right">
-                <div class="button btn btn-link" (click)="activeModal.close(false)">Cancelar</div>
-                <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
-                    <i class="ta-save mr-1"></i>
-                    Salvar Tabela
-                </button>
+            <div class="row">
+                <div class="col" *ngIf="tabelaValorHora">
+                    <button type="button" class="btn btn-danger" (click)="excluirTabela()">Excluir Tabela</button>
+                </div>
+                <div class="col text-right">
+                    <div class="button btn btn-link" (click)="activeModal.close(false)">Cancelar</div>
+                    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+                        <i class="ta-save mr-1"></i>
+                        Salvar Tabela
+                    </button>
+                </div>
             </div>
         </div>
     </form>

@@ -26,7 +26,9 @@ export class TabelasFormComponent implements OnInit {
         if (value) {
             const dadosForm = JSON.parse(value.registros);
             this._tabelaValorHora = dadosForm;
+            this._tabelaValorHora.id = value.id;
             this.form.patchValue(dadosForm);
+            this.form.get('id').setValue(value.id);
         }
     }
 
@@ -74,6 +76,22 @@ export class TabelasFormComponent implements OnInit {
                 this.app.alert('Tabela salva com sucesso').then();
             } catch (e) {
                 this.app.alert('Não foi possível salvar a Tabela').then();
+                console.error(e);
+            }
+            this.app.loading.hide();
+        }
+    }
+
+    async excluirTabela() {
+        console.log(this.tabelaValorHora);
+        if (this.tabelaValorHora) {
+            this.app.loading.show().then();
+            try {
+                await this.service.excluir(this.tabelaValorHora.id);
+                this.activeModal.close(true);
+                this.app.alert('Tabela excluída com sucesso').then();
+            } catch (e) {
+                this.app.alert('Não foi possível excluir a Tabela').then();
                 console.error(e);
             }
             this.app.loading.hide();
