@@ -70,6 +70,19 @@ export class CronogramaConsolidadoComponent implements OnInit {
         this.carregarSimulacoes();
     }
 
+    simulacaoInvalida() {
+        const mesAno = this.simulador.controls.mesInicioProposta.value;
+        const hoje = new Date();
+        const mes = mesAno && mesAno.split('-')[1];
+        const ano = mesAno && mesAno.split('-')[0];
+
+        const mesInvalido =
+            !(!Number.isNaN(mes) && mes >= 1 && mes <= 12) ||
+            !(!Number.isNaN(ano) && ano >= hoje.getFullYear() && ano <= hoje.getFullYear() + 5);
+
+        return mesInvalido || !this.simulador.controls.propostaSelecionada.value;
+    }
+
     carregarSimulacoes() {
         this.projetoService.getCronogramaConsolidadoSimulado(this.propostasSimuladas).then((data) => {
             this.cronograma = data;

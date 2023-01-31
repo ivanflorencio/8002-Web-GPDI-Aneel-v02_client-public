@@ -14,7 +14,12 @@
             </select>
         </div>
         <div class="form-group pr-4" [formGroup]="simulador">
-            <label class="pr-2"><small>Iniciar em:</small></label>
+            <label class="pr-2"
+                ><small
+                    >Iniciar em:
+                    <small><br /><i>ANO-MÊS</i></small>
+                </small></label
+            >
             <input
                 type="month"
                 min="{{ dataMinSimulacao }}"
@@ -23,10 +28,7 @@
                 class="form-control" />
         </div>
         <div class="form-group pr-2">
-            <button
-                class="btn btn-outline-primary mr-1"
-                [disabled]="!this.simulador.controls.mesInicioProposta.value || !this.simulador.controls.propostaSelecionada.value"
-                (click)="adicionarProposta()">
+            <button class="btn btn-outline-primary mr-1" [disabled]="simulacaoInvalida()" (click)="adicionarProposta()">
                 <span *ngIf="!loading">Adicionar</span>
                 <span *ngIf="loading">
                     <fa-icon [icon]="['fas', 'spinner']" [spin]="true" [size]="size" [style.color]="color"></fa-icon>
