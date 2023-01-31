@@ -47,7 +47,7 @@
                 </label>
                 <select class="form-control" id="etapa" formControlName="etapaId">
                     <option value="" hidden>Selecione uma etapa</option>
-                    <option [value]="etapa.id" *ngFor="let etapa of etapas">Etapa {{ etapa.ordem | pad: '0':2 }}</option>
+                    <option [value]="etapa.id" *ngFor="let etapa of etapas">Etapa {{ etapa.ordem | pad : '0' : 2 }}</option>
                 </select>
             </div>
         </div>
@@ -62,12 +62,14 @@
                         <ng-container *ngFor="let m of meses">
                             <div class="wrap-input-control rounded">
                                 <div class="form-group">
-                                    <div class="font-weight-bold fs-14 text-blue-light text-uppercase">Mês {{ m | pad: '0':2 }}</div>
+                                    <div class="font-weight-bold fs-14 text-blue-light text-uppercase">Mês {{ m | pad : '0' : 2 }}</div>
                                     <input
                                         type="number"
+                                        pattern="\d*"
                                         class="form-control"
                                         [formControlName]="m"
                                         min="0"
+                                        step="1"
                                         [max]="max"
                                         [placeholder]="'Max '.concat(max.toString(), 'h')" />
                                 </div>

@@ -10,6 +10,10 @@
             resize: none;
         }
     }
+    input:invalid {
+        outline: solid 2px red;
+        box-shadow: 0px 0px 10px red;
+    }
 }
 
 .form-check {
@@ -23,7 +27,7 @@
 
             &::before {
                 color: inherit;
-                font-family: "taesa" !important;
+                font-family: 'taesa' !important;
                 display: inline-block;
                 position: absolute;
                 top: 0;
@@ -40,7 +44,7 @@
             }
         }
 
-        &[type=checkbox] {
+        &[type='checkbox'] {
             + .form-check-label {
                 &::before {
                     content: $ta-checkbox-unchecked;
