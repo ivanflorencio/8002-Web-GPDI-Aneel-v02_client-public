@@ -1,0 +1,25 @@
+<button class="btn btn-outline-primary" (click)="openCriterioAvaliacaoForm()">Critérios de Avaliação</button>
+<button class="btn btn-outline-primary" (click)="openCriterioAvaliacaoForm(true)">Critérios de Avaliação (P&D)</button>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Demanda</th>
+            <th>Fornecedor</th>
+            <th>Data da Proposta</th>
+            <th>Status da Análise</th>
+            <th>Responsável</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let proposta of propostas">
+            <td>{{ proposta.tituloDemanda }}</td>
+            <td>{{ proposta.fornecedor }}</td>
+            <td>{{ proposta.dataHora }}</td>
+            <td>{{ proposta.statusAnalise }}</td>
+            <td>{{ proposta.analistaResponsavel }}</td>
+            <td class="text-right">
+                <button class="btn btn-primary" (click)="openAnaliseTecnica(proposta.propostaId)">Dar Parecer</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,74 @@
+<div class="modal-header">
+    <div class="text-uppercase modal-title text-blue-light fs-24">Critérios de Avaliação</div>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close(false)">
+        <i class="ta-cancel-circle"></i>
+    </button>
+</div>
+
+<div class="modal-body">
+    <div *ngFor="let demanda of criteriosDemandas" class="accordion">
+        <div class="card">
+            <div class="card-header" (click)="toggleAbaDemanda(demanda.demandaId)">
+                <b [class]="!demanda.show ? 'mb-0' : 'mb-0 ativo'">{{ demanda.tituloDemanda }} ({{ demanda.criteriosAvaliacao.length }})</b>
+            </div>
+            <div [class]="!demanda.show ? 'collapse' : 'collapse show'">
+                <div [class]="!isLoading ? 'card-body' : 'card-body loading'">
+                    <div class="row">
+                        <div class="col-9"><small>Nome do Critério de Avaliação</small></div>
+                        <div class="col-2"><small>Peso</small></div>
+                        <div class="col-1" *ngIf="criterio && criterio.id > 0 && !(criterio.doGestor && !isGestor)"></div>
+                    </div>
+                    <div *ngFor="let criterio of demanda.criteriosAvaliacao">
+                        <div class="row">
+                            <div class="col-9">
+                                <textarea
+                                    class="form-control"
+                                    [disabled]="criterio.doGestor && !isGestor"
+                                    (blur)="salvarCriterio($event)"
+                                    attr.data-criterio="{{ criterio.id }}"
+                                    attr.data-demanda="{{ demanda.demandaId }}"
+                                    attr.data-peso="{{ criterio.peso }}"
+                                    attr.data-descricao="{{ criterio.descricao }}"
+                                    data-field="descricao"
+                                    >{{ criterio.descricao }}</textarea
+                                >
+                            </div>
+                            <div class="col-2">
+                                <input
+                                    type="number"
+                                    step="1"
+                                    max="5"
+                                    min="0"
+                                    class="form-control text-center"
+                                    value="{{ criterio.peso }}"
+                                    [disabled]="criterio.doGestor && !isGestor"
+                                    (blur)="salvarCriterio($event)"
+                                    attr.data-criterio="{{ criterio.id }}"
+                                    attr.data-demanda="{{ demanda.demandaId }}"
+                                    attr.data-peso="{{ criterio.peso }}"
+                                    attr.data-descricao="{{ criterio.descricao }}"
+                                    data-field="peso" />
+                            </div>
+                            <div class="col-1" *ngIf="criterio.id > 0 && !(criterio.doGestor && !isGestor)">
+                                <button type="button" class="btn btn-outline-danger btn-xs" (click)="removerCriterio(criterio.id)">
+                                    <i class="ta-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button
+                        type="button"
+                        *ngIf="!isNovo"
+                        class="btn btn-outline-primary btn-block btn-xs"
+                        (click)="addCriterioDemanda(demanda.demandaId)">
+                        <i class="ta-plus-circle"></i> Adicionar Critério de Avaliação
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" aria-label="Close" (click)="activeModal.close(false)">Voltar</button>
+</div>

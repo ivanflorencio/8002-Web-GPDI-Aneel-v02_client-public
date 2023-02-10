@@ -1,0 +1,13 @@
+.iframe-container {
+    overflow: hidden;
+    height: calc(100% - 3em);
+    filter: hue-rotate(350deg) grayscale(0.25);
+    margin-left: -1.5em;
+    aspect-ratio: 16 / 9;
+    border-radius: 1em;
+    iframe {
+        width: 100%;
+        height: calc(100% + 60px);
+        border: none;
+    }
+}

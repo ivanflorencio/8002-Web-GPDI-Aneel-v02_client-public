@@ -35,6 +35,12 @@ export const GestaoPeDRoute: Route = {
     loadChildren: () => import('@app/pages/gestao-ped/gestao-ped.module').then((m) => m.GestaoPeDModule),
 };
 
+export const AnaliseTecnicaRoute: Route = {
+    path: 'analise-tecnica',
+    component: SidebarComponent,
+    loadChildren: () => import('@app/pages/analise-tecnica/analise-tecnica.module').then((m) => m.AnaliseTecnicaModule),
+};
+
 export const CronogramaConsolidadoRoute: Route = {
     path: 'cronograma-consolidado',
     component: SidebarComponent,

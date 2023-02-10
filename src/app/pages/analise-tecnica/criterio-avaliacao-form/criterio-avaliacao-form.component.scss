@@ -1,0 +1,18 @@
+@import '../../../../styles/components-base';
+
+.card-header {
+    cursor: pointer;
+    font-size: 1.2em;
+    .ativo {
+        color: #0099a8 !important;
+    }
+}
+.card-body {
+    .row {
+        margin-bottom: 10px;
+    }
+    &.loading {
+        pointer-events: none;
+        cursor: progress;
+    }
+}

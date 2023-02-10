@@ -23,6 +23,7 @@ import {
 } from '@app/pages/projetos/projeto/projeto';
 import {
     Demandas,
+    AnaliseTecnica,
     Captacoes,
     Selecao,
     Refinamento,
@@ -41,6 +42,7 @@ export const SidebarMenu = {
     provide: SIDEBAR_MENU,
     useValue: [
         Demandas,
+        AnaliseTecnica,
         Captacoes,
         Selecao,
         Refinamento,

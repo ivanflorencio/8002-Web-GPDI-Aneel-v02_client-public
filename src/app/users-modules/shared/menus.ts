@@ -9,11 +9,15 @@ export const GerenciarUsers = {
     icon: 'ta-group',
     path: `/gerenciar-usuarios`,
 };
-
 export const Demandas = {
     text: 'Gestão de Demandas',
     icon: 'ta-projeto',
     path: `/demandas`,
+};
+export const AnaliseTecnica = {
+    text: 'Análise Técnica',
+    icon: 'ta-ficha',
+    path: `/analise-tecnica`,
 };
 export const Captacoes = {
     subtitle: 'Projetos',
@@ -57,19 +61,16 @@ export const Finalizacao = {
     icon: 'ta-ficha',
     path: `/projetos/em-finalizacao`,
 };
-
 export const GestaoPeD = {
     text: 'Gestão P&D',
     icon: 'ta-alocacao-rm',
     path: `/gestao-ped`,
 };
-
 export const CronogramaConsolidado = {
     text: 'Cronograma Consolidado',
     icon: 'ta-chart',
     path: `/cronograma-consolidado`,
 };
-
 export const Configuracao = {
     text: 'Configurações do Sistema',
     icon: 'ta-gear',
