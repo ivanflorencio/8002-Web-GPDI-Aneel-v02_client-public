@@ -9,7 +9,8 @@
     <div *ngFor="let demanda of criteriosDemandas" class="accordion">
         <div class="card">
             <div class="card-header" (click)="toggleAbaDemanda(demanda.demandaId)">
-                <b [class]="!demanda.show ? 'mb-0' : 'mb-0 ativo'">{{ demanda.tituloDemanda }} ({{ demanda.criteriosAvaliacao.length }})</b>
+                <b [class]="!demanda.show ? 'mb-0' : 'mb-0 ativo'">{{ demanda.tituloDemanda }} </b>
+                <div class="badge badge-primary float-right">{{ demanda.criteriosAvaliacao.length }}</div>
             </div>
             <div [class]="!demanda.show ? 'collapse' : 'collapse show'">
                 <div [class]="!isLoading ? 'card-body' : 'card-body loading'">
@@ -32,6 +33,10 @@
                                     data-field="descricao"
                                     >{{ criterio.descricao }}</textarea
                                 >
+                                <small *ngIf="criterio.id > 0" class="caption">
+                                    Responsável:
+                                    <b>{{ criterio.responsavel.nomeCompleto }} ({{ criterio.doGestor ? 'Gestor' : 'Técnico' }})</b>
+                                </small>
                             </div>
                             <div class="col-2">
                                 <input

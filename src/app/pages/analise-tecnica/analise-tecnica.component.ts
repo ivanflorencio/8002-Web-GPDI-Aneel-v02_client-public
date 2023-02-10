@@ -12,6 +12,7 @@ import { ParecerFormComponent } from './parecer-form/parecer-form.component';
 })
 export class AnaliseTecnicaComponent implements OnInit {
     propostas: PropostaAnalise[];
+    tab = 'pendente';
 
     constructor(protected app: AppService, protected service: AnalisesService, protected modal: NgbModal) {}
 
@@ -19,6 +20,10 @@ export class AnaliseTecnicaComponent implements OnInit {
         this.service.getPropostasAnaliseTecnicaPendente().then((result: PropostaAnalise[]) => {
             this.propostas = result;
         });
+    }
+
+    goToTab(tab: string) {
+        this.tab = tab;
     }
 
     async openCriterioAvaliacaoForm(isGestor = false) {

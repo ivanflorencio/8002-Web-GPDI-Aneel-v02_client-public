@@ -15,6 +15,7 @@ export const Demandas = {
     path: `/demandas`,
 };
 export const AnaliseTecnica = {
+    subtitle: 'Projetos',
     text: 'Análise Técnica',
     icon: 'ta-ficha',
     path: `/analise-tecnica`,

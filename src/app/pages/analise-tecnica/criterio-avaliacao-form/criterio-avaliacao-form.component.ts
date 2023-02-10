@@ -24,6 +24,14 @@ export class CriterioAvaliacaoFormComponent implements OnInit {
     carregarCriterios() {
         this.service.getCriteriosDemandas().then((result) => {
             this.criteriosDemandas = result;
+            if (!this.isGestor) {
+                this.criteriosDemandas.map((demanda) => {
+                    demanda.criteriosAvaliacao = demanda.criteriosAvaliacao.sort((a, b) =>
+                        a.doGestor === b.doGestor ? 0 : a.doGestor ? -1 : 1
+                    );
+                    return demanda;
+                });
+            }
         });
     }
 

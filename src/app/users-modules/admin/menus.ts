@@ -42,8 +42,8 @@ export const SidebarMenu = {
     provide: SIDEBAR_MENU,
     useValue: [
         Demandas,
-        AnaliseTecnica,
         Captacoes,
+        AnaliseTecnica,
         Selecao,
         Refinamento,
         Riscos,
