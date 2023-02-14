@@ -1,22 +1,54 @@
 <div class="modal-header">
     <div class="text-uppercase modal-title text-blue-light fs-24">Parecer de Análise Técnica da Proposta {{ propostaId }}</div>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.close(false)">
-        <i class="ta-cancel-circle"></i>
-    </button>
+    <button class="btn btn-primary" (click)="voltar()"><i class="ta-arrow-left"></i> Voltar</button>
 </div>
 
-<div class="modal-body">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque quam ab quae nostrum nihil dicta omnis corrupti porro, animi
-    explicabo error! Magnam impedit perferendis autem ipsa iste numquam aperiam voluptates. Doloribus dicta officia obcaecati hic nobis,
-    totam doloremque et ut omnis. Quae ipsam, officiis voluptatibus ducimus quaerat ratione atque repellat id nemo illum ab, temporibus
-    asperiores voluptatem maiores facilis, iusto ipsum accusantium provident magnam pariatur ut. Blanditiis, atque. Aspernatur quos sint
-    officia corrupti repellat accusantium! Illum quidem quae veniam eligendi officia perferendis minus magnam neque excepturi obcaecati
-    impedit autem, vel deserunt dolorum, repellat quisquam iste tempora, animi corporis ullam provident corrupti beatae fuga voluptatum. Est
-    corrupti quidem, deserunt laboriosam aliquid quibusdam animi officia porro voluptatum, debitis delectus quae rem. Sit saepe minima optio
-    similique. Necessitatibus fuga voluptates, assumenda nihil similique, deleniti ullam tempore doloremque cum libero alias omnis
-    laudantium eum ipsum fugit illo? Velit, asperiores et, eum quia quasi assumenda ratione, porro deserunt consectetur rerum dolor sunt
-    consequuntur quos? Officia eveniet ipsum ipsam voluptas earum voluptates laborum laudantium hic ducimus? Quasi similique molestias neque
-    totam distinctio. Sapiente repudiandae animi nam voluptate expedita eligendi. Accusantium adipisci veniam inventore explicabo laudantium
-    suscipit nihil magni odio est, culpa ipsam quia repellat vel nesciunt, reiciendis temporibus beatae soluta? Sunt quae, error dolore
-    exercitationem voluptatum consequuntur. Non qui dolores.
+<div class="`form-body pt-5" *ngIf="!!analise" [formGroup]="form">
+    <ng-container formArrayName="pareceres">
+        <div *ngFor="let criterio of analise.pareceres; let index = index" class="col-12 pt-3">
+            <h3 class="pb-3">{{ criterio.descricaoCriterio }}</h3>
+            <div class="row" [formGroupName]="index">
+                <input formControlName="parecerId" type="hidden" />
+                <input formControlName="criterioId" type="hidden" />
+                <input formControlName="peso" type="hidden" />
+                <div class="col-2 form-group">
+                    <label>Pontuação</label>
+                    <input
+                        type="number"
+                        step="1"
+                        max="5"
+                        min="0"
+                        class="form-control text-right"
+                        formControlName="pontuacao"
+                        [attr.readonly]="readonly" />
+                </div>
+                <div class="col-10 form-group">
+                    <label>Justificativa</label>
+                    <ckeditor [editor]="editor" [config]="configEditor" formControlName="justificativa" *ngIf="!readonly"></ckeditor>
+                    <div class="alert alert-secondary" role="alert" *ngIf="readonly" innerHTML="{{ criterio.justificativa }}">
+                        A simple secondary alert—check it out!
+                    </div>
+                </div>
+            </div>
+            `
+            <hr />
+        </div>
+    </ng-container>
+
+    <div class="col-12 form-group">
+        <label>Comentários</label>
+        <ckeditor [editor]="editor" [config]="configEditor" formControlName="comentarios" [disabled]="readonly"></ckeditor>
+    </div>
+    <hr />
+    <div class="col-12 form-group">
+        <label>Justificativa</label>
+        <ckeditor [editor]="editor" [config]="configEditor" formControlName="justificativa" [disabled]="readonly"></ckeditor>
+    </div>
+    <hr />
+    <div class="form-group col-12 text-right pt-3 pb-6" *ngIf="!readonly">
+        <button type="button" class="btn btn-outline-primary mr-3" (click)="salvar()"><i class="ta-save"></i> Salvar Dados</button>
+        <button type="button" class="btn btn-primary mr-3" [disabled]="form.invalid" (click)="enviar()">
+            <i class="ta-ok"></i> Enviar Análise
+        </button>
+    </div>
 </div>

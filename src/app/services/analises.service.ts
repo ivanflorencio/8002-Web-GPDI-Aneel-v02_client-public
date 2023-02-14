@@ -18,6 +18,7 @@ export interface PropostaAnalise {
 }
 
 export interface ParecerTecnico {
+    id: number;
     criterioId: number;
     descricaoCriterio: string;
     peso: number;
@@ -43,6 +44,17 @@ export interface CriteriosDemandas {
     show: boolean;
 }
 
+export interface AnaliseTecnica {
+    id: number;
+    demandaId: number;
+    propostaId: number;
+    justificativa: string;
+    comentarios: string;
+    pontuacaoFinal: number;
+    status: string;
+    pareceres: ParecerTecnico[];
+}
+
 @Injectable({
     providedIn: 'root',
 })
@@ -65,5 +77,17 @@ export class AnalisesService {
 
     removerCriterioAvaliacao(criterioId: number) {
         return this.http.delete(`AnaliseTecnica/CriteriosAvaliacao/${criterioId}`).toPromise();
+    }
+
+    abrirAnaliseTecnicaProposta(propostaId: number) {
+        return this.http.get<AnaliseTecnica>(`AnaliseTecnica/${propostaId}`).toPromise();
+    }
+
+    salvarAnaliseTecnica(analise: AnaliseTecnica) {
+        return this.http.post(`AnaliseTecnica`, analise).toPromise();
+    }
+
+    enviarAnaliseTecnica(analise: AnaliseTecnica) {
+        return this.http.post(`AnaliseTecnica/Enviar`, analise).toPromise();
     }
 }

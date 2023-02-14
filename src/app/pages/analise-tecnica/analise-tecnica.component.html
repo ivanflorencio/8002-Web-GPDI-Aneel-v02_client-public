@@ -7,12 +7,12 @@
         <ul class="nav nav-bar-row nav-justified pt-3">
             <li class="nav-item">
                 <a [class]="tab === 'pendente' ? 'nav-link active' : 'nav-link'" (click)="goToTab('pendente')">
-                    <span class="menu-item-text">Análises Pendentes</span>
+                    <span class="menu-item-text">Análises Pendentes ({{ pendentes.length }})</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a [class]="tab === 'concluido' ? 'nav-link active' : 'nav-link'" (click)="goToTab('concluido')">
-                    <span class="menu-item-text">Análises Concluídas</span>
+                <a [class]="tab === 'concluida' ? 'nav-link active' : 'nav-link'" (click)="goToTab('concluida')">
+                    <span class="menu-item-text">Análises Concluídas ({{ concluidas.length }})</span>
                 </a>
             </li>
         </ul>
@@ -34,8 +34,11 @@
                 <td>{{ proposta.dataHora }}</td>
                 <td>{{ proposta.statusAnalise }}</td>
                 <td>{{ proposta.analistaResponsavel }}</td>
-                <td class="text-right">
+                <td class="text-right" *ngIf="proposta.statusAnalise === 'Aberta' || proposta.statusAnalise === 'Pendente'">
                     <button class="btn btn-primary" (click)="openAnaliseTecnica(proposta.propostaId)">Dar Parecer</button>
+                </td>
+                <td class="text-right" *ngIf="proposta.statusAnalise === 'Enviada' || proposta.statusAnalise === 'Concluída'">
+                    <button class="btn btn-primary" (click)="openAnaliseTecnica(proposta.propostaId)">Ver Parecer</button>
                 </td>
             </tr>
         </tbody>
