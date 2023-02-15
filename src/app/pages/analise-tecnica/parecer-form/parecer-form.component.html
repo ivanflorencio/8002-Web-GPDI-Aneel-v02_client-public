@@ -20,7 +20,9 @@
                         min="0"
                         class="form-control text-right"
                         formControlName="pontuacao"
-                        [attr.readonly]="readonly" />
+                        [readonly]="readonly"
+                        (blur)="calcular()" />
+                    <small>Peso: {{ criterio.peso }}</small>
                 </div>
                 <div class="col-10 form-group">
                     <label>Justificativa</label>
@@ -30,11 +32,25 @@
                     </div>
                 </div>
             </div>
-            `
             <hr />
         </div>
     </ng-container>
-
+    <div class="col-12 form-group">
+        <h4 class="pt-2">Pontuação Final</h4>
+        <div class="row">
+            <div class="col-2 form-group">
+                <input
+                    type="number"
+                    step="1"
+                    max="5"
+                    min="0"
+                    class="form-control form-lg text-right"
+                    formControlName="pontuacaoFinal"
+                    readonly="true" />
+            </div>
+        </div>
+        <hr />
+    </div>
     <div class="col-12 form-group">
         <label>Comentários</label>
         <ckeditor [editor]="editor" [config]="configEditor" formControlName="comentarios" [disabled]="readonly"></ckeditor>

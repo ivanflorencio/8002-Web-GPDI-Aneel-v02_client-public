@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AnalisesService, AnaliseTecnica } from '@app/services/analises.service';
+import { AnalisesService, AnaliseTecnica, ParecerTecnico } from '@app/services/analises.service';
 import * as ClassicEditor from '@projects/ckeditor/build/ckeditor';
 import { ConfigEditor } from '@app/core/shared';
 import { AppService } from '@app/services/app.service';
@@ -52,7 +52,17 @@ export class ParecerFormComponent implements OnInit {
                     )
                 ),
             });
+            this.calcular();
         });
+    }
+
+    calcular() {
+        const analise = this.form.value as AnaliseTecnica;
+        if (!analise || !analise.pareceres) {
+            return 0;
+        }
+        const somaPontos = analise.pareceres.reduce((soma: number, parecer: ParecerTecnico) => soma + parecer.pontuacao * parecer.peso, 0);
+        this.form.controls['pontuacaoFinal'].setValue(somaPontos);
     }
 
     voltar() {

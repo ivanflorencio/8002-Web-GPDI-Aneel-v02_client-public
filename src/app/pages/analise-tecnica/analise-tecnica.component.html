@@ -24,6 +24,7 @@
                 <th>Fornecedor</th>
                 <th>Data da Proposta</th>
                 <th>Status da Análise</th>
+                <th>Pontuação</th>
                 <th>Responsável</th>
             </tr>
         </thead>
@@ -33,6 +34,7 @@
                 <td>{{ proposta.fornecedor }}</td>
                 <td>{{ proposta.dataHora }}</td>
                 <td>{{ proposta.statusAnalise }}</td>
+                <td>{{ proposta.pontuacao }}</td>
                 <td>{{ proposta.analistaResponsavel }}</td>
                 <td class="text-right" *ngIf="proposta.statusAnalise === 'Aberta' || proposta.statusAnalise === 'Pendente'">
                     <button class="btn btn-primary" (click)="openAnaliseTecnica(proposta.propostaId)">Dar Parecer</button>

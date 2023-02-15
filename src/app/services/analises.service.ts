@@ -15,6 +15,7 @@ export interface PropostaAnalise {
     dataHora: string;
     analistaResponsavel: string;
     statusAnalise: string;
+    pontuacao: number;
 }
 
 export interface ParecerTecnico {
