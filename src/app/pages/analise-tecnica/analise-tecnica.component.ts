@@ -4,8 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { AnalisesService, PropostaAnalise } from '@app/services/analises.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CriterioAvaliacaoFormComponent } from './criterio-avaliacao-form/criterio-avaliacao-form.component';
-import { Router } from '@angular/router';
-import { IsGestor, IsAdmin, IsAnalistaTecnico } from '@app/guards/role.guard';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@app/services';
 import { UserRole } from '@app/commons';
 
@@ -25,7 +24,8 @@ export class AnaliseTecnicaComponent implements OnInit {
         protected auth: AuthService,
         protected service: AnalisesService,
         protected modal: NgbModal,
-        protected router: Router
+        protected router: Router,
+        private route: ActivatedRoute
     ) {}
 
     ngOnInit() {

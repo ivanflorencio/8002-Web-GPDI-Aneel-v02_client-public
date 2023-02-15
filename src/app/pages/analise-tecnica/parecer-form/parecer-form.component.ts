@@ -63,6 +63,7 @@ export class ParecerFormComponent implements OnInit {
         }
         const somaPontos = analise.pareceres.reduce((soma: number, parecer: ParecerTecnico) => soma + parecer.pontuacao * parecer.peso, 0);
         this.form.controls['pontuacaoFinal'].setValue(somaPontos);
+        this.analise.pontuacaoFinal = somaPontos;
     }
 
     voltar() {

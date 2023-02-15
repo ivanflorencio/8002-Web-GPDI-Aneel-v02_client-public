@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <div class="text-uppercase modal-title text-blue-light fs-24">Parecer de Análise Técnica da Proposta {{ propostaId }}</div>
+    <div class="text-uppercase modal-title text-blue-light fs-24">Parecer de Análise Técnica da Proposta #{{ propostaId }}</div>
     <button class="btn btn-primary" (click)="voltar()"><i class="ta-arrow-left"></i> Voltar</button>
 </div>
 
@@ -27,38 +27,30 @@
                 <div class="col-10 form-group">
                     <label>Justificativa</label>
                     <ckeditor [editor]="editor" [config]="configEditor" formControlName="justificativa" *ngIf="!readonly"></ckeditor>
-                    <div class="alert alert-secondary" role="alert" *ngIf="readonly" innerHTML="{{ criterio.justificativa }}">
-                        A simple secondary alert—check it out!
-                    </div>
+                    <div class="alert alert-secondary" role="alert" *ngIf="readonly" innerHTML="{{ criterio.justificativa }}"></div>
                 </div>
             </div>
             <hr />
         </div>
     </ng-container>
-    <div class="col-12 form-group">
-        <h4 class="pt-2">Pontuação Final</h4>
-        <div class="row">
-            <div class="col-2 form-group">
-                <input
-                    type="number"
-                    step="1"
-                    max="5"
-                    min="0"
-                    class="form-control form-lg text-right"
-                    formControlName="pontuacaoFinal"
-                    readonly="true" />
-            </div>
-        </div>
-        <hr />
-    </div>
+
     <div class="col-12 form-group">
         <label>Comentários</label>
-        <ckeditor [editor]="editor" [config]="configEditor" formControlName="comentarios" [disabled]="readonly"></ckeditor>
+        <ckeditor [editor]="editor" [config]="configEditor" *ngIf="!readonly" formControlName="comentarios"></ckeditor>
+        <div class="alert alert-secondary" role="alert" *ngIf="readonly" innerHTML="{{ analise.comentarios }}"></div>
     </div>
     <hr />
     <div class="col-12 form-group">
         <label>Justificativa</label>
-        <ckeditor [editor]="editor" [config]="configEditor" formControlName="justificativa" [disabled]="readonly"></ckeditor>
+        <ckeditor [editor]="editor" [config]="configEditor" *ngIf="!readonly" formControlName="justificativa"></ckeditor>
+        <div class="alert alert-secondary" role="alert" *ngIf="readonly" innerHTML="{{ analise.justificativa }}"></div>
+    </div>
+    <hr />
+    <div class="col-12 pr-5 form-group d-flex align-items-center justify-content-end">
+        <h4 class="pt-2">Pontuação Final:</h4>
+        <h1 class="m-0 ml-2">
+            <div class="badge badge-primary badge-lg">{{ form.controls['pontuacaoFinal'].value }}</div>
+        </h1>
     </div>
     <hr />
     <div class="form-group col-12 text-right pt-3 pb-6" *ngIf="!readonly">

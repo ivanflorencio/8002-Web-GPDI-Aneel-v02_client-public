@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppService, ServiceBase } from '@app/services';
 import { ActivatedRoute } from '@angular/router';
@@ -6,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { EquipePeD } from '@app/commons';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FileService } from '@app/services/file.service';
+import { AnaliseTecnicaDetalhesComponent } from '@app/pages/analise-tecnica/analise-tecnica-detalhes/analise-tecnica-detalhes.component';
 
 @Component({
     selector: 'app-selecao',
@@ -34,7 +36,8 @@ export class SelecaoComponent implements OnInit, OnDestroy {
         protected app: AppService,
         protected fb: FormBuilder,
         protected service: ServiceBase<any>,
-        protected fileService: FileService
+        protected fileService: FileService,
+        protected modal: NgbModal
     ) {}
 
     ngOnInit(): void {
@@ -47,6 +50,12 @@ export class SelecaoComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
+    }
+
+    abrirAnaliseTecnica(proposta) {
+        const ref = this.modal.open(AnaliseTecnicaDetalhesComponent, { size: 'lg' });
+        const cmp = ref.componentInstance as AnaliseTecnicaDetalhesComponent;
+        cmp.propostaId = proposta.id;
     }
 
     selecionar(id) {

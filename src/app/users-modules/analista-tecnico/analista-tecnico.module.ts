@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AnalistaTecnicoRoutingModule } from './analista-tecnico-routing.module';
 import { DashboardModule } from '@app/dashboard';
 import { HEADER_MENU, ROOT_URL, SIDEBAR_MENU } from '@app/commons';
+import { SidebarComponent } from '@app/dashboard/sidebar/sidebar.component';
 
 @NgModule({
     declarations: [],

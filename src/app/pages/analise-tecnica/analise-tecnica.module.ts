@@ -6,9 +6,10 @@ import { AnaliseTecnicaComponent } from '@app/pages/analise-tecnica/analise-tecn
 import { CoreModule } from '@app/core';
 import { CriterioAvaliacaoFormComponent } from './criterio-avaliacao-form/criterio-avaliacao-form.component';
 import { ParecerFormComponent } from './parecer-form/parecer-form.component';
+import { AnaliseTecnicaDetalhesComponent } from './analise-tecnica-detalhes/analise-tecnica-detalhes.component';
 
 @NgModule({
-    declarations: [AnaliseTecnicaComponent, CriterioAvaliacaoFormComponent, ParecerFormComponent],
+    declarations: [AnaliseTecnicaComponent, CriterioAvaliacaoFormComponent, ParecerFormComponent, AnaliseTecnicaDetalhesComponent],
     imports: [CommonModule, CoreModule, AnaliseTecnicaRoutingModule],
 })
 export class AnaliseTecnicaModule {}

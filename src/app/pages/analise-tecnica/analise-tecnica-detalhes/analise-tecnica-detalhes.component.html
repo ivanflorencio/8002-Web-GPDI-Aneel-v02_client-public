@@ -1,0 +1,76 @@
+<div class="modal-header">
+    <div class="text-uppercase modal-title text-blue-light fs-24">ANÁLISE TÉCNICA DA PROPOSTA #{{ propostaId }}</div>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('close')">
+        <i class="ta-cancel-circle"></i>
+    </button>
+</div>
+<div class="modal-body position-relative">
+    Status da Análise: <strong>{{ analise.status }}</strong>
+    <hr />
+    <ng-container *ngIf="!!analise">
+        <div *ngFor="let criterio of analise.pareceres" class="col-12">
+            <div class="row">
+                <div class="col-11 pr-0 pl-0">
+                    <h5>
+                        {{ criterio.descricaoCriterio }}
+                    </h5>
+                    <div class="form-group">
+                        <p innerHTML="{{ criterio.justificativa }}"></p>
+                    </div>
+                </div>
+                <div class="col-1 text-right p-0">
+                    <h2 class="pb-3">
+                        <b class="badge badge-secondary">
+                            {{ criterio.pontuacao }}
+                        </b>
+                    </h2>
+                    <label><small>Peso:</small> {{ criterio.peso }}</label>
+                </div>
+            </div>
+            <hr />
+        </div>
+
+        <div class="col-12">
+            <div class="row">
+                <div class="col-11 pr-0 pl-0 form-group">
+                    <label>Justificativa</label>
+                    <div class="form-group">
+                        <p innerHTML="{{ analise.justificativa }}"></p>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-11 pr-0 pl-0 form-group">
+                    <label>Comentários</label>
+                    <div class="form-group">
+                        <p innerHTML="{{ analise.comentarios }}"></p>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-11 pr-0 pl-0">
+                    <h4>Pontuação Final</h4>
+                </div>
+                <div class="col-1 text-right p-0">
+                    <h2 class="pb-3">
+                        <b class="badge badge-primary">
+                            {{ analise.pontuacaoFinal }}
+                        </b>
+                    </h2>
+                </div>
+            </div>
+            <hr />
+        </div>
+        <div class="col-12 text-right pr-0">
+            <button class="btn btn-outline-primary" (click)="activeModal.close('close')">
+                <i class="ta-arrow-left mr-2"></i><span class="mr-2">Voltar</span>
+            </button>
+        </div>
+    </ng-container>
+</div>

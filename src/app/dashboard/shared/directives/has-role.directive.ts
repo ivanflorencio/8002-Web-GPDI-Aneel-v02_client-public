@@ -4,7 +4,7 @@ import { UserRole } from '@app/commons';
 import { AuthService } from '@app/services';
 
 @Directive({
-    selector: '[appRole], [appRoleAdmin], [appRoleUser], [appRoleSuprimento], [appRoleFornecedor]',
+    selector: '[appRole], [appRoleAdmin], [appRoleUser], [appRoleSuprimento], [appRoleAnalistaTecnico], [appRoleFornecedor]',
 })
 export class HasRoleDirective implements OnInit {
     hasView = false;
@@ -32,6 +32,10 @@ export class HasRoleDirective implements OnInit {
 
     @Input('appRoleSuprimento') set userLeitura(value) {
         this.update(UserRole.Suprimento);
+    }
+
+    @Input('appRoleAnalistaTecnico') set userAnaliseTecnica(value) {
+        this.update(UserRole.AnalistaTecnico);
     }
 
     @Input('appRoleFornecedor') set userLeituraEscrita(value) {
