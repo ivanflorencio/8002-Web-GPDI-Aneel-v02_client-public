@@ -11,6 +11,7 @@ import {
     PropostaRefinamentoRoute,
     PropostaRiscosRoute,
     SuprimentoRoutes,
+    AnalistaTecnicoRoutes,
     GestaoPeDRoute,
     CronogramaConsolidadoRoute,
     PropostaSelecaoRoute,
@@ -39,6 +40,7 @@ const routes: Routes = [
             CronogramaConsolidadoRoute,
             NotFoundRoute,
             SuprimentoRoutes[0],
+            AnalistaTecnicoRoutes[0],
         ],
     },
 ];

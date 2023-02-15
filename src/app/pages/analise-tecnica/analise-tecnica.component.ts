@@ -1,10 +1,13 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { AppService } from '@app/services/app.service';
 import { Component, OnInit } from '@angular/core';
 import { AnalisesService, PropostaAnalise } from '@app/services/analises.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CriterioAvaliacaoFormComponent } from './criterio-avaliacao-form/criterio-avaliacao-form.component';
-import { ParecerFormComponent } from './parecer-form/parecer-form.component';
 import { Router } from '@angular/router';
+import { IsGestor, IsAdmin, IsAnalistaTecnico } from '@app/guards/role.guard';
+import { AuthService } from '@app/services';
+import { UserRole } from '@app/commons';
 
 @Component({
     selector: 'app-analise-tecnica',
@@ -17,7 +20,13 @@ export class AnaliseTecnicaComponent implements OnInit {
     pendentes: PropostaAnalise[] = [];
     concluidas: PropostaAnalise[] = [];
 
-    constructor(protected app: AppService, protected service: AnalisesService, protected modal: NgbModal, protected router: Router) {}
+    constructor(
+        protected app: AppService,
+        protected auth: AuthService,
+        protected service: AnalisesService,
+        protected modal: NgbModal,
+        protected router: Router
+    ) {}
 
     ngOnInit() {
         this.service.getPropostasAnaliseTecnicaPendente().then((result: PropostaAnalise[]) => {
@@ -25,6 +34,7 @@ export class AnaliseTecnicaComponent implements OnInit {
             this.concluidas = result.filter((x) => x.statusAnalise === 'Concluida' || x.statusAnalise === 'Enviada');
             this.propostas = this.pendentes;
         });
+        console.log('isGestor', this.isGestor, 'analista', this.isAnalista);
     }
 
     goToTab(tab: string) {
@@ -34,6 +44,14 @@ export class AnaliseTecnicaComponent implements OnInit {
         } else {
             this.propostas = this.concluidas;
         }
+    }
+
+    get isGestor() {
+        return this.auth.getUser().role === UserRole.User || this.auth.getUser().role === UserRole.Administrador;
+    }
+
+    get isAnalista() {
+        return this.auth.getUser().role === UserRole.AnalistaTecnico;
     }
 
     async openCriterioAvaliacaoForm(isGestor = false) {

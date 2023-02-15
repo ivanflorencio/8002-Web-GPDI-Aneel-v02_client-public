@@ -6,6 +6,7 @@ export enum UserRole {
     User = 'User',
     Suprimento = 'Suprimento',
     Fornecedor = 'Fornecedor',
+    AnalistaTecnico = 'AnalistaTecnico',
 }
 
 export enum ProjetoAccess {

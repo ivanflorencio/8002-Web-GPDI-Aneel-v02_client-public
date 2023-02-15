@@ -39,6 +39,7 @@ export class RoleGuard implements CanActivate, CanActivateChild {
 export const IsAdmin = RoleGuard.To([UserRole.Administrador], 'isAdmin');
 export const IsGestor = RoleGuard.To([UserRole.Administrador, UserRole.User], 'isGestor');
 export const IsSuprimento = RoleGuard.To([UserRole.Administrador, UserRole.Suprimento, UserRole.User], 'isSuprimento');
+export const IsAnalistaTecnico = RoleGuard.To([UserRole.Administrador, UserRole.AnalistaTecnico, UserRole.User], 'isAnalistaTecnico');
 export const IsFornecedor = RoleGuard.To([UserRole.Fornecedor], 'isFornecedor');
 export const IsColaborador = RoleGuard.To(
     [UserRole.Administrador, UserRole.User, UserRole.Colaborador, UserRole.Suprimento],

@@ -125,6 +125,14 @@ export const SuprimentoRoutes: Routes = [
         loadChildren: () => import('@app/users-modules/suprimento/suprimento.module').then((m) => m.SuprimentoModule),
     },
 ];
+export const AnalistaTecnicoRoutes: Routes = [
+    {
+        path: '',
+        canActivate: ['logged', 'isAnalistaTecnico'],
+        canActivateChild: ['logged', 'isAnalistaTecnico'],
+        loadChildren: () => import('@app/users-modules/analista-tecnico/analista-tecnico.module').then((m) => m.AnalistaTecnicoModule),
+    },
+];
 const FornecedorRoutes: Routes = [
     {
         path: '',
@@ -141,4 +149,5 @@ export const RoutesRoleMap = new Map<string, Routes>([
     [UserRole.Colaborador, ColaboradorRoutes],
     [UserRole.Fornecedor, FornecedorRoutes],
     [UserRole.Suprimento, SuprimentoRoutes],
+    [UserRole.AnalistaTecnico, AnalistaTecnicoRoutes],
 ]);

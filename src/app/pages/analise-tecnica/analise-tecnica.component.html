@@ -1,6 +1,8 @@
 <div class="mb-3 text-right">
-    <button class="btn btn-outline-primary" (click)="openCriterioAvaliacaoForm()">Critérios de Avaliação</button>
-    <button class="btn btn-outline-primary ml-3" (click)="openCriterioAvaliacaoForm(true)">Critérios de Avaliação (P&D)</button>
+    <button class="btn btn-outline-primary" (click)="openCriterioAvaliacaoForm()" *ngIf="isAnalista">Critérios de Avaliação</button>
+    <button class="btn btn-outline-primary ml-3" (click)="openCriterioAvaliacaoForm(true)" *ngIf="isGestor">
+        Critérios de Avaliação (P&D)
+    </button>
 </div>
 <div class="layout-topnav">
     <div class="tabs-nav-bar mb-3">
