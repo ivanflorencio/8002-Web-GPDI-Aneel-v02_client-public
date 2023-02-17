@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@app/services';
 import { UserRole } from '@app/commons';
+import { AnaliseTecnicaDetalhesComponent } from '../analise-tecnica/analise-tecnica-detalhes/analise-tecnica-detalhes.component';
 
 @Component({
     selector: 'app-analise-ped',
@@ -28,12 +29,11 @@ export class AnalisePedComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.service.getPropostasAnaliseTecnicaPendente().then((result: PropostaAnalise[]) => {
+        this.service.getPropostasAnalisePedPendente().then((result: PropostaAnalise[]) => {
             this.pendentes = result.filter((x) => x.statusAnalise === 'Pendente' || x.statusAnalise === 'Aberta');
             this.concluidas = result.filter((x) => x.statusAnalise === 'Concluida' || x.statusAnalise === 'Enviada');
             this.propostas = this.pendentes;
         });
-        console.log('isGestor', this.isGestor, 'analista', this.isAnalista);
     }
 
     goToTab(tab: string) {
@@ -45,6 +45,12 @@ export class AnalisePedComponent implements OnInit {
         }
     }
 
+    abrirAnaliseTecnica(propostaId) {
+        const ref = this.modal.open(AnaliseTecnicaDetalhesComponent, { size: 'lg' });
+        const cmp = ref.componentInstance as AnaliseTecnicaDetalhesComponent;
+        cmp.propostaId = propostaId;
+    }
+
     get isGestor() {
         return this.auth.getUser().role === UserRole.User || this.auth.getUser().role === UserRole.Administrador;
     }
@@ -54,6 +60,6 @@ export class AnalisePedComponent implements OnInit {
     }
 
     async openAnalisePed(propostaId: number) {
-        this.router.navigateByUrl(`/analise-ped/parecer/${propostaId}`).then();
+        this.router.navigateByUrl(`/analise-ped/parecer-ped/${propostaId}`).then();
     }
 }

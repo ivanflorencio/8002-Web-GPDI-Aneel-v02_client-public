@@ -1,0 +1,7 @@
+.listra {
+    padding: 1em;
+
+    &:nth-child(2n) {
+        background-color: #f0f0f0;
+    }
+}

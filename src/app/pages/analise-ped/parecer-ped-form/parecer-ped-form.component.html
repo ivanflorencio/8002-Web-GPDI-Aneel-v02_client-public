@@ -1,38 +1,110 @@
 <div class="modal-header">
     <div class="text-uppercase modal-title text-blue-light fs-24">Parecer de Análise P&D da Proposta #{{ propostaId }}</div>
-    <button class="btn btn-primary" (click)="voltar()"><i class="ta-arrow-left"></i> Voltar</button>
+    <button class="btn btn-sm btn-primary" (click)="voltar()"><i class="ta-arrow-left"></i> Voltar</button>
 </div>
 
 <div class="`form-body pt-5" *ngIf="!!analise" [formGroup]="form">
-    <ng-container formArrayName="pareceres">
-        <div *ngFor="let criterio of analise.pareceres; let index = index" class="col-12 pt-3">
-            <h3 class="pb-3">{{ criterio.descricaoCriterio }}</h3>
-            <div class="row" [formGroupName]="index">
-                <input formControlName="parecerId" type="hidden" />
-                <input formControlName="criterioId" type="hidden" />
-                <input formControlName="peso" type="hidden" />
-                <div class="col-2 form-group">
-                    <label>Pontuação</label>
-                    <input
-                        type="number"
-                        step="1"
-                        max="5"
-                        min="0"
-                        class="form-control text-right"
-                        formControlName="pontuacao"
-                        [readonly]="readonly"
-                        (blur)="calcular()" />
-                    <small>Peso: {{ criterio.peso }}</small>
-                </div>
-                <div class="col-10 form-group">
-                    <label>Justificativa</label>
-                    <ckeditor [editor]="editor" [config]="configEditor" formControlName="justificativa" *ngIf="!readonly"></ckeditor>
-                    <div class="alert alert-secondary" role="alert" *ngIf="readonly" innerHTML="{{ criterio.justificativa }}"></div>
-                </div>
+    <div class="col-12 pt-3">
+        <h3 class="pb-3">Originalidade</h3>
+        <div class="row">
+            <div class="col-2 form-group">
+                <label>Pontuação</label>
+                <input
+                    type="number"
+                    step="1"
+                    max="5"
+                    min="0"
+                    class="form-control text-right"
+                    formControlName="pontuacaoOriginalidade"
+                    [readonly]="readonly"
+                    (blur)="calcular()" />
             </div>
-            <hr />
+            <div class="col-10 form-group">
+                <label>Justificativa</label>
+                <ckeditor [editor]="editor" [config]="configEditor" formControlName="originalidade" *ngIf="!readonly"></ckeditor>
+                <div class="alert alert-secondary" role="alert" *ngIf="readonly" innerHTML="{{ originalidade }}"></div>
+            </div>
         </div>
-    </ng-container>
+        <hr />
+    </div>
+
+    <div class="col-12 pt-3">
+        <h3 class="pb-3">Aplicabilidade</h3>
+        <div class="row">
+            <div class="col-2 form-group">
+                <label>Pontuação</label>
+                <input
+                    type="number"
+                    step="1"
+                    max="5"
+                    min="0"
+                    class="form-control text-right"
+                    formControlName="pontuacaoAplicabilidade"
+                    [readonly]="readonly"
+                    (blur)="calcular()" />
+            </div>
+            <div class="col-10 form-group">
+                <label>Justificativa</label>
+                <ckeditor [editor]="editor" [config]="configEditor" formControlName="aplicabilidade" *ngIf="!readonly"></ckeditor>
+                <div class="alert alert-secondary" role="alert" *ngIf="readonly" innerHTML="{{ aplicabilidade }}"></div>
+            </div>
+        </div>
+        <hr />
+    </div>
+
+    <div class="col-12 pt-3">
+        <h3 class="pb-3">Relevância</h3>
+        <div class="row">
+            <div class="col-2 form-group">
+                <label>Pontuação</label>
+                <input
+                    type="number"
+                    step="1"
+                    max="5"
+                    min="0"
+                    class="form-control text-right"
+                    formControlName="pontuacaoRelevancia"
+                    [readonly]="readonly"
+                    (blur)="calcular()" />
+            </div>
+            <div class="col-10 form-group">
+                <label>Justificativa</label>
+                <ckeditor [editor]="editor" [config]="configEditor" formControlName="relevancia" *ngIf="!readonly"></ckeditor>
+                <div class="alert alert-secondary" role="alert" *ngIf="readonly" innerHTML="{{ relevancia }}"></div>
+            </div>
+        </div>
+        <hr />
+    </div>
+
+    <div class="col-12 pt-3">
+        <h3 class="pb-3">Razoabilidade dos Custos</h3>
+        <div class="row">
+            <div class="col-2 form-group">
+                <label>Pontuação</label>
+                <input
+                    type="number"
+                    step="1"
+                    max="5"
+                    min="0"
+                    class="form-control text-right"
+                    formControlName="pontuacaoRazoabilidadeCustos"
+                    [readonly]="readonly"
+                    (blur)="calcular()" />
+            </div>
+            <div class="col-10 form-group">
+                <label>Justificativa</label>
+                <ckeditor [editor]="editor" [config]="configEditor" formControlName="razoabilidadeCustos" *ngIf="!readonly"></ckeditor>
+                <div class="alert alert-secondary" role="alert" *ngIf="readonly" innerHTML="{{ razoabilidadeCustos }}"></div>
+            </div>
+        </div>
+        <hr />
+    </div>
+
+    <div class="col-12 form-group">
+        <label>Pontos Críticos</label>
+        <ckeditor [editor]="editor" [config]="configEditor" *ngIf="!readonly" formControlName="pontosCriticos"></ckeditor>
+        <div class="alert alert-secondary" role="alert" *ngIf="readonly" innerHTML="{{ analise.pontosCriticos }}"></div>
+    </div>
 
     <div class="col-12 form-group">
         <label>Comentários</label>
@@ -40,11 +112,7 @@
         <div class="alert alert-secondary" role="alert" *ngIf="readonly" innerHTML="{{ analise.comentarios }}"></div>
     </div>
     <hr />
-    <div class="col-12 form-group">
-        <label>Justificativa</label>
-        <ckeditor [editor]="editor" [config]="configEditor" *ngIf="!readonly" formControlName="justificativa"></ckeditor>
-        <div class="alert alert-secondary" role="alert" *ngIf="readonly" innerHTML="{{ analise.justificativa }}"></div>
-    </div>
+
     <hr />
     <div class="col-12 pr-5 form-group d-flex align-items-center justify-content-end">
         <h4 class="pt-2">Pontuação Final:</h4>

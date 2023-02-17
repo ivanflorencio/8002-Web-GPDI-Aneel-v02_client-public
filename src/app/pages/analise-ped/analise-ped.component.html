@@ -20,27 +20,51 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Demanda</th>
                 <th>Fornecedor</th>
-                <th>Data da Proposta</th>
-                <th>Status da Análise</th>
-                <th>Pontuação</th>
+                <th>Data</th>
+                <th>Demanda</th>
+                <th>Status / Pontuação</th>
                 <th>Responsável</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let proposta of propostas">
-                <td>{{ proposta.tituloDemanda }}</td>
-                <td>{{ proposta.fornecedor }}</td>
+                <td>{{ proposta.fornecedor }}<br /></td>
                 <td>{{ proposta.dataHora }}</td>
-                <td>{{ proposta.statusAnalise }}</td>
-                <td>{{ proposta.pontuacao }}</td>
-                <td>{{ proposta.analistaResponsavel }}</td>
-                <td class="text-right" *ngIf="proposta.statusAnalise === 'Aberta' || proposta.statusAnalise === 'Pendente'">
-                    <button class="btn btn-primary" (click)="openAnalisePed(proposta.propostaId)">Dar Parecer</button>
+                <td>{{ proposta.tituloDemanda }}</td>
+                <td>
+                    <div class="d-flex justify-content-between">
+                        <span>{{ proposta.statusAnalise }}</span>
+                        <label
+                            class="badge badge-primary"
+                            *ngIf="proposta.statusAnalise === 'Aberta' || proposta.statusAnalise === 'Enviada'"
+                            >{{ proposta.pontuacao }}</label
+                        >
+                    </div>
                 </td>
-                <td class="text-right" *ngIf="proposta.statusAnalise === 'Enviada' || proposta.statusAnalise === 'Concluída'">
-                    <button class="btn btn-primary" (click)="openAnalisePed(proposta.propostaId)">Ver Parecer</button>
+                <td>{{ proposta.analistaResponsavel }}</td>
+                <td class="text-right">
+                    <button
+                        class="btn btn-sm btn-link mr-2"
+                        (click)="downloadDocumento('PlanoTrabalho', proposta.captacaoId, proposta.propostaId)">
+                        <i class="ta-attachment"></i>
+                        Plano de Trabalho
+                    </button>
+                    <button
+                        class="btn btn-sm btn-link mr-2"
+                        (click)="downloadDocumento('Contrato', proposta.captacaoId, proposta.propostaId)">
+                        <i class="ta-attachment"></i>
+                        Contrato Base
+                    </button>
+                    <button class="btn btn-link" type="button" (click)="abrirAnaliseTecnica(proposta.propostaId)">
+                        <i class="ta-file-check"></i> Análise Técnica
+                    </button>
+                    <button class="btn btn-primary" (click)="openAnalisePed(proposta.propostaId)">
+                        <span *ngIf="proposta.statusAnalise === 'Aberta' || proposta.statusAnalise === 'Pendente'">Dar</span>
+                        <span *ngIf="proposta.statusAnalise === 'Enviada' || proposta.statusAnalise === 'Concluída'">Ver</span>
+                        Parecer
+                    </button>
                 </td>
             </tr>
         </tbody>

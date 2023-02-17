@@ -57,11 +57,32 @@ export interface AnaliseTecnica {
     pareceres: ParecerTecnico[];
 }
 
+export interface AnalisePed {
+    id: number;
+    demandaId: number;
+    propostaId: number;
+    originalidade: string;
+    aplicabilidade: string;
+    relevancia: string;
+    razoabilidadeCustos: string;
+    pontuacaoOriginalidade: number;
+    pontuacaoAplicabilidade: number;
+    pontuacaoRelevancia: number;
+    pontuacaoRazoabilidadeCustos: number;
+    pontosCriticos: string;
+    comentarios: string;
+    pontuacaoFinal: number;
+    conceito: string;
+    status: string;
+}
+
 @Injectable({
     providedIn: 'root',
 })
 export class AnalisesService {
     constructor(private http: HttpClient) {}
+
+    // ANÁLISE TÉCNICA DA PROPOSTA
 
     getPropostasAnaliseTecnicaPendente() {
         return this.http.get<PropostaAnalise[]>(`AnaliseTecnica/PropostasPendentes`).toPromise();
@@ -91,5 +112,23 @@ export class AnalisesService {
 
     enviarAnaliseTecnica(analise: AnaliseTecnica) {
         return this.http.post(`AnaliseTecnica/Enviar`, analise).toPromise();
+    }
+
+    // ANÁLISE P&D
+
+    getPropostasAnalisePedPendente() {
+        return this.http.get<PropostaAnalise[]>(`AnalisePed/PropostasPendentes`).toPromise();
+    }
+
+    abrirAnalisePedProposta(propostaId: number) {
+        return this.http.get<AnalisePed>(`AnalisePed/${propostaId}`).toPromise();
+    }
+
+    salvarAnalisePed(analise: AnalisePed) {
+        return this.http.post(`AnalisePed`, analise).toPromise();
+    }
+
+    enviarAnalisePed(analise: AnalisePed) {
+        return this.http.post(`AnalisePed/Enviar`, analise).toPromise();
     }
 }

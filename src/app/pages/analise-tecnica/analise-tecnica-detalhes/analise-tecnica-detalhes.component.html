@@ -11,9 +11,9 @@
     <ng-container *ngIf="!!analise && analise.id > 0">
         Status da Análise: <strong>{{ analise.status }}</strong>
         <hr />
-        <div *ngFor="let criterio of analise.pareceres" class="col-12">
+        <div *ngFor="let criterio of analise.pareceres" class="col-12 listra">
             <div class="row">
-                <div class="col-11 pr-0 pl-0">
+                <div class="col-11 pr-0">
                     <h5>
                         {{ criterio.descricaoCriterio }}
                     </h5>
@@ -21,8 +21,8 @@
                         <p innerHTML="{{ criterio.justificativa }}"></p>
                     </div>
                 </div>
-                <div class="col-1 text-right p-0">
-                    <h2 class="pb-3">
+                <div class="col-1 text-right pl-0">
+                    <h2 class="m-0 pb-0">
                         <b class="badge badge-secondary">
                             {{ criterio.pontuacao }}
                         </b>
@@ -30,23 +30,21 @@
                     <label><small>Peso:</small> {{ criterio.peso }}</label>
                 </div>
             </div>
-            <hr />
         </div>
 
         <div class="col-12">
             <div class="row">
-                <div class="col-11 pr-0 pl-0 form-group">
+                <div class="col-11 mt-5 form-group">
                     <label>Justificativa</label>
                     <div class="form-group">
                         <p innerHTML="{{ analise.justificativa }}"></p>
                     </div>
                 </div>
             </div>
-            <hr />
         </div>
         <div class="col-12">
             <div class="row">
-                <div class="col-11 pr-0 pl-0 form-group">
+                <div class="col-11 form-group">
                     <label>Comentários</label>
                     <div class="form-group">
                         <p innerHTML="{{ analise.comentarios }}"></p>
@@ -57,10 +55,10 @@
         </div>
         <div class="col-12">
             <div class="row">
-                <div class="col-11 pr-0 pl-0">
+                <div class="col-11 pr-0">
                     <h4>Pontuação Final</h4>
                 </div>
-                <div class="col-1 text-right p-0">
+                <div class="col-1 text-right pl-0">
                     <h2 class="pb-3">
                         <b class="badge badge-primary">
                             {{ analise.pontuacaoFinal }}
@@ -70,7 +68,7 @@
             </div>
             <hr />
         </div>
-        <div class="col-12 text-right pr-0">
+        <div class="col-12 text-right">
             <button class="btn btn-outline-primary" (click)="activeModal.close('close')">
                 <i class="ta-arrow-left mr-2"></i><span class="mr-2">Voltar</span>
             </button>
