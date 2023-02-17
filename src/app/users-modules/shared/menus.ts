@@ -20,6 +20,12 @@ export const AnaliseTecnica = {
     icon: 'ta-ficha',
     path: `/analise-tecnica`,
 };
+export const AnalisePed = {
+    subtitle: 'Projetos',
+    text: 'Análise P&D',
+    icon: 'ta-file-check',
+    path: `/analise-ped`,
+};
 export const Captacoes = {
     subtitle: 'Projetos',
     text: 'Captação de Propostas',

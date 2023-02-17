@@ -41,6 +41,12 @@ export const AnaliseTecnicaRoute: Route = {
     loadChildren: () => import('@app/pages/analise-tecnica/analise-tecnica.module').then((m) => m.AnaliseTecnicaModule),
 };
 
+export const AnalisePedRoute: Route = {
+    path: 'analise-ped',
+    component: SidebarComponent,
+    loadChildren: () => import('@app/pages/analise-ped/analise-ped.module').then((m) => m.AnalisePedModule),
+};
+
 export const CronogramaConsolidadoRoute: Route = {
     path: 'cronograma-consolidado',
     component: SidebarComponent,

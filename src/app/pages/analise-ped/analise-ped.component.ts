@@ -3,18 +3,16 @@ import { AppService } from '@app/services/app.service';
 import { Component, OnInit } from '@angular/core';
 import { AnalisesService, PropostaAnalise } from '@app/services/analises.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CriterioAvaliacaoFormComponent } from './criterio-avaliacao-form/criterio-avaliacao-form.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@app/services';
 import { UserRole } from '@app/commons';
-import { FileService } from '@app/services/file.service';
 
 @Component({
-    selector: 'app-analise-tecnica',
-    templateUrl: './analise-tecnica.component.html',
-    styleUrls: ['./analise-tecnica.component.scss'],
+    selector: 'app-analise-ped',
+    templateUrl: './analise-ped.component.html',
+    styleUrls: ['./analise-ped.component.scss'],
 })
-export class AnaliseTecnicaComponent implements OnInit {
+export class AnalisePedComponent implements OnInit {
     propostas: PropostaAnalise[] = [];
     tab = 'pendente';
     pendentes: PropostaAnalise[] = [];
@@ -26,7 +24,7 @@ export class AnaliseTecnicaComponent implements OnInit {
         protected service: AnalisesService,
         protected modal: NgbModal,
         protected router: Router,
-        protected file: FileService
+        private route: ActivatedRoute
     ) {}
 
     ngOnInit() {
@@ -55,17 +53,7 @@ export class AnaliseTecnicaComponent implements OnInit {
         return this.auth.getUser().role === UserRole.AnalistaTecnico;
     }
 
-    async openCriterioAvaliacaoForm(isGestor = false) {
-        const ref = this.modal.open(CriterioAvaliacaoFormComponent, { backdrop: false, size: 'lg' });
-        const form = ref.componentInstance as CriterioAvaliacaoFormComponent;
-        form.isGestor = isGestor;
-    }
-
-    async openAnaliseTecnica(propostaId: number) {
-        this.router.navigateByUrl(`/analise-tecnica/parecer/${propostaId}`).then();
-    }
-
-    async downloadDocumento(documento: string, captacaoId: number, propostaId: number) {
-        this.file.urlToBlobDownload(`Captacoes/${captacaoId}/Propostas/${propostaId}/${documento}`, null);
+    async openAnalisePed(propostaId: number) {
+        this.router.navigateByUrl(`/analise-ped/parecer/${propostaId}`).then();
     }
 }

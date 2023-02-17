@@ -11,6 +11,7 @@ export interface PropostaAnalise {
     demandaId: number;
     tituloDemanda: string;
     propostaId: number;
+    captacaoId: number;
     fornecedor: string;
     dataHora: string;
     analistaResponsavel: string;

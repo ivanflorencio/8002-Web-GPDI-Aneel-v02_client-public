@@ -1,12 +1,12 @@
 <div class="modal-header">
-    <div class="text-uppercase modal-title text-blue-light fs-24">ANÁLISE TÉCNICA DA PROPOSTA #{{ propostaId }}</div>
+    <div class="text-uppercase modal-title text-blue-light fs-24">ANÁLISE P&D DA PROPOSTA #{{ propostaId }}</div>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.close('close')">
         <i class="ta-cancel-circle"></i>
     </button>
 </div>
 <div class="modal-body position-relative">
     <ng-container *ngIf="!!analise && analise.id === 0">
-        Nenhuma Análise Técnica foi encontrada para a proposta #{{ propostaId }}
+        Nenhuma Análise P&D foi encontrada para a proposta #{{ propostaId }}
     </ng-container>
     <ng-container *ngIf="!!analise && analise.id > 0">
         Status da Análise: <strong>{{ analise.status }}</strong>

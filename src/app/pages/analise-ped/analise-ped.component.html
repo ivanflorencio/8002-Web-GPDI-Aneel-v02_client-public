@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-between">
+    <h5 class="text-uppercase text-blue font-weight-normal my-4">PROJETOS - ANÁLISE P&D</h5>
+</div>
+
+<div class="layout-topnav">
+    <div class="tabs-nav-bar mb-3">
+        <ul class="nav nav-bar-row nav-justified pt-3">
+            <li class="nav-item">
+                <a [class]="tab === 'pendente' ? 'nav-link active' : 'nav-link'" (click)="goToTab('pendente')">
+                    <span class="menu-item-text">Análises Pendentes ({{ pendentes.length }})</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a [class]="tab === 'concluida' ? 'nav-link active' : 'nav-link'" (click)="goToTab('concluida')">
+                    <span class="menu-item-text">Análises Concluídas ({{ concluidas.length }})</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Demanda</th>
+                <th>Fornecedor</th>
+                <th>Data da Proposta</th>
+                <th>Status da Análise</th>
+                <th>Pontuação</th>
+                <th>Responsável</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let proposta of propostas">
+                <td>{{ proposta.tituloDemanda }}</td>
+                <td>{{ proposta.fornecedor }}</td>
+                <td>{{ proposta.dataHora }}</td>
+                <td>{{ proposta.statusAnalise }}</td>
+                <td>{{ proposta.pontuacao }}</td>
+                <td>{{ proposta.analistaResponsavel }}</td>
+                <td class="text-right" *ngIf="proposta.statusAnalise === 'Aberta' || proposta.statusAnalise === 'Pendente'">
+                    <button class="btn btn-primary" (click)="openAnalisePed(proposta.propostaId)">Dar Parecer</button>
+                </td>
+                <td class="text-right" *ngIf="proposta.statusAnalise === 'Enviada' || proposta.statusAnalise === 'Concluída'">
+                    <button class="btn btn-primary" (click)="openAnalisePed(proposta.propostaId)">Ver Parecer</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -24,6 +24,7 @@ import {
 import {
     Demandas,
     AnaliseTecnica,
+    AnalisePed,
     Captacoes,
     Selecao,
     Refinamento,
@@ -44,6 +45,7 @@ export const SidebarMenu = {
         Demandas,
         Captacoes,
         AnaliseTecnica,
+        AnalisePed,
         Selecao,
         Refinamento,
         Riscos,

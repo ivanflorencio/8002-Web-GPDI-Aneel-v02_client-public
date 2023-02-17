@@ -33,7 +33,7 @@
                                     data-field="descricao"
                                     >{{ criterio.descricao }}</textarea
                                 >
-                                <small *ngIf="criterio.id > 0" class="caption">
+                                <small *ngIf="criterio.id > 0 && !!criterio.responsavel" class="caption">
                                     Responsável:
                                     <b>{{ criterio.responsavel.nomeCompleto }} ({{ criterio.doGestor ? 'Gestor' : 'Técnico' }})</b>
                                 </small>

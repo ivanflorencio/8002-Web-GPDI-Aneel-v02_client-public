@@ -1,9 +1,13 @@
-<div class="mb-3 text-right">
-    <button class="btn btn-outline-primary" (click)="openCriterioAvaliacaoForm()" *ngIf="isAnalista">Critérios de Avaliação</button>
-    <button class="btn btn-outline-primary ml-3" (click)="openCriterioAvaliacaoForm(true)" *ngIf="isGestor">
-        Critérios de Avaliação (P&D)
-    </button>
+<div class="d-flex justify-content-between">
+    <h5 class="text-uppercase text-blue font-weight-normal my-4">PROJETOS - ANÁLISE TÉCNICA</h5>
+    <div class="mb-3 text-right">
+        <button class="btn btn-outline-primary" (click)="openCriterioAvaliacaoForm()" *ngIf="isAnalista">Critérios de Avaliação</button>
+        <button class="btn btn-outline-primary ml-3" (click)="openCriterioAvaliacaoForm(true)" *ngIf="isGestor">
+            Critérios de Avaliação (P&D)
+        </button>
+    </div>
 </div>
+
 <div class="layout-topnav">
     <div class="tabs-nav-bar mb-3">
         <ul class="nav nav-bar-row nav-justified pt-3">
@@ -22,27 +26,44 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Demanda</th>
                 <th>Fornecedor</th>
-                <th>Data da Proposta</th>
-                <th>Status da Análise</th>
-                <th>Pontuação</th>
+                <th>Data</th>
+                <th>Demanda</th>
+                <th>Status / Pontuação</th>
                 <th>Responsável</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let proposta of propostas">
-                <td>{{ proposta.tituloDemanda }}</td>
-                <td>{{ proposta.fornecedor }}</td>
+                <td>{{ proposta.fornecedor }}<br /></td>
                 <td>{{ proposta.dataHora }}</td>
-                <td>{{ proposta.statusAnalise }}</td>
-                <td>{{ proposta.pontuacao }}</td>
-                <td>{{ proposta.analistaResponsavel }}</td>
-                <td class="text-right" *ngIf="proposta.statusAnalise === 'Aberta' || proposta.statusAnalise === 'Pendente'">
-                    <button class="btn btn-primary" (click)="openAnaliseTecnica(proposta.propostaId)">Dar Parecer</button>
+                <td>{{ proposta.tituloDemanda }}</td>
+                <td>
+                    <div class="d-flex justify-content-between">
+                        <span>{{ proposta.statusAnalise }}</span>
+                        <label class="badge badge-primary">{{ proposta.pontuacao }}</label>
+                    </div>
                 </td>
-                <td class="text-right" *ngIf="proposta.statusAnalise === 'Enviada' || proposta.statusAnalise === 'Concluída'">
-                    <button class="btn btn-primary" (click)="openAnaliseTecnica(proposta.propostaId)">Ver Parecer</button>
+                <td>{{ proposta.analistaResponsavel }}</td>
+                <td class="text-right">
+                    <button
+                        class="btn btn-sm btn-link mr-2"
+                        (click)="downloadDocumento('PlanoTrabalho', proposta.captacaoId, proposta.propostaId)">
+                        <i class="ta-attachment"></i>
+                        Plano de Trabalho
+                    </button>
+                    <button
+                        class="btn btn-sm btn-link mr-2"
+                        (click)="downloadDocumento('Contrato', proposta.captacaoId, proposta.propostaId)">
+                        <i class="ta-attachment"></i>
+                        Contrato Base
+                    </button>
+                    <button class="btn btn-primary" (click)="openAnaliseTecnica(proposta.propostaId)">
+                        <span *ngIf="proposta.statusAnalise === 'Aberta' || proposta.statusAnalise === 'Pendente'">Dar</span>
+                        <span *ngIf="proposta.statusAnalise === 'Enviada' || proposta.statusAnalise === 'Concluída'">Ver</span>
+                        Parecer
+                    </button>
                 </td>
             </tr>
         </tbody>
