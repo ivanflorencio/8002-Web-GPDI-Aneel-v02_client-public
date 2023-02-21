@@ -5,6 +5,15 @@
 <div class="layout-topnav">
     <div class="tabs-nav-bar mb-3">
         <ul class="nav nav-bar-row nav-justified pt-3">
+            <div class="nav-item">
+                <input
+                    type="search"
+                    class="form-control campo-busca-texto"
+                    placeholder="Buscar"
+                    (keyup)="buscar($event)"
+                    (blur)="buscar($event)" />
+                <span class="ta-search fs-22 text-cinza-claro-4" style="position: absolute; right: 4px; top: 10px"></span>
+            </div>
             <li class="nav-item">
                 <a [class]="tab === 'pendente' ? 'nav-link active' : 'nav-link'" (click)="goToTab('pendente')">
                     <span class="menu-item-text">Análises Pendentes ({{ pendentes.length }})</span>
@@ -20,11 +29,14 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Fornecedor</th>
-                <th>Data</th>
-                <th>Demanda</th>
-                <th>Status / Pontuação</th>
-                <th>Responsável</th>
+                <th [class]="app.headerOrdem('fornecedor')" (click)="app.ordenar(propostas, 'fornecedor')">Fornecedor</th>
+                <th [class]="app.headerOrdem('dataHora')" (click)="app.ordenar(propostas, 'dataHora')">Data</th>
+                <th [class]="app.headerOrdem('tituloDemanda')" (click)="app.ordenar(propostas, 'tituloDemanda')">Demanda</th>
+                <th [class]="app.headerOrdem('statusAnalise')" (click)="app.ordenar(propostas, 'statusAnalise')">Status</th>
+                <th [class]="app.headerOrdem('pontuacao')" (click)="app.ordenar(propostas, 'pontuacao')">Pontuação</th>
+                <th [class]="app.headerOrdem('analistaResponsavel')" (click)="app.ordenar(propostas, 'analistaResponsavel')">
+                    Responsável
+                </th>
                 <th></th>
             </tr>
         </thead>
@@ -33,15 +45,15 @@
                 <td>{{ proposta.fornecedor }}<br /></td>
                 <td>{{ proposta.dataHora }}</td>
                 <td>{{ proposta.tituloDemanda }}</td>
+                <td>{{ proposta.statusAnalise }}</td>
                 <td>
-                    <div class="d-flex justify-content-between">
-                        <span>{{ proposta.statusAnalise }}</span>
-                        <label
+                    <h4>
+                        <span
                             class="badge badge-primary"
-                            *ngIf="proposta.statusAnalise === 'Aberta' || proposta.statusAnalise === 'Enviada'"
-                            >{{ proposta.pontuacao }}</label
-                        >
-                    </div>
+                            *ngIf="proposta.statusAnalise === 'Aberta' || proposta.statusAnalise === 'Enviada'">
+                            {{ proposta.pontuacao }}
+                        </span>
+                    </h4>
                 </td>
                 <td>{{ proposta.analistaResponsavel }}</td>
                 <td class="text-right">
@@ -57,7 +69,7 @@
                         <i class="ta-attachment"></i>
                         Contrato Base
                     </button>
-                    <button class="btn btn-link" type="button" (click)="abrirAnaliseTecnica(proposta.propostaId)">
+                    <button class="btn btn-sm btn-link" type="button" (click)="abrirAnaliseTecnica(proposta.propostaId)">
                         <i class="ta-file-check"></i> Análise Técnica
                     </button>
                     <button class="btn btn-primary" (click)="openAnalisePed(proposta.propostaId)">

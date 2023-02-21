@@ -20,3 +20,36 @@
         }
     }
 }
+.campo-ordem {
+    cursor: pointer;
+    &:hover {
+        background-color: #f5f5f5;
+    }
+    &.ativo {
+        padding-left: 25px;
+        border-bottom: solid 1px #0099a8;
+        background-color: #f0f0f0;
+        &::before {
+            transform: translate(-15px, 3px);
+            width: 5px;
+            height: 5px;
+            display: inline-block;
+            position: absolute;
+            content: '';
+            border-left: solid 5px transparent;
+            border-right: solid 5px transparent;
+        }
+        &.asc::before {
+            border-bottom: solid 5px #999;
+            border-top: solid 5px transparent;
+        }
+        &.desc::before {
+            border-top: solid 5px #999;
+            border-bottom: solid 5px transparent;
+        }
+    }
+}
+.campo-busca-texto {
+    margin-bottom: 10px;
+    transform: translateX(-15px);
+}

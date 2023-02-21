@@ -71,6 +71,9 @@ export class AppService {
     userSubscription: Subscription;
     protected isInstalled = false;
 
+    // Ordenamento tabela
+    ordem = {};
+
     constructor(
         public modal: NgbModal,
         public catalogo: CatalogsService,
@@ -215,5 +218,18 @@ export class AppService {
             console.error(`Rotas para ${role} não disponíveis`);
             this.auth.logout();
         }
+    }
+
+    ordenar(lista: any[], campo: string) {
+        if (this.ordem['campo'] === campo) {
+            this.ordem['direcao'] = this.ordem['direcao'] * -1;
+        } else {
+            this.ordem['direcao'] = 1;
+        }
+        lista.sort((a, b) => (a[campo] > b[campo] ? this.ordem['direcao'] : this.ordem['direcao'] * -1));
+        this.ordem['campo'] = campo;
+    }
+    headerOrdem(campo: string) {
+        return 'campo-ordem ' + (this.ordem['campo'] === campo ? ' ativo ' : '') + (this.ordem['direcao'] > 0 ? ' asc ' : ' desc ');
     }
 }

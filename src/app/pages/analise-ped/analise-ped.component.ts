@@ -51,6 +51,30 @@ export class AnalisePedComponent implements OnInit {
         cmp.propostaId = propostaId;
     }
 
+    buscar(event: Event) {
+        const filtroTexto = (filtro: string) => (item) => {
+            if (filtro === '') {
+                return true;
+            }
+            if (filtro !== '') {
+                let contem = false;
+                Object.keys(item).forEach((key) => {
+                    if (item[key].toString().toLowerCase().includes(filtro.toLowerCase())) {
+                        contem = true;
+                    }
+                });
+                return contem;
+            }
+        };
+
+        const texto = (event.target as HTMLInputElement).value;
+        if (this.tab === 'pendente') {
+            this.propostas = this.pendentes.filter(filtroTexto(texto));
+        } else {
+            this.propostas = this.concluidas.filter(filtroTexto(texto));
+        }
+    }
+
     get isGestor() {
         return this.auth.getUser().role === UserRole.User || this.auth.getUser().role === UserRole.Administrador;
     }

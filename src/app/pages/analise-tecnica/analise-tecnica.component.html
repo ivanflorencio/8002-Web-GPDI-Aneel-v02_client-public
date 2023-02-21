@@ -26,11 +26,14 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Fornecedor</th>
-                <th>Data</th>
-                <th>Demanda</th>
-                <th>Status / Pontuação</th>
-                <th>Responsável</th>
+                <th [class]="app.headerOrdem('fornecedor')" (click)="app.ordenar(propostas, 'fornecedor')">Fornecedor</th>
+                <th [class]="app.headerOrdem('dataHora')" (click)="app.ordenar(propostas, 'dataHora')">Data</th>
+                <th [class]="app.headerOrdem('tituloDemanda')" (click)="app.ordenar(propostas, 'tituloDemanda')">Demanda</th>
+                <th [class]="app.headerOrdem('statusAnalise')" (click)="app.ordenar(propostas, 'statusAnalise')">Status</th>
+                <th [class]="app.headerOrdem('pontuacao')" (click)="app.ordenar(propostas, 'pontuacao')">Pontuação</th>
+                <th [class]="app.headerOrdem('analistaResponsavel')" (click)="app.ordenar(propostas, 'analistaResponsavel')">
+                    Responsável
+                </th>
                 <th></th>
             </tr>
         </thead>
@@ -39,11 +42,15 @@
                 <td>{{ proposta.fornecedor }}<br /></td>
                 <td>{{ proposta.dataHora }}</td>
                 <td>{{ proposta.tituloDemanda }}</td>
+                <td>{{ proposta.statusAnalise }}</td>
                 <td>
-                    <div class="d-flex justify-content-between">
-                        <span>{{ proposta.statusAnalise }}</span>
-                        <label class="badge badge-primary">{{ proposta.pontuacao }}</label>
-                    </div>
+                    <h4>
+                        <span
+                            class="badge badge-primary"
+                            *ngIf="proposta.statusAnalise === 'Aberta' || proposta.statusAnalise === 'Enviada'">
+                            {{ proposta.pontuacao }}
+                        </span>
+                    </h4>
                 </td>
                 <td>{{ proposta.analistaResponsavel }}</td>
                 <td class="text-right">
@@ -59,7 +66,7 @@
                         <i class="ta-attachment"></i>
                         Contrato Base
                     </button>
-                    <button class="btn btn-primary" (click)="openAnaliseTecnica(proposta.propostaId)">
+                    <button class="btn btn-sm btn-primary" (click)="openAnaliseTecnica(proposta.propostaId)">
                         <span *ngIf="proposta.statusAnalise === 'Aberta' || proposta.statusAnalise === 'Pendente'">Dar</span>
                         <span *ngIf="proposta.statusAnalise === 'Enviada' || proposta.statusAnalise === 'Concluída'">Ver</span>
                         Parecer

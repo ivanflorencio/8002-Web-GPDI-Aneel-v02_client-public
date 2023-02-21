@@ -38,7 +38,7 @@ export class ParecerFormComponent implements OnInit {
             this.form = this.fb.group({
                 id: new FormControl(this.analise.id),
                 pontuacaoFinal: new FormControl(0),
-                comentarios: new FormControl(this.analise.comentarios, [Validators.required]),
+                comentarios: new FormControl(this.analise.comentarios),
                 justificativa: new FormControl(this.analise.justificativa, [Validators.required]),
                 pareceres: this.fb.array(
                     this.analise.pareceres.map((i) =>
