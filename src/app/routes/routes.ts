@@ -139,6 +139,14 @@ export const AnalistaTecnicoRoutes: Routes = [
         loadChildren: () => import('@app/users-modules/analista-tecnico/analista-tecnico.module').then((m) => m.AnalistaTecnicoModule),
     },
 ];
+export const AnalistaPedRoutes: Routes = [
+    {
+        path: '',
+        canActivate: ['logged', 'isAnalistaPed'],
+        canActivateChild: ['logged', 'isAnalistaPed'],
+        loadChildren: () => import('@app/users-modules/analista-ped/analista-ped.module').then((m) => m.AnalistaPedModule),
+    },
+];
 const FornecedorRoutes: Routes = [
     {
         path: '',
@@ -156,4 +164,5 @@ export const RoutesRoleMap = new Map<string, Routes>([
     [UserRole.Fornecedor, FornecedorRoutes],
     [UserRole.Suprimento, SuprimentoRoutes],
     [UserRole.AnalistaTecnico, AnalistaTecnicoRoutes],
+    [UserRole.AnalistaPed, AnalistaPedRoutes],
 ]);

@@ -16,9 +16,13 @@ import { AuthService } from '@app/services';
 export class EquipeValidacaoComponent implements OnInit {
     pessoas: Array<any> = [];
     tabelas: Array<any> = [];
+    analistasTecnicos: Array<any> = [];
+    analistasPed: Array<any> = [];
     exceptIds: Array<any> = [];
     form = this.fb.group({
         tabelaValorHoraId: ['', Validators.required],
+        analistaTecnicoId: ['', Validators.required],
+        analistaPedId: ['', Validators.required],
         superiorDireto: ['', Validators.required],
     });
 
@@ -37,9 +41,18 @@ export class EquipeValidacaoComponent implements OnInit {
 
     async configForm() {
         this.tabelas = await this.app.sistema.getTabelasValorHora();
-        const { superiorDireto, tabelaValorHora } = await this.app.demandas.getSuperiorDireto(this.demanda.id);
+        const { superiorDireto, tabelaValorHora, analistaTecnico, analistaPed } = await this.app.demandas.getSuperiorDireto(
+            this.demanda.id
+        );
         this.pessoas = this.equipe.outros;
-        this.form.patchValue({ superiorDireto, tabelaValorHoraId: tabelaValorHora });
+        this.analistasTecnicos = this.equipe.analistasTecnicos;
+        this.analistasPed = this.equipe.analistasPed;
+        this.form.patchValue({
+            superiorDireto,
+            analistaTecnicoId: analistaTecnico,
+            analistaPedId: analistaPed,
+            tabelaValorHoraId: tabelaValorHora,
+        });
         if (!this.auth.hasRoles(UserRole.Administrador)) {
             this.exceptIds = [this.auth.getUser().id];
         }

@@ -20,7 +20,7 @@ export class AnalisePedComponent implements OnInit {
     concluidas: PropostaAnalise[] = [];
 
     constructor(
-        protected app: AppService,
+        public app: AppService,
         protected auth: AuthService,
         protected service: AnalisesService,
         protected modal: NgbModal,
@@ -34,10 +34,12 @@ export class AnalisePedComponent implements OnInit {
             this.concluidas = result.filter((x) => x.statusAnalise === 'Concluida' || x.statusAnalise === 'Enviada');
             this.propostas = this.pendentes;
         });
+        this.app.ordem = {};
     }
 
     goToTab(tab: string) {
         this.tab = tab;
+        this.app.ordem = {};
         if (tab === 'pendente') {
             this.propostas = this.pendentes;
         } else {

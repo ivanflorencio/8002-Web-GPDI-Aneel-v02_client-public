@@ -21,7 +21,7 @@ export class AnaliseTecnicaComponent implements OnInit {
     concluidas: PropostaAnalise[] = [];
 
     constructor(
-        protected app: AppService,
+        public app: AppService,
         protected auth: AuthService,
         protected service: AnalisesService,
         protected modal: NgbModal,
@@ -35,15 +35,40 @@ export class AnaliseTecnicaComponent implements OnInit {
             this.concluidas = result.filter((x) => x.statusAnalise === 'Concluida' || x.statusAnalise === 'Enviada');
             this.propostas = this.pendentes;
         });
-        console.log('isGestor', this.isGestor, 'analista', this.isAnalista);
+        this.app.ordem = {};
     }
 
     goToTab(tab: string) {
         this.tab = tab;
+        this.app.ordem = {};
         if (tab === 'pendente') {
             this.propostas = this.pendentes;
         } else {
             this.propostas = this.concluidas;
+        }
+    }
+
+    buscar(event: Event) {
+        const filtroTexto = (filtro: string) => (item) => {
+            if (filtro === '') {
+                return true;
+            }
+            if (filtro !== '') {
+                let contem = false;
+                Object.keys(item).forEach((key) => {
+                    if (item[key].toString().toLowerCase().includes(filtro.toLowerCase())) {
+                        contem = true;
+                    }
+                });
+                return contem;
+            }
+        };
+
+        const texto = (event.target as HTMLInputElement).value;
+        if (this.tab === 'pendente') {
+            this.propostas = this.pendentes.filter(filtroTexto(texto));
+        } else {
+            this.propostas = this.concluidas.filter(filtroTexto(texto));
         }
     }
 

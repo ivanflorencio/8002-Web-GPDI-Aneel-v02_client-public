@@ -4,6 +4,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { FileService } from '@app/services/file.service';
 import { AnaliseTecnicaDetalhesComponent } from '@app/pages/analise-tecnica/analise-tecnica-detalhes/analise-tecnica-detalhes.component';
+import { AnalisePedDetalhesComponent } from '@app/pages/analise-ped/analise-ped-detalhes/analise-ped-detalhes.component';
 
 export interface CaptacaoSelecao {
     titulo: string;
@@ -50,6 +51,12 @@ export class PropostaDetalhesComponent {
     abrirAnaliseTecnica(captacao: CaptacaoSelecao) {
         const ref = this.modal.open(AnaliseTecnicaDetalhesComponent, { size: 'lg' });
         const cmp = ref.componentInstance as AnaliseTecnicaDetalhesComponent;
+        cmp.propostaId = captacao.propostaId;
+    }
+
+    abrirAnalisePed(captacao: CaptacaoSelecao) {
+        const ref = this.modal.open(AnalisePedDetalhesComponent, { size: 'lg' });
+        const cmp = ref.componentInstance as AnalisePedDetalhesComponent;
         cmp.propostaId = captacao.propostaId;
     }
 }

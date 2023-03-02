@@ -18,7 +18,6 @@ export class AnaliseTecnicaDetalhesComponent implements OnInit {
     constructor(public activeModal: NgbActiveModal, protected service: AnalisesService, protected app: AppService) {}
 
     ngOnInit(): void {
-        console.log('proposta', this.propostaId);
         this.service
             .abrirAnaliseTecnicaProposta(this.propostaId)
             .then((result) => {

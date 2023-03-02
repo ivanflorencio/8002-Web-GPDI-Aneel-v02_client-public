@@ -60,7 +60,11 @@ export class DemandasService {
     }
 
     getSuperiorDireto(id: number) {
-        return this.http.get<{ superiorDireto: string; tabelaValorHora: string }>(`Demandas/${id}/EquipeValidacao`).toPromise();
+        return this.http
+            .get<{ superiorDireto: string; tabelaValorHora: string; analistaPed: string; analistaTecnico: string }>(
+                `Demandas/${id}/EquipeValidacao`
+            )
+            .toPromise();
     }
 
     setSuperiorDireto(id: number, data: object) {

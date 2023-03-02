@@ -8,6 +8,7 @@ import { EquipePeD } from '@app/commons';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FileService } from '@app/services/file.service';
 import { AnaliseTecnicaDetalhesComponent } from '@app/pages/analise-tecnica/analise-tecnica-detalhes/analise-tecnica-detalhes.component';
+import { AnalisePedDetalhesComponent } from '@app/pages/analise-ped/analise-ped-detalhes/analise-ped-detalhes.component';
 
 @Component({
     selector: 'app-selecao',
@@ -58,9 +59,19 @@ export class SelecaoComponent implements OnInit, OnDestroy {
         cmp.propostaId = proposta.id;
     }
 
-    selecionar(id) {
-        this.propostaCtrl.setValue(id);
-        this.form.updateValueAndValidity();
+    abrirAnalisePed(proposta) {
+        const ref = this.modal.open(AnalisePedDetalhesComponent, { size: 'lg' });
+        const cmp = ref.componentInstance as AnalisePedDetalhesComponent;
+        cmp.propostaId = proposta.id;
+    }
+
+    selecionar(proposta) {
+        if (proposta.analiseTecnicaFinalizada && proposta.analisePedFinalizada) {
+            this.propostaCtrl.setValue(proposta.id);
+            this.form.updateValueAndValidity();
+        } else {
+            this.app.alert('Está proposta não pode ser selecionada pois ainda não possuí Análise P&D');
+        }
     }
 
     async download(proposta, arquivo: string) {

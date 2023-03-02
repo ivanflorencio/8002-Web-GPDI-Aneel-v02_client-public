@@ -113,12 +113,24 @@
     </div>
     <hr />
 
-    <hr />
-    <div class="col-12 pr-5 form-group d-flex align-items-center justify-content-end">
-        <h4 class="pt-2">Pontuação Final:</h4>
-        <h1 class="m-0 ml-2">
-            <div class="badge badge-primary badge-lg">{{ form.controls['pontuacaoFinal'].value }}</div>
-        </h1>
+    <div class="col-12 pr-5 form-group d-flex align-items-center justify-content-between">
+        <div class="flex-grow-1" *ngIf="!!analise.conceito">
+            <label>Conceito</label>
+            <div class="alert alert-secondary mr-6 d-flex justify-content-between">
+                <p>
+                    Conceito do projeto em função da média de pontuação obtida: <strong>{{ analise.conceito }}</strong>
+                </p>
+                <button class="btn btn-lg btn-link ml-3" (click)="mostrarCriteriosConceito()">
+                    <i class="ta-question"></i>
+                </button>
+            </div>
+        </div>
+        <div>
+            <label class="pt-2">Pontuação Final:</label>
+            <h1 class="m-0">
+                <div class="badge badge-primary badge-lg">{{ form.controls['pontuacaoFinal'].value }}</div>
+            </h1>
+        </div>
     </div>
     <hr />
     <div class="form-group col-12 text-right pt-3 pb-6" *ngIf="!readonly">

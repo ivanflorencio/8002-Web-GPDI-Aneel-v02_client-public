@@ -7,6 +7,8 @@ export interface EquipePeD {
     diretor: User;
     gerente: User;
     outros: Array<User>;
+    analistasPed: Array<User>;
+    analistasTecnicos: Array<User>;
 }
 
 export interface ContratoPadrao {

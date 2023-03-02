@@ -21,7 +21,7 @@ export class ParecerPedFormComponent implements OnInit {
     form: FormGroup;
 
     constructor(
-        protected app: AppService,
+        public app: AppService,
         protected service: AnalisesService,
         protected fb: FormBuilder,
         private router: Router,
@@ -67,8 +67,28 @@ export class ParecerPedFormComponent implements OnInit {
             analise.pontuacaoAplicabilidade +
             analise.pontuacaoRelevancia +
             analise.pontuacaoRazoabilidadeCustos;
-        this.form.controls['pontuacaoFinal'].setValue(somaPontos);
-        this.analise.pontuacaoFinal = somaPontos;
+        this.analise.pontuacaoFinal = somaPontos / 4;
+        this.analise.conceito = this.calcularConceito(somaPontos / 4);
+
+        this.form.controls['pontuacaoFinal'].setValue(this.analise.pontuacaoFinal);
+        this.form.controls['conceito'].setValue(this.analise.conceito);
+    }
+
+    calcularConceito(pontos: number) {
+        console.log(this.form.controls['pontuacaoFinal'].value);
+        let conceito = '';
+        if ((pontos > 1 && pontos < 2) || this.form.controls['pontuacaoOriginalidade'].value <= 1) {
+            conceito = 'Inadequado';
+        } else if (pontos >= 2 && pontos < 3) {
+            conceito = 'Insuficiente';
+        } else if (pontos >= 3 && pontos < 3.5) {
+            conceito = 'Aceitável';
+        } else if (pontos >= 3.5 && pontos < 4.5) {
+            conceito = 'Bom';
+        } else if (pontos >= 4.5 && pontos < 5) {
+            conceito = 'Excelente';
+        }
+        return conceito;
     }
 
     voltar() {
@@ -103,5 +123,42 @@ export class ParecerPedFormComponent implements OnInit {
                     this.app.alertError('Não foi possível enviar a Análise P&D!');
                 });
         }
+    }
+
+    mostrarCriteriosConceito() {
+        this.app.alert(
+            `<table class="table">
+                <thead>
+                    <tr>
+                        <th>Média do Projeto (N)</th>
+                        <th>Conceito do Projeto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1,0 &lt; N &lt; 2,0</td>
+                        <td>Inadequado*</td>
+                    </tr>
+                    <tr>
+                        <td>2,0 &le; N &lt; 3,0</td>
+                        <td>Insuficiênte</td>
+                    </tr>
+                    <tr>
+                        <td>3,0 &le; N &lt; 3,5</td>
+                        <td>Aceitável</td>
+                    </tr>
+                    <tr>
+                        <td>3,5 &le; N &lt; 4,5</td>
+                        <td>Bom</td>
+                    </tr>
+                    <tr>
+                        <td>4,5 &le; N &lt; 5,0</td>
+                        <td>Excelente</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>* Considera-se <b>Inadequado</b> também quando o item <i><b>Originalidade</b></i> tem o valor menor que 1.</p>`,
+            'Conceito do Projeto'
+        );
     }
 }

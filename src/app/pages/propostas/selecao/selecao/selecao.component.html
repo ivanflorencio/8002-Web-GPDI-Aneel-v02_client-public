@@ -14,7 +14,7 @@
         <ng-container *ngFor="let proposta of propostas">
             <div class="d-grid border border-cinza rounded w-100 mb-3 align-items-center" style="grid-template-rows: 1fr 1fr">
                 <div class="px-3 py-2">
-                    <div class="d-flex align-items-center cursor-pointer" (click)="selecionar(proposta.id)">
+                    <div class="d-flex align-items-center cursor-pointer" (click)="selecionar(proposta)">
                         <div
                             class="rounded-circle border border-cinza p-2 d-inline-block mr-3"
                             [ngClass]="{ 'bg-primary': propostaCtrl.value === proposta.id }"></div>
@@ -29,8 +29,19 @@
                         <button class="btn btn-link" type="button" (click)="download(proposta, 'Contrato')">
                             <i class="ta-attachment"></i> Contrato Base
                         </button>
-                        <button class="btn btn-link" type="button" (click)="abrirAnaliseTecnica(proposta)">
-                            <i class="ta-file-check"></i> Análise Técnica
+                        <button
+                            class="btn btn-link"
+                            type="button"
+                            (click)="abrirAnaliseTecnica(proposta)"
+                            [disabled]="!proposta.analiseTecnicaFinalizada">
+                            <i class="ta-ficha"></i> Análise Técnica
+                        </button>
+                        <button
+                            class="btn btn-link"
+                            type="button"
+                            (click)="abrirAnalisePed(proposta)"
+                            [disabled]="!proposta.analisePedFinalizada">
+                            <i class="ta-file-check"></i> Análise P&D
                         </button>
                     </div>
                 </div>

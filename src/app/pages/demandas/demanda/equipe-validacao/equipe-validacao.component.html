@@ -14,7 +14,7 @@
                 </label>
                 <select name="superiorDireto" id="superiorDireto" class="form-control" formControlName="superiorDireto">
                     <option value="">Selecione</option>
-                    <option [value]="pessoa.id" *ngFor="let pessoa of pessoas | listUnique: []:exceptIds:'id'">
+                    <option [value]="pessoa.id" *ngFor="let pessoa of pessoas | listUnique : [] : exceptIds : 'id'">
                         {{ pessoa.nomeCompleto || pessoa.userName }}
                     </option>
                 </select>
@@ -27,6 +27,29 @@
                 <select name="tabelaValorHora" id="tabelaValorHora" class="form-control" formControlName="tabelaValorHoraId">
                     <option value="">Selecione</option>
                     <option [value]="tabela.id" *ngFor="let tabela of tabelas">{{ tabela.nome }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label>Analista Técnico Responsável</label>
+                <select name="analistaTecnico" id="analistaTecnico" class="form-control" formControlName="analistaTecnicoId">
+                    <option value="">Selecione</option>
+                    <option [value]="analistasTecnico.id" *ngFor="let analistasTecnico of analistasTecnicos">
+                        {{ analistasTecnico.nomeCompleto }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label>Analista P&D Responsável</label>
+                <select name="analistaPed" id="analistaPed" class="form-control" formControlName="analistaPedId">
+                    <option value="">Selecione</option>
+                    <option [value]="analistaPed.id" *ngFor="let analistaPed of analistasPed">{{ analistaPed.nomeCompleto }}</option>
                 </select>
             </div>
         </div>
