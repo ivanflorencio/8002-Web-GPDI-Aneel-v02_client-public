@@ -1,200 +1,196 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject} from 'rxjs';
-import {LoginRequest, RecoverRequest, ResultadoResponse, NewpassRequest, UserRole, User} from '@app/commons';
-import {LoginResponse} from '@app/commons';
-import {Router} from '@angular/router';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {RoutesRoleMap} from '@app/routes/routes';
+/* eslint-disable @typescript-eslint/member-ordering */
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
+import { LoginRequest, RecoverRequest, ResultadoResponse, NewpassRequest, UserRole, User } from '@app/commons';
+import { LoginResponse } from '@app/commons';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RoutesRoleMap } from '@app/routes/routes';
 
 const storageKey = 'userSession';
 
 interface Session {
-  aud: string;
-  iss: string;
-  jti: string;
-  ext: number;
-  nbf: number;
-  iat: number;
-  role: Array<string>;
-  unique_name: Array<string>;
+    aud: string;
+    iss: string;
+    jti: string;
+    ext: number;
+    nbf: number;
+    iat: number;
+    role: Array<string>;
+    unique_name: Array<string>;
 
-  [prop: string]: any;
+    [prop: string]: any;
 }
 
-
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class AuthService {
-  protected session: Session;
-  protected $currentUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
-  protected $error: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  protected $token = null;
-  user = this.$currentUser.asObservable();
-  error = this.$error.asObservable();
-  redirectTo = '/';
+    protected session: Session;
+    protected $currentUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+    protected $error: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+    protected $token = null;
+    user = this.$currentUser.asObservable();
+    error = this.$error.asObservable();
+    redirectTo = '/';
 
-  get expiration() {
-    return (this.session?.exp || 0) * 1e3;
-  }
-
-  get token() {
-    return this.$token;
-  }
-
-  get isLoggedIn() {
-    return (this.token && this.expiration > Date.now());
-  }
-
-  get role() {
-    return this.getUser()?.role;
-  }
-
-  get roles() {
-    return this.getUser()?.role;
-  }
-
-  constructor(private http: HttpClient, protected router: Router, public modal: NgbModal) {
-    this.init().then(() => this.syncUserInfo());
-  }
-
-  protected getStorageUser() {
-    let storageUser = null;
-    if (localStorage.getItem(storageKey) != null) {
-      storageUser = localStorage.getItem(storageKey);
-    } else if (sessionStorage.getItem(storageKey) != null) {
-      storageUser = sessionStorage.getItem(storageKey);
-    }
-    if (storageUser) {
-      try {
-        return JSON.parse(storageUser);
-      } catch (e) {
-        console.error(e);
-      }
-    }
-    return null;
-  }
-
-  protected extractInfoToken(token: string) {
-    if (token) {
-      return JSON.parse(atob(token.split('.')[1]));
-    }
-    return null;
-  }
-
-  async init() {
-    const storageUser = this.getStorageUser();
-
-    if (storageUser) {
-      try {
-        this.setSession(storageUser);
-      } catch (e) {
-        console.error(e.message);
-      }
-    }
-  }
-
-  async syncUserInfo() {
-    if (this.isLoggedIn) {
-      const user = await this.http.get<User>('Me').toPromise();
-      this.setUser(user);
-    }
-  }
-
-  setUser(user: User) {
-    this.$currentUser.next(user);
-  }
-
-  getUser() {
-    return this.$currentUser.getValue();
-  }
-
-  setSession(response: LoginResponse) {
-    this.$token = response.accessToken;
-    this.session = this.extractInfoToken(this.token);
-    this.setUser(response.user);
-  }
-
-  clearSession() {
-    this.$token = null;
-    this.session = null;
-    this.setUser(null);
-    localStorage.removeItem(storageKey);
-    sessionStorage.removeItem(storageKey);
-  }
-
-  async login(loginRequest: LoginRequest, remember: boolean = false) {
-
-    try {
-
-      const response = await this.http.post<LoginResponse>(`Login`, loginRequest).toPromise();
-
-      const storage = remember ? localStorage : sessionStorage;
-
-      storage.setItem(storageKey, JSON.stringify(response));
-
-      this.setSession(response);
-
-      if (remember) {
-        sessionStorage.setItem('last_login_user', loginRequest.email);
-      } else {
-        sessionStorage.removeItem('last_login_user');
-      }
-      this.$error.next(null);
-      return true;
-    } catch (e) {
-      this.$error.next(e);
-      return false;
+    get expiration() {
+        return (this.session?.exp || 0) * 1e3;
     }
 
-  }
-
-
-  async logout(redirect?: string) {
-    try {
-      await this.http.post('logout', {}).toPromise();
-    } catch (e) {
-      console.error(e);
+    get token() {
+        return this.$token;
     }
-    this.redirectTo = '/';
-    if (this.modal.hasOpenModals()) {
-      this.modal.dismissAll('logout');
+
+    get isLoggedIn() {
+        return this.token && this.expiration > Date.now();
     }
-    this.clearSession();
-  }
 
-  recuperarSenha(recoverRequest: RecoverRequest) {
-    return this.http.post<ResultadoResponse>('Login/recuperar-senha', recoverRequest).toPromise();
-  }
+    get role() {
+        return this.getUser()?.role;
+    }
 
-  async novaSenha(recoverRequest: NewpassRequest) {
-    return await this.http.post<ResultadoResponse>('Login/nova-senha', recoverRequest).toPromise();
-  }
+    get roles() {
+        return this.getUser()?.role;
+    }
 
+    constructor(private http: HttpClient, protected router: Router, public modal: NgbModal) {
+        this.init().then(() => this.syncUserInfo());
+    }
 
-  hasRoles(...roles: string[]) {
-    return this.userHasRoles(...roles);
-  }
+    protected getStorageUser() {
+        let storageUser = null;
+        if (localStorage.getItem(storageKey) != null) {
+            storageUser = localStorage.getItem(storageKey);
+        } else if (sessionStorage.getItem(storageKey) != null) {
+            storageUser = sessionStorage.getItem(storageKey);
+        }
+        if (storageUser) {
+            try {
+                return JSON.parse(storageUser);
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        return null;
+    }
 
-  userHasRoles(...roles: string[]) {
-    return roles
-      .reduce((p, c) => [...p, ...(Array.isArray(c) ? c : [c])], [])
-      .some(role => this.getUser().roles.indexOf(role as UserRole) >= 0);
-  }
+    protected extractInfoToken(token: string) {
+        if (token) {
+            return JSON.parse(atob(token.split('.')[1]));
+        }
+        return null;
+    }
 
-  // updateRoutes() {
-  //   this.setRoutes(this.role ?? '');
-  // }
-  //
-  // setRoutes(role: string) {
-  //   if (RoutesRoleMap.has(role)) {
-  //     const routes = RoutesRoleMap.get(role);
-  //     this.router.resetConfig(routes);
-  //   } else {
-  //     console.error(`Rotas para ${role} não disponíveis`);
-  //     this.logout().then();
-  //   }
-  // }
+    async init() {
+        const storageUser = this.getStorageUser();
 
+        if (storageUser) {
+            try {
+                this.setSession(storageUser);
+            } catch (e) {
+                console.error(e.message);
+            }
+        }
+    }
+
+    async syncUserInfo() {
+        if (this.isLoggedIn) {
+            const user = await this.http.get<User>('Me').toPromise();
+            this.setUser(user);
+        }
+    }
+
+    setUser(user: User) {
+        this.$currentUser.next(user);
+    }
+
+    getUser() {
+        return this.$currentUser.getValue();
+    }
+
+    setSession(response: LoginResponse) {
+        this.$token = response.accessToken;
+        this.session = this.extractInfoToken(this.token);
+        this.setUser(response.user);
+    }
+
+    clearSession() {
+        this.$token = null;
+        this.session = null;
+        this.setUser(null);
+        localStorage.removeItem(storageKey);
+        sessionStorage.removeItem(storageKey);
+    }
+
+    async login(loginRequest: LoginRequest, remember: boolean = false) {
+        try {
+            const response = await this.http.post<LoginResponse>(`Login`, loginRequest).toPromise();
+
+            const storage = remember ? localStorage : sessionStorage;
+
+            storage.setItem(storageKey, JSON.stringify(response));
+
+            this.setSession(response);
+
+            if (remember) {
+                sessionStorage.setItem('last_login_user', loginRequest.email);
+            } else {
+                sessionStorage.removeItem('last_login_user');
+            }
+            this.$error.next(null);
+            return true;
+        } catch (e) {
+            this.$error.next(e);
+            return false;
+        }
+    }
+
+    async logout(redirect?: string) {
+        try {
+            if (!/firefox/i.test(navigator.userAgent)) {
+                await this.http.post('logout', {}).toPromise();
+            }
+        } catch (e) {
+            console.error(e);
+        }
+        this.redirectTo = '/';
+        if (this.modal.hasOpenModals()) {
+            this.modal.dismissAll('logout');
+        }
+        this.clearSession();
+    }
+
+    recuperarSenha(recoverRequest: RecoverRequest) {
+        return this.http.post<ResultadoResponse>('Login/recuperar-senha', recoverRequest).toPromise();
+    }
+
+    async novaSenha(recoverRequest: NewpassRequest) {
+        return await this.http.post<ResultadoResponse>('Login/nova-senha', recoverRequest).toPromise();
+    }
+
+    hasRoles(...roles: string[]) {
+        return this.userHasRoles(...roles);
+    }
+
+    userHasRoles(...roles: string[]) {
+        return roles
+            .reduce((p, c) => [...p, ...(Array.isArray(c) ? c : [c])], [])
+            .some((role) => this.getUser().roles.indexOf(role as UserRole) >= 0);
+    }
+
+    // updateRoutes() {
+    //   this.setRoutes(this.role ?? '');
+    // }
+    //
+    // setRoutes(role: string) {
+    //   if (RoutesRoleMap.has(role)) {
+    //     const routes = RoutesRoleMap.get(role);
+    //     this.router.resetConfig(routes);
+    //   } else {
+    //     console.error(`Rotas para ${role} não disponíveis`);
+    //     this.logout().then();
+    //   }
+    // }
 }
