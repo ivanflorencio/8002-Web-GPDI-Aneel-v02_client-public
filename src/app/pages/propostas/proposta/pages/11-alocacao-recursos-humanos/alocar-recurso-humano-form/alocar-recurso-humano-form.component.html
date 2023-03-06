@@ -55,7 +55,9 @@
         <div class="row">
             <div class="col">
                 <div class="form-group mb-0">
-                    <label>Horas alocadas por mês (Max.: {{ max }})</label>
+                    <label
+                        >Horas alocadas por mês <small *ngIf="max > 0">(Max.: {{ max }})</small></label
+                    >
                 </div>
                 <div class="p-3 bg-cinza-claro rounded mb-4">
                     <div class="wrap-controls" [formGroup]="formMeses">
@@ -70,7 +72,7 @@
                                         [formControlName]="m"
                                         min="0"
                                         step="1"
-                                        [max]="max"
+                                        [max]="max > 0 ? max : 1000"
                                         [placeholder]="'Max '.concat(max.toString(), 'h')" />
                                 </div>
                             </div>

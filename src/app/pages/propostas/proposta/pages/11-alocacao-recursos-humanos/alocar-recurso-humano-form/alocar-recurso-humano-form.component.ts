@@ -99,6 +99,9 @@ export class AlocarRecursoHumanoFormComponent extends PropostaNodeFormDirective 
                     const funcao = this.recursoSelecionado.funcao;
                     const graduacao = this.recursoSelecionado.titulacao;
                     this.max = this.tabelaValorHora[`Horas_${funcao}_${graduacao}`];
+                    if (this.app.isGestor) {
+                        this.max = 0;
+                    }
                 }
             });
         };
