@@ -72,10 +72,6 @@ export class AnaliseTecnicaComponent implements OnInit {
         }
     }
 
-    get isGestor() {
-        return this.auth.getUser().role === UserRole.User || this.auth.getUser().role === UserRole.Administrador;
-    }
-
     get isAnalista() {
         return this.auth.getUser().role === UserRole.AnalistaTecnico;
     }

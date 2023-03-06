@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 import { AfterViewInit, Component, ElementRef, Inject, Input, OnInit, ViewChild } from '@angular/core';
-import { AppService } from '@app/services';
+import { AppService, AuthService } from '@app/services';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { PropostaNodeFormDirective } from '@app/pages/propostas/proposta/directives';
 import { PropostaServiceBase } from '@app/pages/propostas/proposta/services/proposta-service-base.service';
 import { PROPOSTA_CAN_EDIT } from '@app/pages/propostas/proposta/shared';
 import { BehaviorSubject } from 'rxjs';
+import { UserRole } from '@app/commons';
 
 @Component({
     selector: 'app-alocar-recurso-humano-form',
@@ -61,6 +62,7 @@ export class AlocarRecursoHumanoFormComponent extends PropostaNodeFormDirective 
     constructor(
         @Inject(PROPOSTA_CAN_EDIT) canEdit: BehaviorSubject<boolean>,
         app: AppService,
+        protected auth: AuthService,
         fb: FormBuilder,
         activeModal: NgbActiveModal,
         service: PropostaServiceBase
@@ -70,10 +72,14 @@ export class AlocarRecursoHumanoFormComponent extends PropostaNodeFormDirective 
 
     ngOnInit(): void {
         super.ngOnInit();
-        this.empresas = this.route.snapshot.data.empresas;
         this.etapas = this.route.snapshot.data.etapas;
         this.recursos = this.route.snapshot.data.recursos;
         this.max = 190;
+
+        this.empresas = this.route.snapshot.data.empresas;
+        if (!this.app.isGestor && this.canEdit) {
+            this.empresas = this.empresas.filter((i) => !(i.razaoSocial.toUpperCase().indexOf('NORTE ENERGIA') > -1));
+        }
 
         const mesesMount = (v, d = null) => {
             const etapa = this.etapas.find((e) => e.id === parseFloat(v));

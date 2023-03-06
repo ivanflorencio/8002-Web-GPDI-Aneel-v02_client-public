@@ -16,6 +16,7 @@ import { FileUploaderComponent } from '@app/core/components/file-uploader/file-u
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorComponent } from '@app/core/screens/error.component';
 import { RoutesRoleMap } from '@app/routes';
+import { UserRole } from '@app/commons';
 
 @Injectable({
     providedIn: 'root',
@@ -231,5 +232,9 @@ export class AppService {
     }
     headerOrdem(campo: string) {
         return 'campo-ordem ' + (this.ordem['campo'] === campo ? ' ativo ' : '') + (this.ordem['direcao'] > 0 ? ' asc ' : ' desc ');
+    }
+
+    get isGestor() {
+        return this.auth.getUser().role === UserRole.User || this.auth.getUser().role === UserRole.Administrador;
     }
 }

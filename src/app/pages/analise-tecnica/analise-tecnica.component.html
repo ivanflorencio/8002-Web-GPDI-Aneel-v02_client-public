@@ -2,7 +2,7 @@
     <h5 class="text-uppercase text-blue font-weight-normal my-4">PROJETOS - ANÁLISE TÉCNICA</h5>
     <div class="mb-3 text-right">
         <button class="btn btn-outline-primary" (click)="openCriterioAvaliacaoForm()" *ngIf="isAnalista">Critérios de Avaliação</button>
-        <button class="btn btn-outline-primary ml-3" (click)="openCriterioAvaliacaoForm(true)" *ngIf="isGestor">
+        <button class="btn btn-outline-primary ml-3" (click)="openCriterioAvaliacaoForm(true)" *ngIf="app.isGestor">
             Critérios de Avaliação (P&D)
         </button>
     </div>

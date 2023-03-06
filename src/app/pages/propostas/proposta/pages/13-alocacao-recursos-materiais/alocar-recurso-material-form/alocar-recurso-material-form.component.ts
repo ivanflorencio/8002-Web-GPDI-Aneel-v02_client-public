@@ -55,6 +55,11 @@ export class AlocarRecursoMaterialFormComponent extends PropostaNodeFormDirectiv
         this.recursos = this.route.snapshot.data.recursos;
         this.mesesDesembolso = this.etapas.find((x) => x.id === this.form.controls['etapaId'].value)?.meses;
 
+        this.empresas = this.route.snapshot.data.empresas;
+        if (!this.app.isGestor && this.canEdit) {
+            this.empresas = this.empresas.filter((i) => !(i.razaoSocial.toUpperCase().indexOf('NORTE ENERGIA') > -1));
+        }
+
         this.empresaFinanciadoraCtrl.valueChanges.subscribe((e) => {
             this.updateFinanciadora();
         });
