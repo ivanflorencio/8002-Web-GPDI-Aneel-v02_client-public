@@ -9,6 +9,7 @@ export const Roles: Array<TextValue> = [
     //{ text: 'Suprimentos', value: UserRole.Suprimento },
     { text: 'Fornecedor', value: UserRole.Fornecedor },
     { text: 'AnalistaTecnico', value: UserRole.AnalistaTecnico },
+    { text: 'AnalistaPed', value: UserRole.AnalistaPed },
     { text: 'Administrador', value: UserRole.Administrador },
 ];
 

@@ -190,6 +190,13 @@ export const CaptacaoButtons: { [prop: string]: TableComponentActions } = {
     IdentificaoPendente: [{ action: './#${id}', isLink: true, text: 'Confirmar Riscos', icon: 'ta-edit', className: 'btn btn-primary' }],
     IdentificaoFinalizada: [{ action: './#${id}', isLink: true, text: 'Ver detalhes', icon: 'ta-edit', className: 'btn btn-primary' }],
     FormalizacaoPendente: [
+        {
+            action: '../../relatorio-diretoria/manter/${id}',
+            isLink: true,
+            text: 'Relatório Diretoria',
+            icon: 'ta-ficha',
+            className: 'btn btn-outline-primary',
+        },
         { action: './#${id}', isLink: true, text: 'Confirmar Formalização', icon: 'ta-edit', className: 'btn btn-primary' },
     ],
     Formalizados: [{ action: './#${id}', isLink: true, text: 'Ver detalhes', icon: 'ta-edit', className: 'btn btn-primary' }],

@@ -36,7 +36,7 @@ export class NewpassComponent implements OnInit {
     ) {}
 
     get passwordConfirmed() {
-        return this.form.get('passconfirm').value === this.form.get('newPassword').value;
+        return !!this.form.get('passconfirm').value && this.form.get('passconfirm').value === this.form.get('newPassword').value;
     }
 
     ngOnInit() {

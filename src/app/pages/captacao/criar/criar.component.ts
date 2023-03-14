@@ -7,7 +7,7 @@ import { ServiceBase } from '@app/services/service-base.service';
 import { FornecedoresService } from '@app/services/fornecedores.service';
 import { ContratosService } from '@app/services/contratos.service';
 import { LoadingComponent } from '@app/core/components';
-import { UsersService } from '@app/services';
+import { RelatoriosDiretoriaService, UsersService } from '@app/services';
 import { UserRole } from '@app/commons';
 
 @Component({
@@ -21,6 +21,7 @@ export class CriarComponent implements OnInit {
     projeto: any;
     fornecedores: Array<{ id: number; nome: string }> = [];
     contratos: Array<{ id: number; titulo: string }> = [];
+    relatorios: Array<{ id: number; titulo: string }> = [];
     equipe: Array<any> = [];
     fornecedoresFormArray: FormArray = new FormArray([]);
     form: FormGroup = this.fb.group({
@@ -28,6 +29,7 @@ export class CriarComponent implements OnInit {
         usuarioSuprimentoId: ['', Validators.required],
         fornecedores: this.fornecedoresFormArray,
         contratoId: ['', Validators.required],
+        relatorioDiretoriaId: ['', Validators.required],
         observacoes: [''],
         files: [''],
     });
@@ -45,19 +47,22 @@ export class CriarComponent implements OnInit {
         protected service: ServiceBase<any>,
         protected fornecedorService: FornecedoresService,
         protected contratosService: ContratosService,
+        protected relatoriosService: RelatoriosDiretoriaService,
         protected usersService: UsersService,
         private fb: FormBuilder,
         public activeModal: NgbActiveModal
     ) {}
 
     async ngOnInit() {
-        const [fornecedores, contratos, equipe] = await Promise.all([
+        const [fornecedores, contratos, relatorios, equipe] = await Promise.all([
             this.fornecedorService.obter(),
             this.contratosService.obter(),
+            this.relatoriosService.obter(),
             this.usersService.usersInRole(UserRole.Suprimento),
         ]);
         this.fornecedores = fornecedores; // await this.fornecedorService.obter();
         this.contratos = contratos; // await this.contratosService.obter();
+        this.relatorios = relatorios; // await this.contratosService.obter();
         this.equipe = equipe; // await this.usersService.usersInRole(UserRole.User);
         this.fornecedoresFormArray = this.form.get('fornecedores') as FormArray;
     }

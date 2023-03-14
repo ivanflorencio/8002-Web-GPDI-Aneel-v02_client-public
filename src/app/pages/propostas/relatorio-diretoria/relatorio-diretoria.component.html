@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-between">
+    <div class="col">
+        <h5 class="text-uppercase text-blue font-weight-normal my-4">PROJETOS - APROVAÇÃO E FORMALIZAÇÃO - RELATÓRIO DE DIRETORIA</h5>
+    </div>
+    <div><button class="btn btn-outline-primary" (click)="voltar()">« Voltar</button></div>
+</div>
+
+<div class="row">
+    <div class="col-12 tabs-nav-bar">
+        <ul class="nav nav-bar-row nav-justified pt-3">
+            <li class="nav-item"></li>
+        </ul>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12 px-4 py-5">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label>Conteúdo do Relatório</label>
+                <ckeditor [editor]="editor" [config]="configEditor" formControlName="conteudo"></ckeditor>
+            </div>
+            <hr class="my-3" />
+            <div class="form-group d-flex justify-content-between">
+                <button type="submit" class="btn btn-outline-primary" [disabled]="form.invalid">
+                    <i class="ta-save"></i>
+                    Salvar Dados
+                </button>
+                <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+                    <i class="ta-save"></i>
+                    Finalizar Relatório
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -18,6 +18,7 @@ export class ConfiguracoesSistemaComponent implements OnInit {
             { text: 'Aprovadores', path: 'equipe' },
             { text: 'Padrão Formulários', path: 'padrao-formularios' },
             { text: 'Contratos Padrão', path: 'contratos-padrao' },
+            { text: 'Relatório Diretoria', path: 'relatorios-diretoria' },
             { text: 'Condições Fundamentais', path: 'clausulas' },
             { text: 'Fornecedores', path: 'fornecedores' },
             { text: 'Configuração Captações', path: 'config-captacoes' },

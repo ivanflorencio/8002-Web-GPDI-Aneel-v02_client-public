@@ -32,7 +32,10 @@ const routes: Routes = [
                 path: 'contratos-padrao',
                 loadChildren: () => import('./contratos-padrao/contratos-padrao.module').then((m) => m.ContratosPadraoModule),
             },
-
+            {
+                path: 'relatorios-diretoria',
+                loadChildren: () => import('./relatorios-diretoria/relatorios-diretoria.module').then((m) => m.RelatoriosDiretoriaModule),
+            },
             {
                 path: 'clausulas',
                 loadChildren: () => import('./clausulas/clausulas.module').then((m) => m.ClausulasModule),

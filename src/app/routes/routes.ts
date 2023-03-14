@@ -93,6 +93,13 @@ export const PropostaRiscosRoute: Route = {
         ),
 };
 
+export const PropostaRelatorioDiretoriaRoute: Route = {
+    path: 'relatorio-diretoria',
+    component: SidebarComponent,
+    loadChildren: () =>
+        import('@app/pages/propostas/relatorio-diretoria/relatorio-diretoria.module').then((m) => m.RelatoriosDiretoriaModule),
+};
+
 const GuestRoutes: Routes = [
     {
         path: '',
