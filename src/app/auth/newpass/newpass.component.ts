@@ -44,7 +44,7 @@ export class NewpassComponent implements OnInit {
             const token = data.token;
             this.passconfirm = new FormControl('', [Validators.required]);
             this.form.patchValue({
-                email: data.email,
+                email: data.email.replace(' ', '+'),
                 resetToken: token,
             });
         });
