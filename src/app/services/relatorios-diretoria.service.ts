@@ -11,6 +11,6 @@ export class RelatoriosDiretoriaService extends ServiceBase<any> {
     }
 
     getRelatorioDiretoriaProposta(captacaoId) {
-        return this.http.get<any>(`Proposta/00000000-0000-0000-0000-000000000000/RelatorioDiretoria?captacaoId=${captacaoId}`).toPromise();
+        return this.http.get<any>(`Proposta/RelatorioDiretoria/${captacaoId}`).toPromise();
     }
 }

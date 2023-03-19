@@ -22,7 +22,7 @@ import resolvers from './relatorio-diretoria.resolver';
         {
             provide: ServiceBase,
             deps: [HttpClient],
-            useFactory: (httpClient) => new ServiceBase(httpClient, 'Sistema/RelatoriosDiretoria'),
+            useFactory: (httpClient) => new ServiceBase(httpClient, 'Proposta/RelatorioDiretoria'),
         },
     ],
 })

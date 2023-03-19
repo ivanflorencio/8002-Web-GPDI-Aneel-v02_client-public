@@ -1,3 +1,4 @@
+<app-loading type="fullscreen"></app-loading>
 <div class="d-flex justify-content-between">
     <div class="col">
         <h5 class="text-uppercase text-blue font-weight-normal my-4">PROJETOS - APROVAÇÃO E FORMALIZAÇÃO - RELATÓRIO DE DIRETORIA</h5>
@@ -14,6 +15,12 @@
 </div>
 
 <div class="row">
+    <div class="col-12 mt-6">
+        <h2>{{ titulo }}</h2>
+    </div>
+</div>
+
+<div class="row">
     <div class="col-12 px-4 py-5">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="form-group">
@@ -26,9 +33,9 @@
                     <i class="ta-save"></i>
                     Salvar Dados
                 </button>
-                <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+                <button type="button" (click)="finalizar()" class="btn btn-primary" [disabled]="form.invalid">
                     <i class="ta-save"></i>
-                    Finalizar Relatório
+                    Concluír Relatório de Diretoria
                 </button>
             </div>
         </form>

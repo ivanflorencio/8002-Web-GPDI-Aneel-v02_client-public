@@ -159,6 +159,7 @@ export const CaptacaoCols: { [prop: string]: TableComponentCols } = {
         { field: 'titulo', title: 'Título Resumido Projeto', order: true },
         { field: 'fornecedor', title: 'Fornecedor', order: true },
         { field: 'aprovacaoResponsavel', title: 'Responsavel Identificação Riscos', order: true },
+        { field: 'statusRelatorioDiretoria', title: 'Status Relatório Diretoria', order: true },
     ],
     Formalizados: [
         { field: 'titulo', title: 'Título Resumido Projeto', order: true },
