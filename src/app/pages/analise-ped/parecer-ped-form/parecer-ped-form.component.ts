@@ -157,7 +157,7 @@ export class ParecerPedFormComponent implements OnInit {
                     </tr>
                 </tbody>
             </table>
-            <p>* Considera-se <b>Inadequado</b> também quando o item <i><b>Originalidade</b></i> tem o valor menor que 1.</p>`,
+            <p>* Considera-se <b>Inadequado</b> também quando o item <i><b>Originalidade</b></i> tem o valor menor ou igual a 1.</p>`,
             'Conceito do Projeto'
         );
     }
