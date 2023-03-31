@@ -7,8 +7,8 @@ import { version } from '../../package.json';
 
 export const environment = {
     production: false,
-    api_url: 'http://localhost:5000/api',
-    version: version + '-dev',
+    api_url: 'https://gpdi-hmg.norteenergiasa.com.br/api',
+    version: version + '-hmg',
 };
 
 /*
