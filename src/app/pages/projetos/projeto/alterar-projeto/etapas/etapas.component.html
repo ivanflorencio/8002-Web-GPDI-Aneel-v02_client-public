@@ -1,0 +1,239 @@
+<div class="row mb-2 mt-5">
+    <div class="col-12 fs-22 text-blue text-uppercase">Alterar Etapas do Projeto</div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="alert alert-info">
+            <i class="ta-alert fs-24 align-middle mr-3 mb-0"></i>
+            <span>Selecione os meses de inicio de e fim de cada Etapa no projeto.</span>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-12">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="row">
+                    <div class="col">
+                        <h4>ETAPA 1</h4>
+                    </div>
+                    <div class="col">
+                        <label>Mês de início</label>
+                        <select class="form-control" formControlName="mesInicio" style="width: 100px">
+                            <option value="">Selecione</option>
+                            <option value="" selected>Mês 1</option>
+                            <option value="">Mês 2</option>
+                            <option value="">Mês 3</option>
+                            <option value="">Mês 4</option>
+                            <option value="">Mês 5</option>
+                            <option value="">Mês 6</option>
+                            <option value="">Mês 7</option>
+                            <option value="">Mês 8</option>
+                            <!--option [value]="m" *ngFor="let m of (proposta.duracao -2) | n2array:1">Mês {{m | pad:"0":2}}</!--option-->
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label>Mês de final</label>
+                        <select class="form-control" formControlName="mesFinal" style="width: 100px">
+                            <option value="">Selecione</option>
+                            <option value="">Mês 1</option>
+                            <option value="">Mês 2</option>
+                            <option value="" selected>Mês 3</option>
+                            <option value="">Mês 4</option>
+                            <option value="">Mês 5</option>
+                            <option value="">Mês 6</option>
+                            <option value="">Mês 7</option>
+                            <option value="">Mês 8</option>
+                            <!--option [value]="m" *ngFor="let m of (mesFinalMax - mesFinalMin + 1) | n2array:mesFinalMin">
+                        Mês {{m | pad:"0":2}}</!--option-->
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label>Justificativa da alteração</label>
+                        <textarea class="form-control" style="width: 300px" rows="2"></textarea>
+                    </div>
+                    <div class="col">
+                        <label>Arquivo Comprobatório</label>
+                        <input type="file" />
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="input-group">
+                <div class="row">
+                    <div class="col">
+                        <h4>ETAPA 2</h4>
+                    </div>
+                    <div class="col">
+                        <label>Mês de início</label>
+                        <select class="form-control" formControlName="mesInicio" style="width: 100px">
+                            <option value="">Selecione</option>
+                            <option value="">Mês 1</option>
+                            <option value="">Mês 2</option>
+                            <option value="" selected>Mês 3</option>
+                            <option value="">Mês 4</option>
+                            <option value="">Mês 5</option>
+                            <option value="">Mês 6</option>
+                            <option value="">Mês 7</option>
+                            <option value="">Mês 8</option>
+                            <!--option [value]="m" *ngFor="let m of (proposta.duracao -2) | n2array:1">Mês {{m | pad:"0":2}}</!--option-->
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label>Mês de final</label>
+                        <select class="form-control" formControlName="mesFinal" style="width: 100px">
+                            <option value="">Selecione</option>
+                            <option value="">Mês 1</option>
+                            <option value="">Mês 2</option>
+                            <option value="">Mês 3</option>
+                            <option value="">Mês 4</option>
+                            <option value="">Mês 5</option>
+                            <option value="" selected>Mês 6</option>
+                            <option value="">Mês 7</option>
+                            <option value="">Mês 8</option>
+                            <!--option [value]="m" *ngFor="let m of (mesFinalMax - mesFinalMin + 1) | n2array:mesFinalMin">
+                        Mês {{m | pad:"0":2}}</!--option-->
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label>Justificativa da alteração</label>
+                        <textarea class="form-control" style="width: 300px" rows="2"></textarea>
+                    </div>
+                    <div class="col">
+                        <label>Arquivo Comprobatório</label>
+                        <input type="file" />
+                    </div>
+                </div>
+            </div>
+            <hr />
+
+            <div class="input-group">
+                <div class="row">
+                    <div class="col">
+                        <h4>ETAPA 3</h4>
+                    </div>
+                    <div class="col">
+                        <label>Mês de início</label>
+                        <select class="form-control" formControlName="mesInicio" style="width: 100px">
+                            <option value="">Selecione</option>
+                            <option value="">Mês 1</option>
+                            <option value="">Mês 2</option>
+                            <option value="">Mês 3</option>
+                            <option value="" selected>Mês 4</option>
+                            <option value="">Mês 5</option>
+                            <option value="">Mês 6</option>
+                            <option value="">Mês 7</option>
+                            <option value="">Mês 8</option>
+                            <!--option [value]="m" *ngFor="let m of (proposta.duracao -2) | n2array:1">Mês {{m | pad:"0":2}}</!--option-->
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label>Mês de final</label>
+                        <select class="form-control" formControlName="mesFinal" style="width: 100px">
+                            <option value="">Selecione</option>
+                            <option value="">Mês 1</option>
+                            <option value="">Mês 2</option>
+                            <option value="">Mês 3</option>
+                            <option value="">Mês 4</option>
+                            <option value="">Mês 5</option>
+                            <option value="">Mês 6</option>
+                            <option value="">Mês 7</option>
+                            <option value="" selected>Mês 8</option>
+                            <!--option [value]="m" *ngFor="let m of (mesFinalMax - mesFinalMin + 1) | n2array:mesFinalMin">
+                        Mês {{m | pad:"0":2}}</!--option-->
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label>Justificativa da alteração</label>
+                        <textarea class="form-control" style="width: 300px" rows="2"></textarea>
+                    </div>
+                    <div class="col">
+                        <label>Arquivo Comprobatório</label>
+                        <input type="file" />
+                    </div>
+                </div>
+            </div>
+            <hr />
+
+            <div class="form-group d-flex justify-content-between mt-3">
+                <div class="text-left">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="ta-save mr-1"></i>
+                        Salvar Alteração de Etapas
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #formRef let-activeModal>
+            <div class="modal-header">
+                <div class="text-uppercase modal-title text-blue-light fs-24">
+                    {{ form.value.id > 0 ? 'EDITAR RECURSO MATERIAL' : 'REGISTRAR RECURSO MATERIAL' }}
+                </div>
+                <button type="button" class="close" aria-label="Close" (click)="activeModal.close()">
+                    <i class="ta-cancel-circle"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label for="nome"
+                            >Nome do recurso material
+                            <app-help codigo="recurso-material-nome"></app-help>
+                        </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="nome"
+                            formControlName="nome"
+                            autocomplete="off"
+                            placeholder="Digite aqui o nome do Recurso (ID63)" />
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="categoria-contabil"
+                                >Categoria contábil
+                                <app-help codigo="recurso-material-categoria-contabil"></app-help>
+                            </label>
+                            <select type="text" class="form-control" id="categoria-contabil" formControlName="categoriaContabilId">
+                                <option value="" hidden>Selecione</option>
+                                <option [value]="categoria.id" *ngFor="let categoria of categorias">{{ categoria.nome }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col">
+                            <label for="valor-unitario"
+                                >Valor unitário
+                                <app-help codigo="recurso-material-valor-unitario"></app-help>
+                            </label>
+                            <input type="text" class="form-control" id="valor-unitario" formControlName="valorUnitario" currencyMask />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Especificação técnica detalhada do recurso</label>
+                        <app-textarea class="form-control" formControlName="especificacaoTecnica" rows="4" maxlength="1000"></app-textarea>
+                    </div>
+
+                    <div class="form-group d-flex justify-content-between">
+                        <div>
+                            <button type="button" class="button btn btn-danger" (click)="remover(form.value.id)" *ngIf="form.value.id > 0">
+                                <i class="ta-trash mr-1"></i>
+                                Excluir Recurso Material
+                            </button>
+                        </div>
+                        <div class="text-right">
+                            <div class="button btn btn-link" (click)="activeModal.close()">Cancelar</div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="ta-save mr-1"></i>
+                                Salvar Recurso
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </ng-template>
+    </div>
+</div>

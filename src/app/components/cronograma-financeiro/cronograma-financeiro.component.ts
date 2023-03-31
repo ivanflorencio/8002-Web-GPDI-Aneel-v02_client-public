@@ -10,14 +10,15 @@ import * as moment from 'moment';
 export class CronogramaFinanceiroComponent implements OnInit {
     @Input() infoCronograma: any;
     @Input() onRemoveSimulacao: any;
+    @Input() mostrarSaldoAtual = false;
 
     loading = false;
     cronograma: any = {
         mesesEtapas: [],
         empresas: [],
     };
-    isCronogramaProjeto: boolean;
     isConsolidado: boolean;
+    isCronogramaProjeto: boolean;
 
     getMesesEtapas(anoInicio: number, mesInicio: number, numeroMeses: number) {
         const meses = [];
