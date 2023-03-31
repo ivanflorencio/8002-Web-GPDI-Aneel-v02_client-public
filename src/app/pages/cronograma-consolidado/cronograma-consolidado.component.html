@@ -41,6 +41,7 @@
         </div>
     </aside>
 </div>
-<div class="{{ loading ? 'loading' : '' }}" *ngIf="!!cronograma?.etapas?.length">
+<div class="{{ loading ? 'loading' : '' }}">
+    <!--*ngIf="!!cronograma?.etapas?.length"-->
     <app-cronograma-financeiro [infoCronograma]="cronograma"></app-cronograma-financeiro>
 </div>

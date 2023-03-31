@@ -8,6 +8,7 @@ import { PropostaServiceBase } from '@app/pages/propostas/proposta/services/prop
 import { PROPOSTA_CAN_EDIT } from '@app/pages/propostas/proposta/shared';
 import { BehaviorSubject } from 'rxjs';
 import { UserRole } from '@app/commons';
+import { textChangeRangeIsUnchanged } from 'typescript';
 
 @Component({
     selector: 'app-alocar-recurso-humano-form',
@@ -16,11 +17,13 @@ import { UserRole } from '@app/commons';
 })
 export class AlocarRecursoHumanoFormComponent extends PropostaNodeFormDirective implements OnInit, AfterViewInit {
     empresaReadonly = false;
+    mensagemContrapartida = '';
     empresas = [];
     etapas = [];
     recursos = [];
     tabelaValorHora: any;
     recursoSelecionado: any;
+    usuario: any = {};
 
     etapaCtrl = this.fb.control('', Validators.required);
     recursoCtrl = this.fb.control('', Validators.required);
@@ -77,9 +80,14 @@ export class AlocarRecursoHumanoFormComponent extends PropostaNodeFormDirective 
         this.max = 190;
 
         this.empresas = this.route.snapshot.data.empresas;
+        /*
         if (!this.app.isGestor && this.canEdit) {
             this.empresas = this.empresas.filter((i) => !(i.razaoSocial.toUpperCase().indexOf('NORTE ENERGIA') > -1));
-        }
+        }*/
+
+        this.auth.user.subscribe((user) => {
+            this.usuario = user;
+        });
 
         const mesesMount = (v, d = null) => {
             const etapa = this.etapas.find((e) => e.id === parseFloat(v));
@@ -120,6 +128,7 @@ export class AlocarRecursoHumanoFormComponent extends PropostaNodeFormDirective 
             maxMeses(id);
             this.updateFinanciador();
         });
+
         if (!this.canEdit) {
             this.formMeses.disable();
         }
@@ -134,10 +143,20 @@ export class AlocarRecursoHumanoFormComponent extends PropostaNodeFormDirective 
         }
     }
 
+    updateFinanciadora(id) {
+        const empresa = this.empresas.find((e) => e.id === Number(id));
+        if (empresa.empresaRefId === this.usuario.empresaId) {
+            this.mensagemContrapartida = 'Contrapartida da Empresa Proponente';
+        } else {
+            this.mensagemContrapartida = 'Despesa do Projeto';
+        }
+    }
+
     updateFinanciador() {
         this.recursoSelected = this.recursos.find((r) => r.id === parseFloat(this.recursoCtrl.value));
         const empresa = this.empresas.find((e) => e.id === this.recursoSelected?.empresaId);
         this.empresaReadonly = this.recursoSelected && empresa.funcao === 'Cooperada';
+
         if (this.empresaReadonly) {
             this.empresaFinanciadora.setValue(this.recursoSelected.empresaId);
             // Não "Corrija" para this.empresaFinanciadora.disable();

@@ -32,7 +32,12 @@
                     >Empresa financiadora
                     <app-help codigo="alocacao-recurso-material-empresa-financiadora"></app-help>
                 </label>
-                <select class="form-control" id="empresa-financiadora" formControlName="empresaFinanciadoraId">
+                <select
+                    class="form-control"
+                    id="empresa-financiadora"
+                    #financiadora
+                    (change)="updateFinanciador(financiadora.value)"
+                    formControlName="empresaFinanciadoraId">
                     <option value="" hidden>Selecione</option>
                     <option [value]="empresa.id" *ngFor="let empresa of empresas">
                         {{ empresa.razaoSocial }}
@@ -44,7 +49,12 @@
                     >Empresa recebedora
                     <app-help codigo="alocacao-recurso-material-empresa-recebedora"></app-help>
                 </label>
-                <select class="form-control" id="empresa-recebedora" formControlName="empresaRecebedoraId">
+                <select
+                    class="form-control"
+                    id="empresa-recebedora"
+                    #recebedora
+                    (change)="updateRecebedor(recebedora.value)"
+                    formControlName="empresaRecebedoraId">
                     <option value="" hidden>Selecione</option>
                     <option
                         [value]="empresa.id"
@@ -53,6 +63,14 @@
                         {{ empresa.razaoSocial }}
                     </option>
                 </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col">
+                <div class="alert alert-info">
+                    <b>{{ mensagemContrapartida }}</b>
+                </div>
             </div>
         </div>
 

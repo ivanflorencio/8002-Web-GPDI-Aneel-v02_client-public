@@ -21,7 +21,6 @@ export class ConfiguracoesSistemaComponent implements OnInit {
             { text: 'Relatório Diretoria', path: 'relatorios-diretoria' },
             { text: 'Condições Fundamentais', path: 'clausulas' },
             { text: 'Fornecedores', path: 'fornecedores' },
-            { text: 'Configuração Captações', path: 'config-captacoes' },
             { text: 'Tabelas Hora/Valor', path: 'tabelas' },
             { text: 'Banco de Ajuda', path: 'ajuda' },
         ];

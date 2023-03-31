@@ -7,6 +7,7 @@ import { PropostaNodeFormDirective } from '@app/pages/propostas/proposta/directi
 import { PropostaServiceBase } from '@app/pages/propostas/proposta/services/proposta-service-base.service';
 import { PROPOSTA_CAN_EDIT } from '@app/pages/propostas/proposta/shared';
 import { BehaviorSubject } from 'rxjs';
+import { AuthService } from '@app/services';
 
 @Component({
     selector: 'app-alocar-recurso-material-form',
@@ -21,6 +22,12 @@ export class AlocarRecursoMaterialFormComponent extends PropostaNodeFormDirectiv
     empresaFinanciadoraCtrl = this.fb.control('', Validators.required);
     empresaFinanciadora: any;
     empresaRecebedoraCtrl = this.fb.control('', Validators.required);
+
+    usuario: any = {};
+    mensagemContrapartida = '';
+    recebedoraId = 0;
+    financiadoraId = 0;
+
     form = this.fb.group({
         id: 0,
         recursoId: ['', Validators.required],
@@ -36,6 +43,7 @@ export class AlocarRecursoMaterialFormComponent extends PropostaNodeFormDirectiv
         @Inject(PROPOSTA_CAN_EDIT) canEdit: BehaviorSubject<boolean>,
         app: AppService,
         fb: FormBuilder,
+        protected auth: AuthService,
         activeModal: NgbActiveModal,
         service: PropostaServiceBase
     ) {
@@ -56,9 +64,14 @@ export class AlocarRecursoMaterialFormComponent extends PropostaNodeFormDirectiv
         this.mesesDesembolso = this.etapas.find((x) => x.id === this.form.controls['etapaId'].value)?.meses;
 
         this.empresas = this.route.snapshot.data.empresas;
+        /*
         if (!this.app.isGestor && this.canEdit) {
             this.empresas = this.empresas.filter((i) => !(i.razaoSocial.toUpperCase().indexOf('NORTE ENERGIA') > -1));
-        }
+        }*/
+
+        this.auth.user.subscribe((user) => {
+            this.usuario = user;
+        });
 
         this.empresaFinanciadoraCtrl.valueChanges.subscribe((e) => {
             this.updateFinanciadora();
@@ -74,6 +87,29 @@ export class AlocarRecursoMaterialFormComponent extends PropostaNodeFormDirectiv
 
         if (this.empresaFinanciadora?.funcao === 'Executora' && recebedora?.funcao === 'Cooperada') {
             this.empresaRecebedoraCtrl.setValue('');
+        }
+    }
+
+    updateFinanciador(id) {
+        const empresa = this.empresas.find((e) => e.id === Number(id));
+        this.financiadoraId = empresa.empresaRefId;
+        this.updateMensagemContrapartida();
+    }
+
+    updateRecebedor(id) {
+        const empresa = this.empresas.find((e) => e.id === Number(id));
+        this.recebedoraId = empresa.empresaRefId;
+        this.updateMensagemContrapartida();
+    }
+
+    updateMensagemContrapartida() {
+        console.log(this.financiadoraId, this.recebedoraId);
+        if (this.financiadoraId === 1 && this.recebedoraId !== 1) {
+            this.mensagemContrapartida = 'Despesa do Projeto';
+        } else if (this.financiadoraId === 1 && this.recebedoraId === 1) {
+            this.mensagemContrapartida = 'Custo Operacional da Norte Energia';
+        } else if (this.financiadoraId === this.usuario.empresaId) {
+            this.mensagemContrapartida = 'Contrapartida da Empresa Proponente';
         }
     }
 }

@@ -33,7 +33,12 @@
                     <app-help codigo="alocacao-recurso-humano-financiadora"></app-help>
                 </label>
 
-                <select class="form-control" #financiadora id="empresa-financiadora" formControlName="empresaFinanciadoraId">
+                <select
+                    class="form-control"
+                    #financiadora
+                    id="empresa-financiadora"
+                    (change)="updateFinanciadora(financiadora.value)"
+                    formControlName="empresaFinanciadoraId">
                     <option value="" hidden>Selecione uma empresa financiadora</option>
                     <option [value]="empresa.id" *ngFor="let empresa of empresas">
                         {{ empresa.razaoSocial }}
@@ -49,6 +54,14 @@
                     <option value="" hidden>Selecione uma etapa</option>
                     <option [value]="etapa.id" *ngFor="let etapa of etapas">Etapa {{ etapa.ordem | pad : '0' : 2 }}</option>
                 </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col">
+                <div class="alert alert-info">
+                    <b>{{ mensagemContrapartida }}</b>
+                </div>
             </div>
         </div>
 

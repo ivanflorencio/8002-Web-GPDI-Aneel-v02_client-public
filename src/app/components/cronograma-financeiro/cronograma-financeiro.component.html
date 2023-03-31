@@ -249,7 +249,7 @@
                             </tr>
                         </ng-container>
                     </ng-container>
-                    <tr class="desembolso" *ngIf="!isCronogramaProjeto">
+                    <!--tr class="desembolso" *ngIf="!isCronogramaProjeto">
                         <td colspan="2" rowspan="2" class="empresa">{{ empresa.nome }}</td>
                         <td class="mes rotated-value" *ngFor="let valor of empresa.desembolso">
                             <div>
@@ -257,7 +257,7 @@
                             </div>
                         </td>
                         <td class="total">{{ empresa.total | number : '1.0-0' }}</td>
-                    </tr>
+                    </tr-->
                 </tbody>
                 <tbody class="resumo">
                     <tr class="totais-grafico">
@@ -289,6 +289,21 @@
                             </td>
                             <td class="total geral">
                                 <strong>{{ cronograma.totalGeralExecutado | number : '1.0-0' }}</strong>
+                            </td>
+                        </tr>
+                        <tr class="totais-mes saldo">
+                            <td colspan="2" class="label">Saldo em conta</td>
+                            <td [attr.colspan]="cronograma.mesesEtapas.length + 1" class="total geral">
+                                <section>
+                                    <div>
+                                        <small>Saldo Atual: </small>
+                                        <strong>{{ cronograma.saldoAtual | number : '1.0-0' }}</strong>
+                                    </div>
+                                    <div>
+                                        <small>Saldo Projetado: </small>
+                                        <strong>{{ cronograma.saldoAtual - cronograma.totalGeralExecutado | number : '1.0-0' }}</strong>
+                                    </div>
+                                </section>
                             </td>
                         </tr>
                     </ng-container>

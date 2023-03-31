@@ -12,7 +12,10 @@ export class CronogramaFinanceiroComponent implements OnInit {
     @Input() onRemoveSimulacao: any;
 
     loading = false;
-    cronograma: any;
+    cronograma: any = {
+        mesesEtapas: [],
+        empresas: [],
+    };
     isCronogramaProjeto: boolean;
     isConsolidado: boolean;
 
@@ -36,6 +39,7 @@ export class CronogramaFinanceiroComponent implements OnInit {
         const mesesEtapas = this.getMesesEtapas(infoCronograma.inicio.ano, infoCronograma.inicio.mes, infoCronograma.inicio.numeroMeses);
         const etapas = infoCronograma.etapas;
         const empresas = infoCronograma.empresas;
+        const saldoAtual = infoCronograma.saldoAtual;
         const anos = Array.from(new Set(mesesEtapas.map((m) => m.ano)));
 
         const meses = anos.reduce((acc, curr) => {
@@ -82,7 +86,7 @@ export class CronogramaFinanceiroComponent implements OnInit {
         });
 
         this.isCronogramaProjeto = empresas?.some((i) => !!i.executado);
-        this.isConsolidado = !!infoCronograma.etapas[0].projetoId;
+        this.isConsolidado = !!infoCronograma.etapas[0]?.projetoId;
 
         this.cronograma = {
             mesesEtapas,
@@ -94,6 +98,7 @@ export class CronogramaFinanceiroComponent implements OnInit {
             totais,
             totaisExecutado,
             maiorTotal,
+            saldoAtual,
             totalGeral,
             totalGeralExecutado,
         };
