@@ -10,6 +10,8 @@ import { RecursosMateriaisComponent } from './recursos-materiais/recursos-materi
 import { ProjetoNodeResolver } from '@app/pages/projetos/projeto/resolvers/projeto.resolver';
 import { CoreModule } from '@app/core';
 import { MultiSelectModule } from '@app/core/components/forms/multi-select/multi-select.module';
+import { AlocacaoRecursosHumanosComponent } from './alocacao-recursos-humanos/alocacao-recursos-humanos.component';
+import { AlocacaoRecursosMateriaisComponent } from './alocacao-recursos-materiais/alocacao-recursos-materiais.component';
 
 const menu: Array<MenuItem> = [
     {
@@ -39,7 +41,13 @@ const menu: Array<MenuItem> = [
 ];
 
 @NgModule({
-    declarations: [ProrrogarComponent, RecursosHumanosComponent, RecursosMateriaisComponent],
+    declarations: [
+        ProrrogarComponent,
+        RecursosHumanosComponent,
+        RecursosMateriaisComponent,
+        AlocacaoRecursosHumanosComponent,
+        AlocacaoRecursosMateriaisComponent,
+    ],
     imports: [CommonModule, DashboardModule, AlterarProjetoRoutingModule, CoreModule, MultiSelectModule],
     providers: [
         {

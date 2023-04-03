@@ -339,7 +339,7 @@
                         </tr>
                     </ng-container>
                 </tbody>
-                <tbody class="resumo">
+                <tbody class="resumo" *ngIf="cronograma.contrapartidas.length > 0">
                     <tr class="totais-mes saldo">
                         <td colspan="2" class="label">Valores de Contrapartida (R$)</td>
                         <td class="mes rotated-value" *ngFor="let valor of cronograma.contrapartidas">

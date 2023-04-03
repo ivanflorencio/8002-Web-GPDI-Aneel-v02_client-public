@@ -9,12 +9,17 @@
         </button>
     </div>
 </div>
-<div class="row"></div>
+
+<div class="row">
+    <div class="col-12">
+        <app-table [buttons]="buttons" [cols]="tableCols" [data]="recursos"></app-table>
+    </div>
+</div>
 
 <ng-template #formRef let-activeModal>
     <div class="modal-header">
         <div class="text-uppercase modal-title text-blue-light fs-24">
-            {{ form.value.id > 0 ? 'EDITAR RECURSO MATERIAL' : 'REGISTRAR RECURSO MATERIAL' }}
+            {{ form.value.id > 0 ? 'EDITAR ALOCAÇÃO RECURSO MATERIAL' : 'REGISTRAR ALOCAÇÃO RECURSO MATERIAL' }}
         </div>
         <button type="button" class="close" aria-label="Close" (click)="activeModal.close()">
             <i class="ta-cancel-circle"></i>
