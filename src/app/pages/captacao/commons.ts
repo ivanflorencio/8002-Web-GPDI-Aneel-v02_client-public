@@ -159,7 +159,8 @@ export const CaptacaoCols: { [prop: string]: TableComponentCols } = {
         { field: 'titulo', title: 'Título Resumido Projeto', order: true },
         { field: 'fornecedor', title: 'Fornecedor', order: true },
         { field: 'aprovacaoResponsavel', title: 'Responsavel Identificação Riscos', order: true },
-        { field: 'statusRelatorioDiretoria', title: 'Status Relatório Diretoria', order: true },
+        { field: 'statusRelatorioDiretoria', title: 'Relatório Diretoria', order: true },
+        { field: 'statusNotaTecnica', title: 'Nota Técnica', order: true },
     ],
     Formalizados: [
         { field: 'titulo', title: 'Título Resumido Projeto', order: true },
@@ -195,6 +196,13 @@ export const CaptacaoButtons: { [prop: string]: TableComponentActions } = {
             action: '../../relatorio-diretoria/manter/${id}',
             isLink: true,
             text: 'Relatório Diretoria',
+            icon: 'ta-ficha',
+            className: 'btn btn-outline-primary',
+        },
+        {
+            action: '../../nota-tecnica/manter/${id}',
+            isLink: true,
+            text: 'Nota Técnica',
             icon: 'ta-ficha',
             className: 'btn btn-outline-primary',
         },

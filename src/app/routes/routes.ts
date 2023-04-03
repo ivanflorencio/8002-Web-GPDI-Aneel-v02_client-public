@@ -100,6 +100,12 @@ export const PropostaRelatorioDiretoriaRoute: Route = {
         import('@app/pages/propostas/relatorio-diretoria/relatorio-diretoria.module').then((m) => m.RelatoriosDiretoriaModule),
 };
 
+export const PropostaNotaTecnicaRoute: Route = {
+    path: 'nota-tecnica',
+    component: SidebarComponent,
+    loadChildren: () => import('@app/pages/propostas/nota-tecnica/nota-tecnica.module').then((m) => m.NotaTecnicaModule),
+};
+
 const GuestRoutes: Routes = [
     {
         path: '',

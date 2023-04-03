@@ -168,6 +168,9 @@
                     <tr class="desembolso" *ngFor="let empresa of cronograma.empresas">
                         <td colspan="2" class="empresa">
                             {{ empresa.nome }}
+                            <small>
+                                <i><br />{{ empresa.nome === 'NORTE ENERGIA' ? 'Custo Operacional' : '' }}</i>
+                            </small>
                         </td>
                         <td class="mes rotated-value" *ngFor="let valor of empresa.desembolso">
                             <div>
@@ -203,6 +206,19 @@
                         </td>
                         <td colspan="2" class="total">
                             <strong>{{ cronograma.totalGeral | number : '1.0-0' }}</strong>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody class="resumo">
+                    <tr class="totais-mes saldo">
+                        <td colspan="2" class="label">Valores de Contrapartida (R$)</td>
+                        <td class="mes rotated-value" *ngFor="let valor of cronograma.contrapartidas">
+                            <div>
+                                <strong>{{ valor | number : '1.0-0' }}</strong>
+                            </div>
+                        </td>
+                        <td class="total geral pr-3">
+                            <strong>{{ cronograma.totalContrapartidas | number : '1.0-0' }}</strong>
                         </td>
                     </tr>
                 </tbody>

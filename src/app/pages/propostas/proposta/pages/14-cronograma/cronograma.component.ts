@@ -63,6 +63,8 @@ export class CronogramaComponent implements OnInit {
         const totais = mesesEtapas.map((m, i) => empresas.reduce((acc, curr) => acc + curr.desembolso[i], 0));
         const maiorTotal = Math.max(...totais);
         const totalGeral = totais.reduce((a, b) => a + b, 0);
+        const contrapartidas = infoCronograma.contrapartidas;
+        const totalContrapartidas = contrapartidas.reduce((acc, curr) => acc + curr, 0);
 
         this.cronograma = {
             mesesEtapas,
@@ -74,6 +76,8 @@ export class CronogramaComponent implements OnInit {
             totais,
             maiorTotal,
             totalGeral,
+            contrapartidas,
+            totalContrapartidas,
         };
     }
 

@@ -17,6 +17,7 @@ import {
     PropostaRefinamentoRoute,
     PropostaRiscosRoute,
     PropostaRelatorioDiretoriaRoute,
+    PropostaNotaTecnicaRoute,
     PropostaSelecaoRoute,
     RedirectRoute,
 } from '@app/routes/routes';
@@ -39,6 +40,7 @@ const routes: Routes = [
             PropostaRefinamentoRoute,
             PropostaRiscosRoute,
             PropostaRelatorioDiretoriaRoute,
+            PropostaNotaTecnicaRoute,
             PropostaFormalizacaoRoute,
             ProjetosRoute,
             ConfiguracaoRoute,

@@ -57,7 +57,8 @@ export class FormalizacaoComponent implements OnInit, OnDestroy {
             this.equipe = data.equipe;
             this.captacaoId = parseFloat(this.route.snapshot.fragment);
             this.captacao = data.captacoes?.find((c) => c.id === this.captacaoId);
-            this.relatorioFinalizado = this.captacao.statusRelatorioDiretoria === 'Finalizado';
+            this.relatorioFinalizado =
+                this.captacao.statusRelatorioDiretoria === 'Finalizado' && this.captacao.statusNotaTecnica === 'Finalizado';
             this.empresas = data.empresas.filter((e) => e.categoria === 1);
         });
         this.aprovadoCtrl.valueChanges.subscribe((value) => {
