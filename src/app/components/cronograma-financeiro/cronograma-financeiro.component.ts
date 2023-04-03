@@ -71,6 +71,8 @@ export class CronogramaFinanceiroComponent implements OnInit {
         const maiorTotal = Math.max(...totais);
         const totalGeral = totais.reduce((a, b) => a + b, 0);
         const totalGeralExecutado = totaisExecutado.reduce((a, b) => a + b, 0);
+        const contrapartidas = infoCronograma.contrapartidas;
+        const totalContrapartidas = contrapartidas.reduce((acc, curr) => acc + curr, 0);
 
         empresas.forEach((empresa) => {
             const { nomeUltimoMes, ultimoMes } = this.getUltimoMesExecutado(infoCronograma.inicio.ano, infoCronograma.inicio.mes, empresa);
@@ -102,6 +104,8 @@ export class CronogramaFinanceiroComponent implements OnInit {
             saldoAtual,
             totalGeral,
             totalGeralExecutado,
+            contrapartidas,
+            totalContrapartidas,
         };
     }
 
