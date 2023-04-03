@@ -33,6 +33,11 @@ const tableCols: TableComponentCols = [
         order: true,
     },
     {
+        field: 'modalidade',
+        title: 'Modalidade',
+        order: true,
+    },
+    {
         field: 'quantidade',
         title: 'Qtd',
         order: true,
